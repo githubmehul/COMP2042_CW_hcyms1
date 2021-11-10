@@ -11,7 +11,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
 /***
- * HomeMenuView Class extends JComponent and implements MouseListener and MouseMotionListener
+ *HomeMenuView Class extends JComponent and implements MouseListener and MouseMotionListener
  * to generate the HomeMenu of the Game
  */
 public class HomeMenuView extends JComponent implements MouseListener, MouseMotionListener {

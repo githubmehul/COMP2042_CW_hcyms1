@@ -11,7 +11,7 @@ import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
 /***
- * GameBoardView Class extends JComponent and implements KeyListener , MouseListener and MouseMotionListener
+ *GameBoardView Class extends JComponent and implements KeyListener , MouseListener and MouseMotionListener
  * to generate the GameBoard(The Actual Game on the GameFrameModel).
  */
 
