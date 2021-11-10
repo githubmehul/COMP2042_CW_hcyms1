@@ -5,7 +5,7 @@ import model.GameFrameModel;
 import java.awt.*;
 
 /***
- * Main Method calls the GameFrameModel Class's initialize method
+ *Main Method calls the GameFrameModel Class's initialize method
  */
 public class Main {
 
