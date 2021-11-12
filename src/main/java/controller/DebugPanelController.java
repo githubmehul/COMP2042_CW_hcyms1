@@ -1,20 +1,3 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package controller;
 
 import model.WallModel;
@@ -25,9 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 
-
+/**
+ * DebugPanelController extends the JPanel to provide implementation for the Debug Console
+ */
 public class DebugPanelController extends JPanel {
 
+    //Background Color of the Debug Console
     private static final Color DEF_BKG = Color.WHITE;
 
 
@@ -39,18 +25,25 @@ public class DebugPanelController extends JPanel {
 
     private WallModel wall;
 
+    /**
+     * DebugPanelController Constructor:
+     * To implement the Debug Panel Controller
+     * @param wall
+     */
     public DebugPanelController(WallModel wall){
 
         this.wall = wall;
 
         initialize();
-
+        //Button to Skip level and reset balls
         skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
         resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
 
+        //Setting the X and Y Speed for the ball
         ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
         ballYSpeed = makeSlider(-4,4,e -> wall.setBallYSpeed(ballYSpeed.getValue()));
 
+        //Add it to the owner
         this.add(skipLevel);
         this.add(resetBalls);
 
@@ -59,17 +52,37 @@ public class DebugPanelController extends JPanel {
 
     }
 
+
+    /**
+     * initialize Method:
+     * Provide implementation to initialize the layout of the Debug Panel
+     */
     private void initialize(){
         this.setBackground(DEF_BKG);
         this.setLayout(new GridLayout(2,2));
     }
 
+    /**
+     * makeButton Method:
+     * Creates the Button Implementation
+     * @param title
+     * @param e
+     * @return
+     */
     private JButton makeButton(String title, ActionListener e){
         JButton out = new JButton(title);
         out.addActionListener(e);
         return  out;
     }
 
+    /**
+     * makeSlider Implementation:
+     * Provides method implementation for the slider in the Debug Panel
+     * @param min
+     * @param max
+     * @param e
+     * @return
+     */
     private JSlider makeSlider(int min, int max, ChangeListener e){
         JSlider out = new JSlider(min,max);
         out.setMajorTickSpacing(1);
@@ -79,6 +92,12 @@ public class DebugPanelController extends JPanel {
         return out;
     }
 
+    /**
+     * setValues Method:
+     * Sets the values of ballXSpeed and ballYSpeed
+     * @param x
+     * @param y
+     */
     public void setValues(int x,int y){
         ballXSpeed.setValue(x);
         ballYSpeed.setValue(y);

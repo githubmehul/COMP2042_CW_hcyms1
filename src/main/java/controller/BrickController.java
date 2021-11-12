@@ -6,13 +6,10 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.Random;
 
-/**
- * Created by filippo on 04/09/16.
- *
- */
+
 abstract public class BrickController {
 
-    public static final int MIN_CRACK = 1;
+//    public static final int MIN_CRACK = 1;
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
 
@@ -47,22 +44,29 @@ abstract public class BrickController {
         public Crack(int crackDepth, int steps){
 
             crack = new GeneralPath();
+            //depth of the crack
             this.crackDepth = crackDepth;
+            //smooth the crack should be , less noise
             this.steps = steps;
 
         }
 
-
-
         public GeneralPath draw(){
-
             return crack;
         }
 
         public void reset(){
+
             crack.reset();
         }
 
+
+        /**
+         * makeCrack Method:
+         * Makes a randomly generated path from the impact point in a direction
+         * @param point
+         * @param direction
+         */
         public void makeCrack(Point2D point, int direction){
             Rectangle bounds = BrickController.this.brickFace.getBounds();
 
@@ -72,7 +76,7 @@ abstract public class BrickController {
 
 
             switch(direction){
-                case LEFT:
+                case LEFT :
                     start.setLocation(bounds.x + bounds.width, bounds.y);
                     end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
                     Point tmp = makeRandomPoint(start,end,VERTICAL);
@@ -103,6 +107,12 @@ abstract public class BrickController {
             }
         }
 
+        /**
+         * makeCrack Method:
+         * Makes a randomly generated path from start point to end point
+         * @param start
+         * @param end
+         */
         protected void makeCrack(Point start, Point end){
 
             GeneralPath path = new GeneralPath();
@@ -134,6 +144,12 @@ abstract public class BrickController {
             crack.append(path,true);
         }
 
+        /**
+         * randomInBounds Method:
+         * Gives a random between negative bound and bound
+         * @param bound
+         * @return
+         */
         private int randomInBounds(int bound){
             int n = (bound * 2) + 1;
             return rnd.nextInt(n) - bound;
@@ -221,6 +237,12 @@ abstract public class BrickController {
     }
 
 
+    /**
+     * findImpact Method:
+     * Finds if the ball is in contact with any of the bricks
+     * @param b
+     * @return
+     */
     public final int findImpact(BallController b){
         if(broken)
             return 0;
