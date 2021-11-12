@@ -1,20 +1,3 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package model;
 
 import controller.BrickController;
@@ -24,6 +7,10 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 
+/***
+ * SteelBrickModel Class extends BrickController Class to create the implementation of
+ * the SteelBrickModel (Abstraction)
+ */
 public class SteelBrickModel extends BrickController {
 
     private static final String NAME = "Steel Brick";
@@ -35,6 +22,14 @@ public class SteelBrickModel extends BrickController {
     private Random rnd;
     private Shape brickFace;
 
+    /**
+     * SteelBrickModel Constructor:
+     * Implement the super BrickController Class
+     * Creates a Random Object
+     * BrickFace is Assigned the super classes brickFace
+     * @param point
+     * @param size
+     */
     public SteelBrickModel(Point point, Dimension size){
         super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
         rnd = new Random();
@@ -42,17 +37,37 @@ public class SteelBrickModel extends BrickController {
     }
 
 
+    /**
+     * makeBrickFace Method:
+     * An abstract implementation of makeBrickFace of BrickController class to create the
+     * shape of the brick. , value assigned to brickFace
+     * @param pos
+     * @param size
+     * @return Rectangle(pos , size)
+     */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
 
         return new Rectangle(pos,size);
     }
 
+    /**getBrick Method:
+     * Returns the BrickFace
+     * @return brickFace
+     */
     @Override
     public Shape getBrick() {
         return brickFace;
     }
 
+
+    /**
+     * setImpact Method:
+     * Set's the Impact of the Steel Brick Model
+     * @param point
+     * @param dir
+     * @return
+     */
     public  boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
@@ -60,6 +75,10 @@ public class SteelBrickModel extends BrickController {
         return  super.isBroken();
     }
 
+    /**
+     * impact Method:
+     * If the Randomly Generated Value is less than the Steel Probability , impact the block
+     */
     public void impact(){
         if(rnd.nextDouble() < STEEL_PROBABILITY){
             super.impact();

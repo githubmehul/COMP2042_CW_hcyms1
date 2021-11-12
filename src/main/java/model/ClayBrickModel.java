@@ -6,9 +6,9 @@ import java.awt.*;
 import java.awt.Point;
 
 
-/**
- * Created by filippo on 04/09/16.
- *
+/***
+ * ClayBrickModel Class extends BrickController Class to create the implementation of
+ * the ClayBrickModel (Abstraction)
  */
 public class ClayBrickModel extends BrickController {
 
@@ -18,15 +18,25 @@ public class ClayBrickModel extends BrickController {
     private static final int CLAY_STRENGTH = 1;
 
 
-
-
-
-
+    /**
+     * ClayBrickModel Constructor:
+     * Implement the super BrickController Class
+     * @param point
+     * @param size
+     */
     public ClayBrickModel(Point point, Dimension size){
 
         super(NAME,point,size,DEF_BORDER,DEF_INNER,CLAY_STRENGTH);
     }
 
+    /**
+     * makeBrickFace Method:
+     * An abstract implementation of makeBrickFace of BrickController class to create the
+     * shape of the brick. , value assigned to brickFace
+     * @param pos
+     * @param size
+     * @return Rectangle(pos , size)
+     */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size)
     {
@@ -34,6 +44,10 @@ public class ClayBrickModel extends BrickController {
         return new Rectangle(pos,size);
     }
 
+    /**getBrick Method:
+     * Returns the BrickFace
+     * @return brickFace
+     */
     @Override
     public Shape getBrick() {
 

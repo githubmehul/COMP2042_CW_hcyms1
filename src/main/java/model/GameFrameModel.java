@@ -1,20 +1,3 @@
-/*
- *  Brick Destroy - A simple Arcade video game
- *   Copyright (C) 2017  Filippo Ranza
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package model;
 
 import view.GameBoardView;
@@ -26,6 +9,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
 
+/***
+ *GameFrameModel extends JFrame,which further implements WindowFocusListener,which takes care
+ *of the implementation of the game
+ */
 public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     private static final String DEF_TITLE = "Brick Destroy";
@@ -35,6 +22,12 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     private boolean gaming;
 
+    /**
+     *GameFrameModel constructor:<br>
+     *1.sets the default BorderLayout using the setLayoutMethod<br>
+     *2.Adds the homeMenu as a BorderLayout with Center Alignment<br>
+     *3.Sets undecorated as true
+     */
     public GameFrameModel(){
         super();
 
@@ -53,6 +46,14 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     }
 
+
+    /**
+     *initialize method on the owner:<br>
+     *1.Sets the Frame Title to"BrickDestroy"<br>
+     *2.Sets the CloseOperation to be the default WindowsCloseOperation<br>
+     *3.Sets the Window to be sized to fit the preferred size and layouts of its subcomponents.
+     *4.Shows the Window when focussed
+     */
     public void initialize(){
         this.setTitle(DEF_TITLE);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -61,6 +62,14 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
         this.setVisible(true);
     }
 
+    /**
+     *enableGameBoard method:<br>
+     *1.Releases all of the native screen resources used by this Window<br>
+     *2.Removes the component of homeMenu<br>
+     *3.Adds the gameBoard as a BorderLayout with CenterAlignment<br>
+     *4.Calls the initialize method
+     *5.To avoid GraphicIssues,a WindowFocusListener is added.
+     */
     public void enableGameBoard(){
         this.dispose();
         this.remove(homeMenu);
@@ -72,6 +81,10 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     }
 
+    /**
+     * autoLocate Method:
+     * Sets the Location of the GameFrame
+     */
     private void autoLocate(){
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (size.width - this.getWidth()) / 2;
@@ -80,6 +93,11 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
     }
 
 
+    /***
+     *The first time the frame loses focus is because it has been disposed to install the GameBoard,
+     *so when it regains the focus it's ready to play.
+     *@paramw indowEvent An object that indicates when the status of Windows has changed
+     */
     @Override
     public void windowGainedFocus(WindowEvent windowEvent) {
         /*
@@ -92,7 +110,10 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
          */
         gaming = true;
     }
-
+    /**
+     *When LostFocus,then call the on LostFocus from GameBoard
+     *@param windowEvent
+     */
     @Override
     public void windowLostFocus(WindowEvent windowEvent) {
         if(gaming)
