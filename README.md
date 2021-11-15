@@ -18,3 +18,5 @@ A build file is added as it automatically downloads and configures the dependenc
 <b>2. Insertion of Javadocs</b>
 <br>JavaDoc tool is a document generator tool in Java programming language for generating standard documentation in HTML format. It generates API documentation. It parses the declarations and documentation in a set of source file describing classes, methods, constructors, and fields. The purpose of the API is to provide information about code so other programmers can use it without needing a thorough knowledge of its inner workings. I had also added inline comments to enhance readability , and allow me to understand the code for further additions and mainainence.<br><br>
 <b>3.	Enhance Variable and Identifier Name</br>
+<b>4.	Indentation</br>
+<b>5.	Encapsulation Implementation</br>
