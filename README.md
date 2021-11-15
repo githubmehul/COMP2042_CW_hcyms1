@@ -20,3 +20,5 @@ A build file is added as it automatically downloads and configures the dependenc
 <b>3.	Enhance Variable and Identifier Name</br>
 <b>4.	Indentation</br>
 <b>5.	Encapsulation Implementation</br>
+<b>6.	Reduce Large Classes – Improve Single Responsibility</br>
+
