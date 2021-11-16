@@ -51,7 +51,7 @@ public class ClayBrickModel extends BrickController {
     @Override
     public Shape getBrick() {
 
-        return super.brickFace;
+        return super.getBrickFace();
     }
 
 

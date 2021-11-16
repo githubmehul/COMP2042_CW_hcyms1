@@ -2,6 +2,7 @@ package model;
 
 import controller.BallController;
 import controller.BrickController;
+import controller.CrackController;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -281,18 +282,18 @@ public class WallModel {
                 //Vertical Impact
                 case BrickController.UP_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.getDownLocation(), BrickController.Crack.UP);
+                    return b.setImpact(ball.getDownLocation(), CrackController.UP);
                 case BrickController.DOWN_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.getUpLocation(), BrickController.Crack.DOWN);
+                    return b.setImpact(ball.getUpLocation(), CrackController.DOWN);
 
                 //Horizontal Impact
                 case BrickController.LEFT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.getRightLocation(), BrickController.Crack.RIGHT);
+                    return b.setImpact(ball.getRightLocation(), CrackController.RIGHT);
                 case BrickController.RIGHT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.getLeftLocation(), BrickController.Crack.LEFT);
+                    return b.setImpact(ball.getLeftLocation(), CrackController.LEFT);
             }
         }
         return false;

@@ -20,10 +20,11 @@ model/CementBrickModel.java
  model.CementBrickModel
 controller/BrickController.java
  controller.BrickController
- controller.BrickController$Crack
 model/SteelBrickModel.java
  model.SteelBrickModel
 model/ClayBrickModel.java
  model.ClayBrickModel
+controller/CrackController.java
+ controller.CrackController
 view/GameBoardView.java
  view.GameBoardView
