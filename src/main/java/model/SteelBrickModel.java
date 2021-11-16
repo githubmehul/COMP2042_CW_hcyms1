@@ -20,7 +20,7 @@ public class SteelBrickModel extends BrickController {
     private static final double BRICK_BREAK_PROBABILITY = 0.4;
 
     private Random random;
-    private Shape BrickFace;
+    private Shape brickFace;
 
     /**
      * SteelBrickModel Constructor:
@@ -33,7 +33,7 @@ public class SteelBrickModel extends BrickController {
     public SteelBrickModel(Point point, Dimension size){
         super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
         random = new Random();
-        BrickFace = super.brickFace;
+        brickFace = super.getBrickFace();
     }
 
     /**

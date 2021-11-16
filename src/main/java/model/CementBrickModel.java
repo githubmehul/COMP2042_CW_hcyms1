@@ -21,7 +21,7 @@ public class CementBrickModel extends BrickController {
     //Object crack
     private CrackController Crack;
     //Object BrickFace from Shape
-    private Shape BrickFace;
+    private Shape brickFace;
 
 
     /**
@@ -83,7 +83,7 @@ public class CementBrickModel extends BrickController {
      */
     @Override
     public Shape getBrick() {
-        return BrickFace;
+        return brickFace;
     }
 
     /**
@@ -95,7 +95,7 @@ public class CementBrickModel extends BrickController {
         if(!super.isBroken()){
             //Create the Crack on the Brick
             GeneralPath gp = Crack.draw();
-            gp.append(super.brickFace,false);
+            gp.append(super.getBrickFace(),false);
             //Update the BrickFace to the Crack
             brickFace = gp;
         }
@@ -111,6 +111,6 @@ public class CementBrickModel extends BrickController {
         //reset the crack
         Crack.reset();
         //update the brickface
-        BrickFace = super.brickFace;
+        brickFace = super.getBrickFace();
     }
 }

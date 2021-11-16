@@ -73,7 +73,7 @@ public class WallModel {
         ball.setSpeed(speedX,speedY);
 
         //Adds in the Parameters for the player model
-        player = new PlayerModel((Point) ballPos.clone(),150,10, drawArea);
+        setPlayer(new PlayerModel((Point) ballPos.clone(),150,10, drawArea));
         //Define the Area of the wall
         area = drawArea;
 
@@ -192,7 +192,7 @@ public class WallModel {
      * @param ballPos
      */
     private void makeBall(Point2D ballPos){
-        ball = new RubberBallModel(ballPos);
+        setBall(new RubberBallModel(ballPos));
     }
 
     /**
@@ -393,7 +393,7 @@ public class WallModel {
      * the bricks based on the level
      */
     public void nextLevel(){
-        bricks = levels[level++];
+        setBricks(levels[level++]);;
         this.BrickCount = bricks.length;
 //        getLevelsCount();
 
