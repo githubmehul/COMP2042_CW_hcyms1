@@ -9,24 +9,21 @@ import java.awt.*;
  * PlayerModel Class implements the PLayer Platform
  */
 public class PlayerModel {
+    //Final Color Declarations
+    public static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
+    public static final Color PLAYER_INNER_COLOR = Color.GREEN;
 
-    //Border of the Player
-    public static final Color BORDER_COLOR = Color.GREEN.darker().darker();
-    //Inner Color of the PLayer
-    public static final Color INNER_COLOR = Color.GREEN;
-
-    private static final int DEF_MOVE_AMOUNT = 5;
+    private static final int PLAYER_MOVE_AMOUNT = 5;
 
     //The shape of the platform
-    private Rectangle playerFace;
+    private Rectangle PlayerFace;
     //A Coordinate Variable called ballPoint
-    private Point ballPoint;
+    private Point BallPoint;
     //The move Amount
-    private int moveAmount;
+    private int MoveAmount;
     //Min and Max Movement
-    private int min;
-    private int max;
-
+    private int Min;
+    private int Max;
 
     /**
      * PlayerModel Constructor:
@@ -40,12 +37,11 @@ public class PlayerModel {
      * @param container
      */
     public PlayerModel(Point ballPoint, int width, int height, Rectangle container) {
-        this.ballPoint = ballPoint;
-        moveAmount = 0;
-        playerFace = makeRectangle(width, height);
-        min = container.x + (width / 2);
-        max = min + container.width - width;
-
+        this.BallPoint = ballPoint;
+        MoveAmount = 0;
+        PlayerFace = makeRectangle(width, height);
+        Min = container.x + (width / 2);
+        Max = Min + container.width - width;
     }
 
     /**
@@ -56,7 +52,7 @@ public class PlayerModel {
      * @return
      */
     private Rectangle makeRectangle(int width,int height){
-        Point p = new Point((int)(ballPoint.getX() - (width / 2)),(int)ballPoint.getY());
+        Point p = new Point((int)(BallPoint.getX() - (width / 2)),(int)BallPoint.getY());
         return  new Rectangle(p,new Dimension(width,height));
     }
 
@@ -68,7 +64,7 @@ public class PlayerModel {
      * @return
      */
     public boolean impact(BallController b){
-        return playerFace.contains(b.getPosition()) && playerFace.contains(b.down) ;
+        return PlayerFace.contains(b.getPosition()) && PlayerFace.contains(b.getDownLocation()) ;
     }
 
     /**
@@ -76,11 +72,11 @@ public class PlayerModel {
      * Implements the movement of the ball and the platform
      */
     public void move(){
-        double x = ballPoint.getX() + moveAmount;
-        if(x < min || x > max)
+        double x = BallPoint.getX() + MoveAmount;
+        if(x < Min || x > Max)
             return;
-        ballPoint.setLocation(x,ballPoint.getY());
-        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
+        BallPoint.setLocation(x,BallPoint.getY());
+        PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
     }
 
     /**
@@ -88,15 +84,15 @@ public class PlayerModel {
      * when moved left , reduces the move amount
      */
     public void moveLeft(){
-        moveAmount = -DEF_MOVE_AMOUNT;
+        MoveAmount = -PLAYER_MOVE_AMOUNT;
     }
 
     /**
      * moveLeft method:
      * when moved right , reduces the move amount
      */
-    public void movRight(){
-        moveAmount = DEF_MOVE_AMOUNT;
+    public void moveRight(){
+        MoveAmount = PLAYER_MOVE_AMOUNT;
     }
 
     /**
@@ -104,7 +100,7 @@ public class PlayerModel {
      * stops the move amount so that the platform does not move
      */
     public void stop(){
-        moveAmount = 0;
+        MoveAmount = 0;
     }
 
     /**
@@ -113,7 +109,7 @@ public class PlayerModel {
      * @return
      */
     public Shape getPlayerFace(){
-        return  playerFace;
+        return  PlayerFace;
     }
 
     /**
@@ -122,7 +118,14 @@ public class PlayerModel {
      * @param p
      */
     public void moveTo(Point p){
-        ballPoint.setLocation(p);
-        playerFace.setLocation(ballPoint.x - (int)playerFace.getWidth()/2,ballPoint.y);
+        BallPoint.setLocation(p);
+        PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
+    }
+    public static Color getBorderColor() {
+        return PLAYER_BORDER_COLOR;
+    }
+
+    public static Color getInnerColor() {
+        return PLAYER_INNER_COLOR;
     }
 }

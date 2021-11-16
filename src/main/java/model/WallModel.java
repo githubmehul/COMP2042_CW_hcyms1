@@ -16,11 +16,11 @@ public class WallModel {
     //Number of Levels
     public static final int LEVELS_COUNT = 4;
     // Strength to Break the Blocks
-    private static final int CLAY = 1;
-    private static final int STEEL = 2;
-    private static final int CEMENT = 3;
+    private static final int CLAY_BRICK = 1;
+    private static final int STEEL_BRICK = 2;
+    private static final int CEMENT_BRICK = 3;
 
-    private Random rnd;
+    private Random random;
     private Rectangle area;
 
     public BrickController[] bricks;
@@ -30,10 +30,10 @@ public class WallModel {
     private BrickController[][] levels;
     private int level;
 
-    private Point startPoint;
-    private int brickCount;
-    private int ballCount;
-    private boolean ballLost;
+    private Point StartPoint;
+    private int BrickCount;
+    private int BallCount;
+    private boolean BallLost;
 
     /**
      * WallModel Constructor:
@@ -48,25 +48,24 @@ public class WallModel {
     public WallModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         //specifies the location of the ball position
-        this.startPoint = new Point(ballPos);
+        this.StartPoint = new Point(ballPos);
         // level takes in the value of makelevels function
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         level = 0;
-
-        ballCount = 3;
-        ballLost = false;
+        BallCount = 3;
+        BallLost = false;
 
         //create random object
-        rnd = new Random();
+        random = new Random();
         //adding ball position in the make ball function
         makeBall(ballPos);
 
         int speedX,speedY;
         do{
-            speedX = rnd.nextInt(5) - 2;
+            speedX = random.nextInt(5) - 2;
         }while(speedX == 0);
         do{
-            speedY = -rnd.nextInt(3);
+            speedY = -random.nextInt(3);
         }while(speedY == 0);
 
         // sets the ball speed x and speed y
@@ -206,13 +205,30 @@ public class WallModel {
      */
     private BrickController[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio){
         BrickController[][] tmp = new BrickController[LEVELS_COUNT][];
-        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY_BRICK);
+        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY_BRICK,CEMENT_BRICK);
+        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY_BRICK,STEEL_BRICK);
+        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL_BRICK,CEMENT_BRICK);
         return tmp;
     }
 
+    private BrickController makeBrick(Point point, Dimension size, int type){
+        BrickController out;
+        switch(type){
+            case CLAY_BRICK:
+                out = new ClayBrickModel(point,size);
+                break;
+            case STEEL_BRICK:
+                out = new SteelBrickModel(point,size);
+                break;
+            case CEMENT_BRICK:
+                out = new CementBrickModel(point, size);
+                break;
+            default:
+                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
+        }
+        return  out;
+    }
     /**
      * move Method:
      * When this method is called , it calls the methods to implement the movement of the player and the
@@ -232,12 +248,12 @@ public class WallModel {
         if(player.impact(ball)){
             ball.reverseY();
         }
-        // if the plaer impacts the wall , then reduce the brick count
+        // if the player impacts the wall , then reduce the brick count
         else if(impactWall()){
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
-            brickCount--;
+            BrickCount--;
         }
         //if the ball hits the border of the wall , reverse x
         else if(impactBorder()) {
@@ -249,8 +265,8 @@ public class WallModel {
         }
         //if the ball goes out of frame , reduce the ball count , and balllost = true
         else if(ball.getPosition().getY() > area.getY() + area.getHeight()){
-            ballCount--;
-            ballLost = true;
+            BallCount--;
+            BallLost = true;
         }
     }
 
@@ -265,18 +281,18 @@ public class WallModel {
                 //Vertical Impact
                 case BrickController.UP_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.down, BrickController.Crack.UP);
+                    return b.setImpact(ball.getDownLocation(), BrickController.Crack.UP);
                 case BrickController.DOWN_IMPACT:
                     ball.reverseY();
-                    return b.setImpact(ball.up, BrickController.Crack.DOWN);
+                    return b.setImpact(ball.getUpLocation(), BrickController.Crack.DOWN);
 
                 //Horizontal Impact
                 case BrickController.LEFT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.right, BrickController.Crack.RIGHT);
+                    return b.setImpact(ball.getRightLocation(), BrickController.Crack.RIGHT);
                 case BrickController.RIGHT_IMPACT:
                     ball.reverseX();
-                    return b.setImpact(ball.left, BrickController.Crack.LEFT);
+                    return b.setImpact(ball.getLeftLocation(), BrickController.Crack.LEFT);
             }
         }
         return false;
@@ -298,7 +314,7 @@ public class WallModel {
      * @return brickCount
      */
     public int getBrickCount(){
-        return brickCount;
+        return BrickCount;
     }
 
     /**
@@ -307,7 +323,7 @@ public class WallModel {
      * @return ballCount
      */
     public int getBallCount(){
-        return ballCount;
+        return BallCount;
     }
 
     /**
@@ -316,7 +332,7 @@ public class WallModel {
      * @return ballLost
      */
     public boolean isBallLost(){
-        return ballLost;
+        return BallLost;
     }
 
 //    public int getLevelsCount(){return level;}
@@ -326,18 +342,18 @@ public class WallModel {
      * When the ball is lost , this method provides the implementation for ball reset
      */
     public void ballReset(){
-        player.moveTo(startPoint);
-        ball.moveTo(startPoint);
+        player.moveTo(StartPoint);
+        ball.moveTo(StartPoint);
         int speedX,speedY;
         do{
-            speedX = rnd.nextInt(5) - 2;
+            speedX = random.nextInt(5) - 2;
         }while(speedX == 0);
         do{
-            speedY = -rnd.nextInt(3);
+            speedY = -random.nextInt(3);
         }while(speedY == 0);
 
         ball.setSpeed(speedX,speedY);
-        ballLost = false;
+        BallLost = false;
     }
 
     /**
@@ -347,8 +363,8 @@ public class WallModel {
     public void wallReset(){
         for(BrickController b : bricks)
             b.repair();
-        brickCount = bricks.length;
-        ballCount = 3;
+        BrickCount = bricks.length;
+        BallCount = 3;
     }
 
     /**
@@ -357,7 +373,7 @@ public class WallModel {
      * @return ballCount
      */
     public boolean ballEnd(){
-        return ballCount == 0;
+        return BallCount == 0;
     }
 
     /**
@@ -366,7 +382,7 @@ public class WallModel {
      * @return brickCount
      */
     public boolean isDone(){
-        return brickCount == 0;
+        return BrickCount == 0;
     }
 
 
@@ -377,7 +393,7 @@ public class WallModel {
      */
     public void nextLevel(){
         bricks = levels[level++];
-        this.brickCount = bricks.length;
+        this.BrickCount = bricks.length;
 //        getLevelsCount();
 
     }
@@ -415,33 +431,6 @@ public class WallModel {
      * Provides Implementation to reset the BallCount
      */
     public void resetBallCount(){
-        ballCount = 3;
+        BallCount = 3;
     }
-
-    /**
-     * makeBrick Method:
-     * Provides implementation to makeBrick  , which is further used in the creation of the brick level
-     * @param point
-     * @param size
-     * @param type
-     * @return
-     */
-    private BrickController makeBrick(Point point, Dimension size, int type){
-        BrickController out;
-        switch(type){
-            case CLAY:
-                out = new ClayBrickModel(point,size);
-                break;
-            case STEEL:
-                out = new SteelBrickModel(point,size);
-                break;
-            case CEMENT:
-                out = new CementBrickModel(point, size);
-                break;
-            default:
-                throw  new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
-        }
-        return  out;
-    }
-
 }

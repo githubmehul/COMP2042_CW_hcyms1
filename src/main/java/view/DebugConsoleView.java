@@ -17,7 +17,7 @@ public class DebugConsoleView extends JDialog implements WindowListener{
     //The title of the Debug Console Window
     private static final String DEBUG_CONSOLE_TITLE = "Dialog Console";
 
-    private final JFrame owner;
+    private JFrame owner;
     private DebugPanelController DebugPanel;
     private GameBoardView Gameboard;
     private WallModel Wall;
@@ -62,8 +62,8 @@ public class DebugConsoleView extends JDialog implements WindowListener{
      * Set the Coordinates of Presentation of the Debug Console
      */
     private void setLocation(){
-        int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
-        int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
+        int x = ((this.getWidth() - this.getWidth()) / 2) + owner.getX();
+        int y = ((this.getHeight() - this.getHeight()) / 2) + owner.getY();
         this.setLocation(x,y);
     }
 

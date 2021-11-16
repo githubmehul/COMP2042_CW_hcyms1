@@ -13,14 +13,14 @@ import java.util.Random;
  */
 public class SteelBrickModel extends BrickController {
 
-    private static final String NAME = "Steel Brick";
-    private static final Color DEF_INNER = new Color(203, 203, 201);
-    private static final Color DEF_BORDER = Color.BLACK;
-    private static final int STEEL_STRENGTH = 1;
-    private static final double STEEL_PROBABILITY = 0.4;
+    private static final String BRICK_NAME = "Steel Brick";
+    private static final Color BRICK_INNER_COLOR = new Color(203, 203, 201);
+    private static final Color BRICK_BORDER_COLOR = Color.BLACK;
+    private static final int BRICK_STRENGTH = 1;
+    private static final double BRICK_BREAK_PROBABILITY = 0.4;
 
-    private Random rnd;
-    private Shape brickFace;
+    private Random random;
+    private Shape BrickFace;
 
     /**
      * SteelBrickModel Constructor:
@@ -31,11 +31,10 @@ public class SteelBrickModel extends BrickController {
      * @param size
      */
     public SteelBrickModel(Point point, Dimension size){
-        super(NAME,point,size,DEF_BORDER,DEF_INNER,STEEL_STRENGTH);
-        rnd = new Random();
-        brickFace = super.brickFace;
+        super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
+        random = new Random();
+        BrickFace = super.brickFace;
     }
-
 
     /**
      * makeBrickFace Method:
@@ -80,7 +79,7 @@ public class SteelBrickModel extends BrickController {
      * If the Randomly Generated Value is less than the Steel Probability , impact the block
      */
     public void impact(){
-        if(rnd.nextDouble() < STEEL_PROBABILITY){
+        if(random.nextDouble() < BRICK_BREAK_PROBABILITY){
             super.impact();
         }
     }

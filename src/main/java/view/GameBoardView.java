@@ -35,10 +35,9 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     private static final Font PAUSE_MENU_FONT = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
     //Final Object Declarations
-    private JFrame owner;
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallModel wall = new WallModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2,new Point(300,430));
-    private DebugConsoleView DebugConsole = new DebugConsoleView(owner,wall,this);;
+    private DebugConsoleView DebugConsole;
     //PauseMenu Button Declaration Button
     private Rectangle ContinueButtonRect;
     private Rectangle ExitButtonRect;
@@ -61,6 +60,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // Create the View of the GameBoard
         this.initialize();
         //initialize the first level
+        DebugConsole = new DebugConsoleView(owner,wall,this);;
         wall.nextLevel();
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
         GAMEBOARD_TIMER = new Timer(10,e ->{
@@ -130,7 +130,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
      * It's invoked from Java Swing Framework to ask for a Component to draw itself on the screen
      * @param g
      */
-    public void PaintGameBoard(Graphics g){
+    public void paint(Graphics g){
         // Create Object g2d
         Graphics2D g2d = (Graphics2D) g;
         //Setting the Background Color
@@ -220,10 +220,10 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // s takes the ball's coordinates to get it's structure
         Shape PlayerFace = p.getPlayerFace();
         //sets the inner color of the platform by calling the InnerColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.INNER_COLOR);
+        g2d.setColor(PlayerModel.PLAYER_INNER_COLOR);
         g2d.fill(PlayerFace);
         //sets the border color of the platform by calling the BorderColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.BORDER_COLOR);
+        g2d.setColor(PlayerModel.PLAYER_BORDER_COLOR);
         g2d.draw(PlayerFace);
 
         g2d.setColor(tmp);
@@ -270,6 +270,8 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // Setting the Font and Color of the Menu Screen
         g2d.setFont(PAUSE_MENU_FONT);
         g2d.setColor(MENU_COLOR);
+        //so they can position it where they want it
+        //what this is doing is it's checking the text's width based on its font
 
         if(StrLen == 0){
             FontRenderContext frc = g2d.getFontRenderContext();

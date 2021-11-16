@@ -12,19 +12,18 @@ import java.awt.geom.RectangularShape;
 abstract public class BallController {
 
     //Shape of the Ball
-    private Shape ballFace;
+    private Shape BallFace;
 
     //Coordinates for center
     private Point2D center;
-    //Coordinates for up , down , left , right
-    public Point2D up;
-    public Point2D down;
-    public Point2D left;
-    public Point2D right;
+    private Point2D up;
+    private Point2D down;
+    private Point2D left;
+    private Point2D right;
 
     //color for border and inner
-    private Color border;
-    private Color inner;
+    private Color Ball_Border_Color;
+    private Color Ball_Inner_Color;
 
     //Speed of Ball
     private int speedX;
@@ -43,21 +42,22 @@ abstract public class BallController {
     public BallController(Point2D center, int radiusA, int radiusB, Color inner, Color border){
         this.center = center;
 
-        up = new Point2D.Double();
-        down = new Point2D.Double();
-        left = new Point2D.Double();
-        right = new Point2D.Double();
+        setUpLocation(new Point2D.Double());
+        setDownLocation(new Point2D.Double());
+        setLeftLocation(new Point2D.Double());
+        setRightLocation(new Point2D.Double());
 
         //Coordinates of the movement of the ball
-        up.setLocation(center.getX(),center.getY()-(radiusB / 2));
-        down.setLocation(center.getX(),center.getY()+(radiusB / 2));
-        left.setLocation(center.getX()-(radiusA /2),center.getY());
-        right.setLocation(center.getX()+(radiusA /2),center.getY());
+        getUpLocation().setLocation(center.getX(),center.getY()-(radiusB / 2));
+        getDownLocation().setLocation(center.getX(),center.getY()+(radiusB / 2));
+
+        getLeftLocation().setLocation(center.getX()-(radiusA /2),center.getY());
+        getRightLocation().setLocation(center.getX()+(radiusA /2),center.getY());
 
         //ballFace - The shape of the ball and initializes the starting location
-        ballFace = makeBall(center,radiusA,radiusB);
-        this.border = border;
-        this.inner  = inner;
+        BallFace = makeBall(center,radiusA,radiusB);
+        this.Ball_Border_Color = border;
+        this.Ball_Inner_Color  = inner;
         speedX = 0;
         speedY = 0;
     }
@@ -77,13 +77,13 @@ abstract public class BallController {
      * Implementation of the width and height of the ball when in motion , called by wall class
      */
     public void move(){
-        RectangularShape tmp = (RectangularShape) ballFace;
+        RectangularShape tmp = (RectangularShape) BallFace;
         center.setLocation((center.getX() + speedX),(center.getY() + speedY));
         double w = tmp.getWidth();
         double h = tmp.getHeight();
         tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
         setPoints(w,h);
-        ballFace = tmp;
+        BallFace = tmp;
     }
 
     /**
@@ -136,11 +136,11 @@ abstract public class BallController {
     }
 
     public Color getBorderColor(){
-        return border;
+        return Ball_Border_Color;
     }
 
     public Color getInnerColor(){
-        return inner;
+        return Ball_Inner_Color;
     }
 
     public Point2D getPosition(){
@@ -148,7 +148,7 @@ abstract public class BallController {
     }
 
     public Shape getBallFace(){
-        return ballFace;
+        return BallFace;
     }
 
     /**
@@ -159,19 +159,19 @@ abstract public class BallController {
     public void moveTo(Point p){
         center.setLocation(p);
 
-        RectangularShape tmp = (RectangularShape) ballFace;
+        RectangularShape tmp = (RectangularShape) BallFace;
         double w = tmp.getWidth();
         double h = tmp.getHeight();
         tmp.setFrame((center.getX() -(w / 2)),(center.getY() - (h / 2)),w,h);
-        ballFace = tmp;
+        BallFace = tmp;
     }
 
     private void setPoints(double width,double height){
-        up.setLocation(center.getX(),center.getY()-(height / 2));
-        down.setLocation(center.getX(),center.getY()+(height / 2));
+        getUpLocation().setLocation(center.getX(),center.getY()-(height / 2));
+        getDownLocation().setLocation(center.getX(),center.getY()+(height / 2));
 
-        left.setLocation(center.getX()-(width / 2),center.getY());
-        right.setLocation(center.getX()+(width / 2),center.getY());
+        getLeftLocation().setLocation(center.getX()-(width / 2),center.getY());
+        getRightLocation().setLocation(center.getX()+(width / 2),center.getY());
     }
 
     public int getSpeedX(){
@@ -182,6 +182,37 @@ abstract public class BallController {
     public int getSpeedY(){
 
         return speedY;
+    }
+    public Point2D getUpLocation() {
+        return up;
+    }
+
+    public void setUpLocation(Point2D up) {
+        this.up = up;
+    }
+
+    public Point2D getDownLocation() {
+        return down;
+    }
+
+    public void setDownLocation(Point2D down) {
+        this.down = down;
+    }
+
+    public Point2D getLeftLocation() {
+        return left;
+    }
+
+    public void setLeftLocation(Point2D left) {
+        this.left = left;
+    }
+
+    public Point2D getRightLocation() {
+        return right;
+    }
+
+    public void setRightLocation(Point2D right) {
+        this.right = right;
     }
 
 

@@ -247,13 +247,13 @@ abstract public class BrickController {
         if(broken)
             return 0;
         int out  = 0;
-        if(brickFace.contains(b.right))
+        if(brickFace.contains(b.getLeftLocation()))
             out = LEFT_IMPACT;
-        else if(brickFace.contains(b.left))
+        else if(brickFace.contains(b.getLeftLocation()))
             out = RIGHT_IMPACT;
-        else if(brickFace.contains(b.up))
+        else if(brickFace.contains(b.getUpLocation()))
             out = DOWN_IMPACT;
-        else if(brickFace.contains(b.down))
+        else if(brickFace.contains(b.getDownLocation()))
             out = UP_IMPACT;
         return out;
     }

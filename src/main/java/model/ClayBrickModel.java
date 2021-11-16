@@ -12,10 +12,10 @@ import java.awt.Point;
  */
 public class ClayBrickModel extends BrickController {
 
-    private static final String NAME = "Clay Brick";
-    private static final Color DEF_INNER = new Color(178, 34, 34).darker();
-    private static final Color DEF_BORDER = Color.GRAY;
-    private static final int CLAY_STRENGTH = 1;
+    private static final String BRICK_NAME = "Clay Brick";
+    private static final Color BRICK_INNER_COLOR = new Color(178, 34, 34).darker();
+    private static final Color BRICK_BORDER_COLOR = Color.GRAY;
+    private static final int BRICK_STRENGTH = 1;
 
 
     /**
@@ -26,7 +26,7 @@ public class ClayBrickModel extends BrickController {
      */
     public ClayBrickModel(Point point, Dimension size){
 
-        super(NAME,point,size,DEF_BORDER,DEF_INNER,CLAY_STRENGTH);
+        super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
     }
 
     /**

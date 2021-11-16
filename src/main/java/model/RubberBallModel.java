@@ -13,9 +13,9 @@ import java.awt.geom.Point2D;
 public class RubberBallModel extends BallController {
 
 
-    private static final int DEF_RADIUS = 10;
-    private static final Color DEF_INNER_COLOR = new Color(255, 219, 88);
-    private static final Color DEF_BORDER_COLOR = DEF_INNER_COLOR.darker().darker();
+    private static final int BALL_RADIUS = 10;
+    private static final Color BALL_INNER_COLOR = new Color(255, 219, 88);
+    private static final Color BALL_BORDER_COLOR = BALL_INNER_COLOR.darker().darker();
 
 
     /**
@@ -25,7 +25,7 @@ public class RubberBallModel extends BallController {
      */
     public RubberBallModel(Point2D center){
 
-        super(center,DEF_RADIUS,DEF_RADIUS,DEF_INNER_COLOR,DEF_BORDER_COLOR);
+        super(center,BALL_RADIUS,BALL_RADIUS,BALL_INNER_COLOR,BALL_BORDER_COLOR);
     }
 
 
@@ -39,11 +39,8 @@ public class RubberBallModel extends BallController {
      */
     @Override
     protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
-
-//        double x = center.getX() - (radiusA / 2);
-//        double y = center.getY() - (radiusB / 2);
-        double x = 100;
-        double y = 100;
+        double x = center.getX() - (radiusA / 2);
+        double y = center.getY() - (radiusB / 2);
         return new Ellipse2D.Double(x,y,radiusA,radiusB);
     }
 }
