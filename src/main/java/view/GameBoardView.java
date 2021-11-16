@@ -220,10 +220,10 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // s takes the ball's coordinates to get it's structure
         Shape PlayerFace = p.getPlayerFace();
         //sets the inner color of the platform by calling the InnerColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.PLAYER_INNER_COLOR);
+        g2d.setColor(PlayerModel.getInnerColor());
         g2d.fill(PlayerFace);
         //sets the border color of the platform by calling the BorderColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.PLAYER_BORDER_COLOR);
+        g2d.setColor(PlayerModel.getBorderColor());
         g2d.draw(PlayerFace);
 
         g2d.setColor(tmp);

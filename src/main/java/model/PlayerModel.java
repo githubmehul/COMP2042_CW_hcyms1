@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class PlayerModel {
     //Final Color Declarations
-    public static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
-    public static final Color PLAYER_INNER_COLOR = Color.GREEN;
+    private static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
+    private static final Color PLAYER_INNER_COLOR = Color.GREEN;
 
     private static final int PLAYER_MOVE_AMOUNT = 5;
 
@@ -121,10 +121,21 @@ public class PlayerModel {
         BallPoint.setLocation(p);
         PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
     }
+
+    /**
+     * getBorderColor Method:
+     * To Return the Border Color
+     * @return PLAYER_BORDER_COLOR
+     */
     public static Color getBorderColor() {
         return PLAYER_BORDER_COLOR;
     }
 
+    /**
+     * getInnerColor Method:
+     * To return the Inner Color
+     * @return PLAYER_INNER_COLOR
+     */
     public static Color getInnerColor() {
         return PLAYER_INNER_COLOR;
     }
