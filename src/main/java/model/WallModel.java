@@ -23,9 +23,9 @@ public class WallModel {
     private Random random;
     private Rectangle area;
 
-    public BrickController[] bricks;
-    public BallController ball;
-    public PlayerModel player;
+    private BrickController[] bricks;
+    private BallController ball;
+    private PlayerModel player;
 
     private BrickController[][] levels;
     private int level;
@@ -432,5 +432,23 @@ public class WallModel {
      */
     public void resetBallCount(){
         BallCount = 3;
+    }
+    public BrickController[] getBricks(){
+        return bricks;
+    }
+    public void setBricks(BrickController[] bricks) {
+        this.bricks = bricks;
+    }
+    public BallController getBall() {
+        return ball;
+    }
+    public void setBall(BallController ball) {
+        this.ball = ball;
+    }
+    public PlayerModel getPlayer() {
+        return player;
+    }
+    public void setPlayer(PlayerModel player) {
+        this.player = player;
     }
 }

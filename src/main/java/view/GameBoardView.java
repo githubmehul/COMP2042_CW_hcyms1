@@ -139,14 +139,14 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         g2d.setColor(Color.BLUE);
         g2d.drawString(message,250,225);
         //Calling the drawBall Method , with the parameters of the ball object and g2d
-        DrawBall(wall.ball,g2d);
+        DrawBall(wall.getBall(),g2d);
         // If the brick is not broken , then call the method drawBrick
-        for(BrickController b : wall.bricks) {
+        for(BrickController b : wall.getBricks()) {
             if(!b.isBroken())
                 DrawBrick(b,g2d);
         }
         //Calling the drawPlayer method to draw the player
-        DrawPlayer(wall.player,g2d);
+        DrawPlayer(wall.getPlayer(),g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
             PauseMenu(g2d);
@@ -325,11 +325,11 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         switch(keyEvent.getKeyCode()){
             // A to move left
             case KeyEvent.VK_A:
-                wall.player.moveLeft();
+                wall.getPlayer().moveLeft();
                 break;
             //D to move right
             case KeyEvent.VK_D:
-                wall.player.moveRight();
+                wall.getPlayer().moveRight();
                 break;
             //Escape Key to call Pause Menu
             case KeyEvent.VK_ESCAPE:
@@ -350,7 +350,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
                 if(keyEvent.isAltDown() && keyEvent.isShiftDown())
                     DebugConsole.setVisible(true);
             default:
-                wall.player.stop();
+                wall.getPlayer().stop();
         }
     }
 
@@ -362,7 +362,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         //Move amount will be 0
-        wall.player.stop();
+        wall.getPlayer().stop();
     }
 
     /**
