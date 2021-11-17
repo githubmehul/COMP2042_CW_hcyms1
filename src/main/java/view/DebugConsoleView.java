@@ -2,7 +2,8 @@ package view;
 
 import controller.BallController;
 import controller.DebugPanelController;
-import model.WallModel;
+import model.LevelModel;
+import controller.WallController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +21,8 @@ public class DebugConsoleView extends JDialog implements WindowListener{
     private JFrame owner;
     private DebugPanelController DebugPanel;
     private GameBoardView Gameboard;
-    private WallModel Wall;
+    private WallController wall;
+    private LevelModel level;
 
 
     /**
@@ -30,14 +32,15 @@ public class DebugConsoleView extends JDialog implements WindowListener{
      * @param wall
      * @param gameboard
      */
-    public DebugConsoleView(JFrame owner, WallModel wall, GameBoardView gameboard){
-        this.Wall = wall;
+    public DebugConsoleView(JFrame owner, WallController wall, GameBoardView gameboard , LevelModel level){
+        this.wall = wall;
         this.owner = owner;
         this.Gameboard = gameboard;
+        this.level = level;
         //Calling the initialize method
         initialize();
         // debugPanel is an object of the DebugPanelController Method
-        DebugPanel = new DebugPanelController(wall);
+        DebugPanel = new DebugPanelController(wall , level);
         //Add the Panel , and keep the Border Layout as Center
         this.add(DebugPanel,BorderLayout.CENTER);
         this.pack();
@@ -62,8 +65,8 @@ public class DebugConsoleView extends JDialog implements WindowListener{
      * Set the Coordinates of Presentation of the Debug Console
      */
     private void setLocation(){
-        int x = ((this.getWidth() - this.getWidth()) / 2) + owner.getX();
-        int y = ((this.getHeight() - this.getHeight()) / 2) + owner.getY();
+        int x = ((owner.getWidth() - this.getWidth()) / 2) + owner.getX();
+        int y = ((owner.getHeight() - this.getHeight()) / 2) + owner.getY();
         this.setLocation(x,y);
     }
 
@@ -98,7 +101,7 @@ public class DebugConsoleView extends JDialog implements WindowListener{
     @Override
     public void windowActivated(WindowEvent windowEvent) {
         setLocation();
-        BallController b = Wall.getBall();
+        BallController b = wall.getBall();
         DebugPanel.setValues(b.getSpeedX(),b.getSpeedY());
     }
     @Override

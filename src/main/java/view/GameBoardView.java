@@ -2,8 +2,9 @@ package view;
 
 import controller.BallController;
 import controller.BrickController;
+import model.LevelModel;
 import model.PlayerModel;
-import model.WallModel;
+import controller.WallController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,8 +37,9 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
 
     //Final Object Declarations
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
-    private WallModel wall = new WallModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2,new Point(300,430));
+    private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2,new Point(300,430));
     private DebugConsoleView DebugConsole;
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     //PauseMenu Button Declaration Button
     private Rectangle ContinueButtonRect;
     private Rectangle ExitButtonRect;
@@ -60,8 +62,8 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // Create the View of the GameBoard
         this.initialize();
         //initialize the first level
-        DebugConsole = new DebugConsoleView(owner,wall,this);;
-        wall.nextLevel();
+        DebugConsole = new DebugConsoleView(owner,wall,this , level);;
+        level.nextLevel();
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
         GAMEBOARD_TIMER = new Timer(10,e ->{
             // Calls the move function in the WallModel Class
@@ -87,7 +89,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
             //If the Wall Is Done
             else if(wall.isDone()){
                 //If the Wall has another level
-                if(wall.hasLevel()){
+                if(level.hasLevel()){
                     //Display Message
                     message = "Go to Next Level";
                     //Stop the GameTimer
@@ -97,7 +99,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
                     //Reset the Wall
                     wall.wallReset();
                     //Go to the Next Level
-                    wall.nextLevel();
+                    level.nextLevel();
                 }
                 else{
                     //If the Player reaches end of game , Display this message

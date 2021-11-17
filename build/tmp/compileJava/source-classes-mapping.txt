@@ -8,14 +8,16 @@ view/DebugConsoleView.java
  view.DebugConsoleView
 controller/BallController.java
  controller.BallController
+model/LevelModel.java
+ model.LevelModel
 model/RubberBallModel.java
  model.RubberBallModel
+controller/WallController.java
+ controller.WallController
 controller/DebugPanelController.java
  controller.DebugPanelController
 view/HomeMenuView.java
  view.HomeMenuView
-model/WallModel.java
- model.WallModel
 model/CementBrickModel.java
  model.CementBrickModel
 controller/BrickController.java

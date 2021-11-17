@@ -1,6 +1,6 @@
 package controller;
 
-import model.WallModel;
+import model.LevelModel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
@@ -23,20 +23,21 @@ public class DebugPanelController extends JPanel {
     private JSlider ballXSpeed;
     private JSlider ballYSpeed;
 
-    private WallModel wall;
+    private WallController wall;
+    private LevelModel level;
 
     /**
      * DebugPanelController Constructor:
      * To implement the Debug Panel Controller
      * @param wall
      */
-    public DebugPanelController(WallModel wall){
+    public DebugPanelController(WallController wall , LevelModel level){
 
         this.wall = wall;
-
+        this.level = level;
         initialize();
         //Button to Skip level and reset balls
-        skipLevel = makeButton("Skip Level",e -> wall.nextLevel());
+        skipLevel = makeButton("Skip Level",e -> level.nextLevel());
         resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
 
         //Setting the X and Y Speed for the ball
