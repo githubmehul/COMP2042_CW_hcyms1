@@ -21,6 +21,8 @@ A build file is added as it automatically downloads and configures the dependenc
 <b>4.	Indentation</b></br>
 <b>5.	Encapsulation Implementation</b></br>
 The Encapsulate Fields refactoring lets data be hidden and create the necessary accessors for it.
-Hiding data and accessing it through an outward interface based on accessor methods enabling changes to be made to this storage without the necessity of changing the code that references the data.<br><br>
+Hiding data and accessing it through an outward interface based on accessor methods enabling changes to be made to this storage without the necessity of changing the code that references the data.<br>
+Considerable Changes have been made to the PlayerModel , BallController , and BrickController Class<br><br>
 <b>6.	Reduce Large Classes – Improve Single Responsibility</br>
+
 
