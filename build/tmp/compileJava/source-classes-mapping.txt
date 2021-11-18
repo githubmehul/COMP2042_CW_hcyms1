@@ -1,9 +1,11 @@
-model/PlayerModel.java
- model.PlayerModel
+view/HomeMenuView.java
+ view.HomeMenuView
 model/GameFrameModel.java
  model.GameFrameModel
 game/Main.java
  game.Main
+model/PlayerModel.java
+ model.PlayerModel
 view/DebugConsoleView.java
  view.DebugConsoleView
 controller/BallController.java
@@ -16,8 +18,6 @@ controller/WallController.java
  controller.WallController
 controller/DebugPanelController.java
  controller.DebugPanelController
-view/HomeMenuView.java
- view.HomeMenuView
 model/CementBrickModel.java
  model.CementBrickModel
 controller/BrickController.java

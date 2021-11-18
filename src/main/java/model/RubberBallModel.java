@@ -12,35 +12,49 @@ import java.awt.geom.Point2D;
  */
 public class RubberBallModel extends BallController {
 
-
     private static final int BALL_RADIUS = 10;
     private static final Color BALL_INNER_COLOR = new Color(255, 219, 88);
     private static final Color BALL_BORDER_COLOR = BALL_INNER_COLOR.darker().darker();
 
-
     /**
-     * RubberBallModel Constructor:
-     * Calls the BallController Class Constructor
+     * Calls the BallController Constructor
      * @param center
      */
     public RubberBallModel(Point2D center){
 
-        super(center,BALL_RADIUS,BALL_RADIUS,BALL_INNER_COLOR,BALL_BORDER_COLOR);
+        super(center,BALL_RADIUS,BALL_RADIUS);
     }
 
-
     /**
-     * makeBall Method:
-     *Provides the implementation to set the initial location of the ball , with the width and height
+     *Implements makeBall Method from BallController to create the Shape of the Ball
      * @param center
-     * @param radiusA
-     * @param radiusB
+     * @param width
+     * @param height
      * @return
      */
     @Override
-    protected Shape makeBall(Point2D center, int radiusA, int radiusB) {
-        double x = center.getX() - (radiusA / 2);
-        double y = center.getY() - (radiusB / 2);
-        return new Ellipse2D.Double(x,y,radiusA,radiusB);
+    protected Shape makeBall(Point2D center, int width, int height) {
+        double x = center.getX() - (width / 2);
+        double y = center.getY() - (height / 2);
+        return new Ellipse2D.Double(x,y,width,height);
     }
+
+    /**
+     * Sets the Inner Color of the Ball
+     * @return BALL_INNER_COLOR
+     */
+    @Override
+    protected Color setInnerColor() {
+        return BALL_INNER_COLOR ;
+    }
+
+    /**
+     * Sets the Border Color of the Ball
+     * @return BALL_BORDER_COLOR
+     */
+    @Override
+    protected Color setBorderColor() {
+        return BALL_BORDER_COLOR;
+    }
+
 }

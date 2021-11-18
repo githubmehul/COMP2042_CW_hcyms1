@@ -6,15 +6,14 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 /**
- * Created by filippo on 04/09/16.
- *
+ * The abstract class Brick provides a 'template' for the different types of
+ * Bricks in the game. It is responsible for defining its shape, looks and
+ * location
  */
 abstract public class BrickController {
 
-    public static final int MIN_CRACK = 1;
     public static final int DEF_CRACK_DEPTH = 1;
     public static final int DEF_STEPS = 35;
-
 
     public static final int UP_IMPACT = 100;
     public static final int DOWN_IMPACT = 200;

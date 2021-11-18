@@ -1,10 +1,7 @@
 package controller;
-
-import controller.BallController;
-import controller.BrickController;
-import controller.CrackController;
 import model.PlayerModel;
 import model.RubberBallModel;
+
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -30,9 +27,6 @@ public class WallController {
     private BallController ball;
     private PlayerModel player;
 
-    private BrickController[][] levels;
-    private int level;
-
     private Point StartPoint;
     private int brickCount;
     private int ballCount;
@@ -52,9 +46,6 @@ public class WallController {
 
         //specifies the location of the ball position
         this.StartPoint = new Point(ballPos);
-        // level takes in the value of makelevels function
-//        levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
-//        level = 0;
         ballCount = 3;
         BallLost = false;
 
@@ -72,7 +63,8 @@ public class WallController {
         }while(speedY == 0);
 
         // sets the ball speed x and speed y
-        ball.setSpeed(speedX,speedY);
+        getBall().setXSpeed(speedX);
+        getBall().setYSpeed(speedY);
 
         //Adds in the Parameters for the player model
         setPlayer(new PlayerModel((Point) ballPos.clone(),150,10, drawArea));
@@ -179,7 +171,7 @@ public class WallController {
         return BallLost;
     }
 
-//    public int getLevelsCount(){return level;}
+
 
     /**
      * ballReset Method:
@@ -196,7 +188,8 @@ public class WallController {
             speedY = -random.nextInt(3);
         }while(speedY == 0);
 
-        getBall().setSpeed(speedX,speedY);
+        getBall().setXSpeed(speedX);
+        getBall().setYSpeed(speedY);
         BallLost = false;
     }
 
@@ -228,29 +221,6 @@ public class WallController {
     public boolean isDone(){
         return brickCount == 0;
     }
-
-
-    /**
-     * nextLevel Method:
-     * Proved implementation to go to the next level , sets the brickCount and
-     * the bricks based on the level
-     */
-//    public void nextLevel(){
-//        setBricks(levels[level++]);;
-//        this.BrickCount = bricks.length;
-////        getLevelsCount();
-//
-//    }
-
-    /**
-     * hasLevel Method:
-     * Returns if the current level is less than the level length
-     * @return level < levels.length;
-     */
-//    public boolean hasLevel(){
-//        return level < levels.length;
-//    }
-
 
     /**
      * setBallXSpeed Method:

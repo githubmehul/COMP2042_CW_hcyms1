@@ -56,6 +56,7 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
     private boolean Start_Button_Clicked;
     //Boolean to mark when the exit is clicked
     private boolean Exit_Button_Clicked;
+    private boolean Audio_Button_Clicked;
 
 
     /**
