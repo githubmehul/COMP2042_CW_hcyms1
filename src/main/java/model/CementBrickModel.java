@@ -12,35 +12,33 @@ import java.awt.geom.Point2D;
  */
 public class CementBrickModel extends BrickController {
 
+    //Brick Name
     private static final String BRICK_NAME = "Cement Brick";
+    //Define the Inner and Border Color
     private static final Color BRICK_INNER_COLOR = new Color(147, 147, 147);
     private static final Color BRICK_BORDER_COLOR = new Color(217, 199, 175);
-    //Hit the Cement twice to crack it.
+    //Brick Strength
     private static final int BRICK_STRENGTH = 2;
+    public static final int DEF_CRACK_DEPTH = 1;
+    public static final int DEF_STEPS = 35;
 
-    //Object crack
     private CrackController Crack;
-    //Object BrickFace from Shape
-    private Shape brickFace;
-
+    private Shape brickCementFace;
 
     /**
-     * CementBrickModel Constructor:
-     * Implement the super BrickController Class , the Crack Constructor ,
-     * and the BrickFace of Brick Controller Class
+     * Implement the super BrickController Class
      * @param point
      * @param size
      */
     public CementBrickModel(Point point, Dimension size){
-        super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
+        super(BRICK_NAME,point,size,BRICK_STRENGTH);
         Crack = new CrackController(this, DEF_CRACK_DEPTH, DEF_STEPS);
-        brickFace = super.getBrickFace();
+        brickCementFace = super.getBrickFace();
     }
 
     /**
-     * makeBrickFace Method:
      * An abstract implementation of makeBrickFace of BrickController class to create the
-     * shape of the brick. , value assigned to brickFace
+     * shape of the brick.
      * @param pos
      * @param size
      * @return Rectangle(pos , size)
@@ -49,13 +47,24 @@ public class CementBrickModel extends BrickController {
     protected Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
-
     /**
-     * setImpact Method:
+     * Abstract Method for setting the Border Color of the Brick
+     */
+    @Override
+    protected Color setBrickBorderColor() {
+        return BRICK_BORDER_COLOR;
+    }
+    /**
+     * Abstract Method for setting the Inner Color of the Brick
+     */
+    @Override
+    protected Color setBrickInnerColor() {
+        return BRICK_INNER_COLOR;
+    }
+    /**
      * Implements the Functionality to set the Impact based on the boolean value
      * @param point
      * @param direction
-     * @return
      */
     @Override
     public boolean setImpact(Point2D point, int direction) {
@@ -76,19 +85,16 @@ public class CementBrickModel extends BrickController {
         return true;
     }
 
-
-    /**getBrick Method:
+    /**
      * Returns the BrickFace
      * @return brickFace
      */
     @Override
     public Shape getBrick() {
-        return brickFace;
+        return brickCementFace;
     }
-
     /**
-     * updateBrick Method:
-     * Implementation when the Brick is Impacted by the Ball.
+     * Implementation of crack when the Brick is Impacted by the Ball.
      */
     private void updateBrick(){
         //if the brick is struck
@@ -97,13 +103,12 @@ public class CementBrickModel extends BrickController {
             GeneralPath gp = Crack.draw();
             gp.append(super.getBrickFace(),false);
             //Update the BrickFace to the Crack
-            brickFace = gp;
+            brickCementFace = gp;
         }
     }
-
     /**
-     * repair Method:
-     * Implementation to remove the broken crack and increase the strength of the brick
+     * Implementation to remove the broken crack and
+     * increase the strength of the brick
      */
     public void repair(){
         //Call the repair method in brickcontroller
@@ -111,6 +116,6 @@ public class CementBrickModel extends BrickController {
         //reset the crack
         Crack.reset();
         //update the brickface
-        brickFace = super.getBrickFace();
+        brickCementFace = super.getBrickFace();
     }
 }

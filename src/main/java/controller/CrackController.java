@@ -1,5 +1,4 @@
 package controller;
-import controller.BrickController;
 
 import java.awt.*;
 import java.awt.geom.GeneralPath;

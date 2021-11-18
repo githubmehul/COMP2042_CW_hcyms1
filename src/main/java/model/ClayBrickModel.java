@@ -12,27 +12,27 @@ import java.awt.Point;
  */
 public class ClayBrickModel extends BrickController {
 
+    //Name of Brick
     private static final String BRICK_NAME = "Clay Brick";
+    //Inner Color and Border Color
     private static final Color BRICK_INNER_COLOR = new Color(178, 34, 34).darker();
     private static final Color BRICK_BORDER_COLOR = Color.GRAY;
+    //Strength of Brick
     private static final int BRICK_STRENGTH = 1;
 
-
     /**
-     * ClayBrickModel Constructor:
      * Implement the super BrickController Class
      * @param point
      * @param size
      */
     public ClayBrickModel(Point point, Dimension size){
 
-        super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
+        super(BRICK_NAME,point,size,BRICK_STRENGTH);
     }
 
     /**
-     * makeBrickFace Method:
      * An abstract implementation of makeBrickFace of BrickController class to create the
-     * shape of the brick. , value assigned to brickFace
+     * shape of the brick.
      * @param pos
      * @param size
      * @return Rectangle(pos , size)
@@ -40,11 +40,25 @@ public class ClayBrickModel extends BrickController {
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size)
     {
-
         return new Rectangle(pos,size);
     }
+    /**
+     * Abstract Method for setting the Border Color of the Brick
+     */
+    @Override
+    protected Color setBrickInnerColor() {
+        return BRICK_INNER_COLOR;
+    }
 
-    /**getBrick Method:
+    /**
+     * Abstract Method for setting the Border Color of the Brick
+     */
+    @Override
+    protected Color setBrickBorderColor() {
+        return BRICK_BORDER_COLOR;
+    }
+
+    /**
      * Returns the BrickFace
      * @return brickFace
      */

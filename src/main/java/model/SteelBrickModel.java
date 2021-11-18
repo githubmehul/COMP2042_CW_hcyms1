@@ -13,17 +13,20 @@ import java.util.Random;
  */
 public class SteelBrickModel extends BrickController {
 
+    //Brick Name
     private static final String BRICK_NAME = "Steel Brick";
+    //Inner Color and Border Color
     private static final Color BRICK_INNER_COLOR = new Color(203, 203, 201);
     private static final Color BRICK_BORDER_COLOR = Color.BLACK;
+    //Strength of Brick
     private static final int BRICK_STRENGTH = 1;
+    //Probability to determine a crack
     private static final double BRICK_BREAK_PROBABILITY = 0.4;
 
     private Random random;
-    private Shape brickFace;
+    private Shape brickSteelFace;
 
     /**
-     * SteelBrickModel Constructor:
      * Implement the super BrickController Class
      * Creates a Random Object
      * BrickFace is Assigned the super classes brickFace
@@ -31,37 +34,45 @@ public class SteelBrickModel extends BrickController {
      * @param size
      */
     public SteelBrickModel(Point point, Dimension size){
-        super(BRICK_NAME,point,size,BRICK_BORDER_COLOR,BRICK_INNER_COLOR,BRICK_STRENGTH);
+        super(BRICK_NAME,point,size,BRICK_STRENGTH);
         random = new Random();
-        brickFace = super.getBrickFace();
+        brickSteelFace = super.getBrickFace();
     }
-
     /**
-     * makeBrickFace Method:
      * An abstract implementation of makeBrickFace of BrickController class to create the
-     * shape of the brick. , value assigned to brickFace
+     * shape of the brick.
      * @param pos
      * @param size
      * @return Rectangle(pos , size)
      */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
-
         return new Rectangle(pos,size);
     }
+    /**
+     * Abstract Method for setting the Border Color of the Brick
+     */
+    @Override
+    protected Color setBrickInnerColor() {
+        return BRICK_INNER_COLOR;
+    }
 
-    /**getBrick Method:
-     * Returns the BrickFace
+    /**
+     * Abstract Method for setting the Border Color of the Brick
+     */
+    @Override
+    protected Color setBrickBorderColor() {
+        return BRICK_BORDER_COLOR;
+    }
+    /**
+     * Returns the Steel BrickFace
      * @return brickFace
      */
     @Override
     public Shape getBrick() {
-        return brickFace;
+        return brickSteelFace;
     }
-
-
     /**
-     * setImpact Method:
      * Set's the Impact of the Steel Brick Model
      * @param point
      * @param dir
@@ -71,11 +82,9 @@ public class SteelBrickModel extends BrickController {
         if(super.isBroken())
             return false;
         impact();
-        return  super.isBroken();
+        return super.isBroken();
     }
-
     /**
-     * impact Method:
      * If the Randomly Generated Value is less than the Steel Probability , impact the block
      */
     public void impact(){
@@ -83,5 +92,4 @@ public class SteelBrickModel extends BrickController {
             super.impact();
         }
     }
-
 }

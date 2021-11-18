@@ -44,7 +44,7 @@ public class RubberBallModel extends BallController {
      * @return BALL_INNER_COLOR
      */
     @Override
-    protected Color setInnerColor() {
+    protected Color setBallInnerColor() {
         return BALL_INNER_COLOR ;
     }
 
@@ -53,7 +53,7 @@ public class RubberBallModel extends BallController {
      * @return BALL_BORDER_COLOR
      */
     @Override
-    protected Color setBorderColor() {
+    protected Color setBallBorderColor() {
         return BALL_BORDER_COLOR;
     }
 

@@ -63,8 +63,8 @@ abstract public class BallController {
         BallFace = makeBall(center,width,height);
 
         // Define the Border Color and Inner Color of the Ball
-        this.Ball_Border_Color = setBorderColor();
-        this.Ball_Inner_Color  = setInnerColor();
+        this.Ball_Border_Color = setBallBorderColor();
+        this.Ball_Inner_Color  = setBallInnerColor();
 
         // Initialise the Speed of the Ball
         speedX = 0;
@@ -87,12 +87,12 @@ abstract public class BallController {
     /**
      *Abstract Method for setting the Inner Color of the Ball
      */
-    protected abstract Color setInnerColor();
+    protected abstract Color setBallInnerColor();
 
     /**
      * Abstract Method for setting the Border Color of the Ball
      */
-    protected abstract Color setBorderColor();
+    protected abstract Color setBallBorderColor();
 
     /**
      *Called to move the ball everytime the method is called
