@@ -4,6 +4,10 @@ import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
+
+/**
+ * Crack Controller is responsible for providing the Crack Implementation
+ */
 public class CrackController {
 
     private static final int CRACK_SECTIONS = 3;
@@ -23,30 +27,41 @@ public class CrackController {
     private int steps;
 
 
-    public CrackController(BrickController brick, int crackDepth, int steps) {
-        this.brick = brick;
+    /**
+     * Sets the General Path , with the crackDepth and steps
+     * @param crackDepth
+     * @param steps
+     */
+    public CrackController( int crackDepth, int steps) {
         crack = new GeneralPath();
         this.crackDepth = crackDepth;
         this.steps = steps;
     }
-
-
+    /**
+     * Method to draw the Crack
+     * @return crack
+     */
     public GeneralPath draw() {
-
         return crack;
     }
-
+    /**
+     * Method to reset the crack
+     */
     public void reset() {
         crack.reset();
     }
 
+    /**
+     *Sets the Start and End Location of the Crack
+     * @param point
+     * @param direction
+     */
     public void makeCrack(Point2D point, int direction) {
         Rectangle bounds = brick.getBrickFace().getBounds();
 
         Point impact = new Point((int) point.getX(), (int) point.getY());
         Point start = new Point();
         Point end = new Point();
-
 
         switch (direction) {
             case LEFT:
@@ -80,11 +95,14 @@ public class CrackController {
         }
     }
 
+    /**
+     * Crack Path Implementation
+     * @param start
+     * @param end
+     */
     protected void makeCrack(Point start, Point end) {
 
         GeneralPath path = new GeneralPath();
-
-
         path.moveTo(start.x, start.y);
 
         double w = (end.x - start.x) / (double) steps;
@@ -106,7 +124,6 @@ public class CrackController {
             path.lineTo(x, y);
 
         }
-
         path.lineTo(end.x, end.y);
         crack.append(path, true);
     }
@@ -132,10 +149,8 @@ public class CrackController {
     }
 
     private Point makeRandomPoint(Point from, Point to, int direction) {
-
         Point out = new Point();
         int pos;
-
         switch (direction) {
             case HORIZONTAL:
                 pos = BrickController.getRnd().nextInt(to.x - from.x) + from.x;

@@ -32,7 +32,7 @@ public class CementBrickModel extends BrickController {
      */
     public CementBrickModel(Point point, Dimension size){
         super(BRICK_NAME,point,size,BRICK_STRENGTH);
-        Crack = new CrackController(this, DEF_CRACK_DEPTH, DEF_STEPS);
+        Crack = new CrackController(DEF_CRACK_DEPTH, DEF_STEPS);
         brickCementFace = super.getBrickFace();
     }
 
