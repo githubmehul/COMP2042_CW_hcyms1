@@ -63,8 +63,8 @@ public class WallController {
         }while(speedY == 0);
 
         // sets the ball speed x and speed y
-        getBall().setXSpeed(speedX);
-        getBall().setYSpeed(speedY);
+        getBall().setSpeedX(speedX);
+        getBall().setSpeedY(speedY);
 
         //Adds in the Parameters for the player model
         setPlayer(new PlayerModel((Point) ballPos.clone(),150,10, drawArea));
@@ -188,8 +188,8 @@ public class WallController {
             speedY = -random.nextInt(3);
         }while(speedY == 0);
 
-        getBall().setXSpeed(speedX);
-        getBall().setYSpeed(speedY);
+        getBall().setSpeedX(speedX);
+        getBall().setSpeedY(speedY);
         BallLost = false;
     }
 
@@ -228,7 +228,7 @@ public class WallController {
      * @param s
      */
     public void setBallXSpeed(int s){
-        ball.setXSpeed(s);
+        ball.setSpeedX(s);
     }
 
     /**
@@ -237,7 +237,7 @@ public class WallController {
      * @param s
      */
     public void setBallYSpeed(int s){
-        ball.setYSpeed(s);
+        ball.setSpeedY(s);
     }
 
     /**

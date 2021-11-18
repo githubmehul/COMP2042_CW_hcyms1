@@ -7,13 +7,12 @@ import java.awt.Point;
 
 
 /***
- * ClayBrickModel Class extends BrickController Class to create the implementation of
- * the ClayBrickModel (Abstraction)
+ * The ClayBrickModel class is a child class of BrickController class.
+ * ClayBrickModel Class extends BrickControllerClass to create the implementation of
+ * the ClayBrickModel.
+ * It is responsible for defining its colours, strength and crack properties.
  */
 public class ClayBrickModel extends BrickController {
-
-    //Name of Brick
-    private static final String BRICK_NAME = "Clay Brick";
     //Inner Color and Border Color
     private static final Color BRICK_INNER_COLOR = new Color(178, 34, 34).darker();
     private static final Color BRICK_BORDER_COLOR = Color.GRAY;
@@ -22,28 +21,29 @@ public class ClayBrickModel extends BrickController {
 
     /**
      * Implement the super BrickController Class
-     * @param point
-     * @param size
+     * @param point - The point position of the brick (left)
+     * @param size - Encapsulates the Width and Height of Brick
      */
     public ClayBrickModel(Point point, Dimension size){
 
-        super(BRICK_NAME,point,size,BRICK_STRENGTH);
+        super(point,size,BRICK_STRENGTH);
     }
 
     /**
-     * An abstract implementation of makeBrickFace of BrickController class to create the
-     * shape of the brick.
-     * @param pos
-     * @param size
-     * @return Rectangle(pos , size)
+     * Implements the makeBall Method from the BrickController Class
+     * @param pos- The position coordinate of the Brick
+     * @param size  - Encapsulates the Width and Height of Brick
+     * @return
      */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size)
     {
         return new Rectangle(pos,size);
     }
+
     /**
-     * Abstract Method for setting the Border Color of the Brick
+     * Sets the Inner Color of the Ball
+     * @return BRICK_INNER_COLOR - Inner Color of the Brick
      */
     @Override
     protected Color setBrickInnerColor() {
@@ -51,7 +51,8 @@ public class ClayBrickModel extends BrickController {
     }
 
     /**
-     * Abstract Method for setting the Border Color of the Brick
+     * Sets the Border Color of the Ball
+     * @return BRICK_BORDER_COLOR - Border Color of the Brick
      */
     @Override
     protected Color setBrickBorderColor() {
@@ -59,14 +60,11 @@ public class ClayBrickModel extends BrickController {
     }
 
     /**
-     * Returns the BrickFace
-     * @return brickFace
+     * {@inheritDoc}
      */
     @Override
     public Shape getBrick() {
 
         return super.getBrickFace();
     }
-
-
 }

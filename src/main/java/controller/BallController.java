@@ -6,8 +6,11 @@ import java.awt.geom.RectangularShape;
 
 
 /**
- * Implements the Ball Movement Functionality.
- * Responsible for defining its shape, looks and location.
+ * The BallController abstract class provides a template that allows different
+ * types of Balls to be created. It is responsible for defining its shape and
+ * location , and the color is defined by the implementation class of the BallController
+ * Not responsible for defining its behaviour in the game.
+ * It provides methods that allow the Game class to define its behaviour in the game.
  */
 abstract public class BallController {
 
@@ -37,13 +40,13 @@ abstract public class BallController {
 
 
     /**
-     * 1. Sets the Coordinates and Location of the Ball<br>
-     * 2. Sets shape of the ball<br>
-     * 3. Defines the colors of the ball<br>
+     * 1. Sets the Coordinates and Location of the Ball
+     * 2. Sets shape of the ball
+     * 3. Defines the colors of the ball
      * 4. Defines the speed of the ball
-     * @param center
-     * @param width
-     * @param height
+     * @param center - The center position.
+     * @param width  - The horizontal diameter.
+     * @param height - The vertical diameter.
      */
     public BallController(Point2D center, int width, int height){
 
@@ -59,7 +62,7 @@ abstract public class BallController {
         setRightLocation(new Point2D.Double());
         setPoints(this.center);
 
-        //Define The shape of the Ball
+        //Create The shape of the Ball
         BallFace = makeBall(center,width,height);
 
         // Define the Border Color and Inner Color of the Ball
@@ -76,26 +79,16 @@ abstract public class BallController {
     }
 
     /**
-     * Abstract Method to make the Ball
-     * @param center
-     * @param width
-     * @param height
-     * @return
+     * An abstract method for creating the Ball's Shape.
+     * @param center - The center position.
+     * @param width  - The horizontal diameter.
+     * @param height - The vertical diameter.
+     * @return The {@code Shape} of the ball.
      */
     protected abstract Shape makeBall(Point2D center,int width,int height);
 
     /**
-     *Abstract Method for setting the Inner Color of the Ball
-     */
-    protected abstract Color setBallInnerColor();
-
-    /**
-     * Abstract Method for setting the Border Color of the Ball
-     */
-    protected abstract Color setBallBorderColor();
-
-    /**
-     *Called to move the ball everytime the method is called
+     * Increment the Ball's location by {@code speedX} and {@code speedY}.
      */
     public void move() {
         //Change the Location by adding the speed
@@ -107,9 +100,9 @@ abstract public class BallController {
     }
 
     /**
-     * Sets the Ball's Location
-     * @param x
-     * @param y
+     * Set a new center location.
+     * @param x - The new center X coordinate.
+     * @param y - The new center Y coordinate.
      */
     public void setLocation(double x , double y){
         //Set the Center Location
@@ -136,8 +129,8 @@ abstract public class BallController {
 
 
     /**
-     * Sets the Ball Points
-     * @param center
+     * Set the Up , Down , Left and Right Points on the Ball
+     * @param center - The new center position.
      */
     private void setPoints(Point2D center){
         int CenterX = (int) center.getX();
@@ -149,34 +142,127 @@ abstract public class BallController {
         getRightLocation().setLocation(CenterX + (width / 2), CenterY );
     }
 
+    //Setter and Getter Methods
     /**
-     * Sets Speed in X Direction
-     * @param s
+     *Abstract Method for setting the Inner Color of the Ball
+     * Implemented in the Child Class
      */
-    public void setXSpeed(int s){
+    protected abstract Color setBallInnerColor();
+    /**
+     * Returns the Inner Color
+     * @return Ball_Inner_Color - Inner Color of the Ball
+     */
+    public Color getInnerColor(){ return Ball_Inner_Color; }
+
+
+    /**
+     * Abstract Method for setting the Border Color of the Ball
+     * Implemented in the Child Class
+     */
+    protected abstract Color setBallBorderColor();
+    /**
+     * Returns the Border Color
+     * @return Ball_Border_Color - Border Color of the Ball
+     */
+    public Color getBorderColor(){ return Ball_Border_Color;}
+
+
+    /**
+     * Set the new speed in the X axis.
+     * @param s - The new speed in the X axis.
+     */
+    public void setSpeedX(int s){
         speedX = s;
     }
     /**
-     * Sets the Speed in the Y Direction
-     * @param s
-     */
-    public void setYSpeed(int s){
-        speedY = s;
-    }
-    /**
      * Returns the speedX
-     * @return speedX
+     * @return speedX - Speed of Ball in X Axis
      */
     public int getSpeedX(){
         return speedX;
     }
+
+
     /**
-     * returns the SpeedY
-     * @return
+     * Set the new speed in the Y axis.
+     * @param s - The new speed in the Y axis.
+     */
+    public void setSpeedY(int s){
+        speedY = s;
+    }
+    /**
+     * Returns the SpeedY
+     * @return speedY - The new speed in Y axis
      */
     public int getSpeedY(){
         return speedY;
     }
+
+
+    /**
+     * Sets the up Position Coordinate
+     * @param up
+     */
+    public void setUpLocation(Point2D up) {
+        this.up = up;
+    }
+    /**
+     * Returns the up Position Coordinate
+     * @return A {@code Point2D} of the Ball's up-most point.
+     */
+    public Point2D getUpLocation() {
+        return up;
+    }
+
+
+    /**
+     * Sets the down Position Coordinate
+     * @param down
+     */
+    public void setDownLocation(Point2D down) {
+        this.down = down;
+    }
+    /**
+     * Returns the down Position Coordinate
+     * @return A {@code Point2D} of the Ball's bottom-most point.
+     */
+    public Point2D getDownLocation() {
+        return down;
+    }
+
+
+    /**
+     * Sets the Left Position Coordinate
+     * @param left
+     */
+    public void setLeftLocation(Point2D left) {
+        this.left = left;
+    }
+    /**
+     * Returns the left Position Coordinate
+     * @return A {@code Point2D} of the Ball's left-most point.
+     */
+    public Point2D getLeftLocation() {
+        return left;
+    }
+
+
+    /**
+     * Sets the right Position Coordinate
+     * @param right
+     */
+    public void setRightLocation(Point2D right) {
+        this.right = right;
+    }
+    /**
+     * Returns the right Position Coordinate
+     * @return A {@code Point2D} of the Ball's right-most point.
+     */
+    public Point2D getRightLocation() {
+        return right;
+    }
+
+
     /**
      * Sets the Speed of the Ball in reverse in X Direction
      */
@@ -190,96 +276,18 @@ abstract public class BallController {
         speedY *= -1;
     }
     /**
-     * Returns the Border Color
-     * @return Ball_Border_Color
-     */
-    public Color getBorderColor(){
-        return Ball_Border_Color;
-    }
-    /**
-     * Returns the Inner Color
-     * @return Ball_Inner_Color
-     */
-    public Color getInnerColor(){
-        return Ball_Inner_Color;
-    }
-    /**
      * Returns the Center Position
-     * @return center
+     * @return center - The Center Position
      */
     public Point2D getPosition(){
         return center;
     }
     /**
      * Returns the BallFace
-     * @return BallFace
+     * @return BallFace - The Super BallFace
      */
     public Shape getBallFace(){
         return BallFace;
-    }
-
-    /**
-     * Returns the up Position Coordinate
-     * @return up
-     */
-    public Point2D getUpLocation() {
-        return up;
-    }
-
-    /**
-     * Sets the up Position Coordinate
-     * @param up
-     */
-    public void setUpLocation(Point2D up) {
-        this.up = up;
-    }
-
-    /**
-     * Returns the down Position Coordinate
-     * @return down
-     */
-    public Point2D getDownLocation() {
-        return down;
-    }
-
-    /**
-     * Sets the down Position Coordinate
-     * @param down
-     */
-    public void setDownLocation(Point2D down) {
-        this.down = down;
-    }
-
-    /**
-     * Returns the left Position Coordinate
-     * @return left
-     */
-    public Point2D getLeftLocation() {
-        return left;
-    }
-
-    /**
-     * Sets the Left Position Coordinate
-     * @param left
-     */
-    public void setLeftLocation(Point2D left) {
-        this.left = left;
-    }
-
-    /**
-     * Returns the right Position Coordinate
-     * @return right
-     */
-    public Point2D getRightLocation() {
-        return right;
-    }
-
-    /**
-     * Sets the right Position Coordinate
-     * @param right
-     */
-    public void setRightLocation(Point2D right) {
-        this.right = right;
     }
 
 }

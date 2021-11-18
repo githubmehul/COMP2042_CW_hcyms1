@@ -7,8 +7,10 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 
 /***
+ * The {@code RubberBallModel} class is a child class of {@code BallController}.
  * RubberBallModel Class extends BallController Class to create the implementation of
- * the RubberBall (Abstraction)
+ * the RubberBall.
+ * It is only responsible for how its {@code Shape} should be created and defining its colours.
  */
 public class RubberBallModel extends BallController {
 
@@ -18,18 +20,18 @@ public class RubberBallModel extends BallController {
 
     /**
      * Calls the BallController Constructor
-     * @param center
+     * @param center - The center position
      */
     public RubberBallModel(Point2D center){
-
         super(center,BALL_RADIUS,BALL_RADIUS);
     }
 
+
     /**
-     *Implements makeBall Method from BallController to create the Shape of the Ball
-     * @param center
-     * @param width
-     * @param height
+     * Implements the makeBall Method from the BallController Class
+     * @param center - The center position.
+     * @param width  - The horizontal diameter.
+     * @param height - The vertical diameter.
      * @return
      */
     @Override
@@ -41,7 +43,7 @@ public class RubberBallModel extends BallController {
 
     /**
      * Sets the Inner Color of the Ball
-     * @return BALL_INNER_COLOR
+     * @return BALL_INNER_COLOR - Inner Color of the Ball
      */
     @Override
     protected Color setBallInnerColor() {
@@ -50,7 +52,7 @@ public class RubberBallModel extends BallController {
 
     /**
      * Sets the Border Color of the Ball
-     * @return BALL_BORDER_COLOR
+     * @return BALL_BORDER_COLOR - Border Color of the Ball
      */
     @Override
     protected Color setBallBorderColor() {

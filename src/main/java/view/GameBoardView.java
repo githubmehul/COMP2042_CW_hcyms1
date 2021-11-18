@@ -37,7 +37,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
 
     //Final Object Declarations
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
-    private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2,new Point(300,430));
+    private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleView DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     //PauseMenu Button Declaration Button
@@ -176,13 +176,13 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         Color tmp = g2d.getColor();
         // Calling the getInnerColor of the BrickController Class to get the Inner Color of the Brick
         // And the inner color of it's abstract implementation
-        g2d.setColor(brick.getInnerColor());
+        g2d.setColor(brick.getBrickInnerColor());
         // Calls the getBrick Method of the BrickController Class , which captures the Dimension and
         //Size of the Brick in the abstract implementations.
         g2d.fill(brick.getBrick());
         //Calls the getBorderColor Method of the BrickController Class , whcih captures the
         //the Border Color of the Brick by the Abstract Implementations.
-        g2d.setColor(brick.getBorderColor());
+        g2d.setColor(brick.getBrickBorderColor());
         // By Taking all parameters , it then paints the brick
         g2d.draw(brick.getBrick());
         g2d.setColor(tmp);

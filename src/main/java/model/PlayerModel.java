@@ -3,25 +3,25 @@ package model;
 import controller.BallController;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 
 
-/***
- * PlayerModel Class implements the PLayer Platform
+/**
+ * The PlayerModel class is responsible for defining the Player's shape, looks,
+ * location and behaviour.
  */
 public class PlayerModel {
     //Final Color Declarations
     private static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
     private static final Color PLAYER_INNER_COLOR = Color.GREEN;
-
     private static final int PLAYER_MOVE_AMOUNT = 5;
 
-    //The shape of the platform
     private Rectangle PlayerFace;
-    //A Coordinate Variable called ballPoint
     private Point BallPoint;
+    private int BallPointX;
+    private int BallPointY;
     //The move Amount
-    private int MoveAmount;
-    //Min and Max Movement
+    private int MoveAmount = 0;
     private int Min;
     private int Max;
 
@@ -31,35 +31,38 @@ public class PlayerModel {
      * 2. moveAmount is set to 0
      * 3. Create the Platform Shape with the width and height parameter
      * 4. min and max
-     * @param ballPoint
+     * @param BallPoint
      * @param width
      * @param height
      * @param container
      */
-    public PlayerModel(Point ballPoint, int width, int height, Rectangle container) {
-        this.BallPoint = ballPoint;
-        MoveAmount = 0;
+    public PlayerModel(Point BallPoint, int width, int height, Rectangle container) {
+
+        // Define location (center)
+        this.BallPointX = (int) BallPoint.getX();
+        this.BallPointY = (int) BallPoint.getY();
+        this.BallPoint = (Point) BallPoint.clone();
+
+        // Create the Player's Shape
         PlayerFace = makeRectangle(width, height);
+
         Min = container.x + (width / 2);
         Max = Min + container.width - width;
     }
 
     /**
-     * makeReactangle Method:
-     * Creates the Platform Shape
-     * @param width
-     * @param height
-     * @return
+     * Create the Player's model, which is a Rectangle.
+     * @param width  - The width.
+     * @param height - The height.
+     * @return A {@code Rectangle} object.
      */
     private Rectangle makeRectangle(int width,int height){
-        Point p = new Point((int)(BallPoint.getX() - (width / 2)),(int)BallPoint.getY());
+        Point p = new Point((BallPointX - (width / 2)),BallPointY);
         return  new Rectangle(p,new Dimension(width,height));
     }
 
-
     /**
-     * impact Method:
-     * Implements the impact of the ball on the platform
+     * Returns the boolean if the Ball has impacted the Platform
      * @param b
      * @return
      */
@@ -68,8 +71,7 @@ public class PlayerModel {
     }
 
     /**
-     * move Method:
-     * Implements the movement of the ball and the platform
+     * Implements the Platform's position by the Move Amount
      */
     public void move(){
         double x = BallPoint.getX() + MoveAmount;
@@ -113,17 +115,17 @@ public class PlayerModel {
     }
 
     /**
-     * moveTo method:
-     * sets the location of the ball point and sets the location of the playerface and sets it to the point
-     * @param p
+     * Set a new center location.
+     * @param p - The new center location.
      */
     public void moveTo(Point p){
+        //Set the Center Location
         BallPoint.setLocation(p);
+        // Set top left corner location of the Player Shape
         PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
     }
 
     /**
-     * getBorderColor Method:
      * To Return the Border Color
      * @return PLAYER_BORDER_COLOR
      */
@@ -132,7 +134,6 @@ public class PlayerModel {
     }
 
     /**
-     * getInnerColor Method:
      * To return the Inner Color
      * @return PLAYER_INNER_COLOR
      */

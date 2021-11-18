@@ -6,9 +6,10 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 /**
- * Implements the Brick Template as an abstract class for CementBrickModel ,
- * ClayBrickModel an SteelBrickModel.
- * This is responsible for defining its shape, looks and location.
+ * The BrickController abstract class provides a template that allows different
+ * types of Bricks to be created. It is responsible for defining its shape and
+ * location , and the color is defined by the implementation class of the BrickController.
+ * Implements simple behaviour regarding the strength of the brick.
  */
 abstract public class BrickController {
 
@@ -18,22 +19,23 @@ abstract public class BrickController {
     public static final int RIGHT_IMPACT = 400;
 
     private static Random rnd;
-
-    private String name;
     private Shape brickFace;
-    //Border Color and Inner Color
+
     private Color Brick_Border_Color;
     private Color Brick_Inner_Color;
 
     private int fullStrength;
     private int strength;
-    //Flage to check if the Brick if broken
     private boolean broken;
 
 
-    public BrickController(String name, Point pos,Dimension size,int strength){
+    /**
+     * @param pos - The Point position
+     * @param size - Encapsulates Width and Height of Brick
+     * @param strength - The Strength of the Brick
+     */
+    public BrickController(Point pos,Dimension size,int strength){
         setRnd(new Random());
-        this.name = name;
 
         //Define the Colors
         this.Brick_Border_Color = setBrickBorderColor();
@@ -50,29 +52,64 @@ abstract public class BrickController {
     }
 
     /**
-     * Abstract Method for creating the Brick
-     * @param pos
-     * @param size
+     * Abstract Method for creating the Brick's Shape
+     * @param pos - The position coordinate of the Brick
+     * @param size - Encapsulates the Width and Height of Brick
      * @return
      */
     protected abstract Shape makeBrickFace(Point pos,Dimension size);
+    /**
+     * Abstract Method for getting the Child Classes Brick Shape
+     */
+    public abstract Shape getBrick();
+
 
     /**
-     *Abstract Method for setting the Inner Color of the Ball
+     * Gets the shape of the parent Brick
+     * @return brickFace
+     */
+    public Shape getBrickFace() {
+        return brickFace;
+    }
+    /**
+     * Sets the Shape of the Parent Brick
+     * @param brickFace
+     */
+    public void setBrickFace(Shape brickFace) {
+        this.brickFace = brickFace;
+    }
+
+
+    /**
+     *Abstract Method for setting the Inner Color of the Brick
      */
     protected abstract Color setBrickInnerColor();
+    /**
+     * Returns the Brick's Inner Color from Child Classes
+     * @return Brick_Inner_Color - Inner Color of Brick
+     */
+    public Color getBrickInnerColor(){
+        return Brick_Inner_Color;
+    }
+
 
     /**
      * Abstract Method for setting the Border Color of the Ball
      */
     protected abstract Color setBrickBorderColor();
+
     /**
-     * Abstract Method for getting the shape of the brick
+     * Returns the Brick's Border Color from Child Classes
+     * @return Brick_Border_Color - Border Color of Brick
      */
-    public abstract Shape getBrick();
+    public Color getBrickBorderColor(){
+        return  Brick_Border_Color;
+    }
+
+
     /**
-     * Method to determine the impact of the brick and the ball
-     * @param b
+     * Method to determine the impact of the Brick and the Ball
+     * @param b - BallController
      * @return
      */
     public final int findImpact(BallController b){
@@ -95,10 +132,11 @@ abstract public class BrickController {
     }
 
     /**
-     * Method to Set the Impact on the Brick
-     * @param point
-     * @param dir
-     * @return
+     * Method implementation when WallController detects a collision between the Ball and
+     * the Brick. The impact() method is called
+     * @param point - The point of impact.
+     * @param dir   - The direction at which the Crack will be created.
+     * @return A boolean value of the Brick's state - False if the brick is broken
      */
     public  boolean setImpact(Point2D point , int dir){
         if(broken)
@@ -106,66 +144,39 @@ abstract public class BrickController {
         impact();
         return  broken;
     }
+
     /**
-     * Method to implement the brick strength when impacted
+     * Decrements the strength  of the Brick and updates the Brick's broken status.
      */
     public void impact(){
         strength--;
         broken = (strength == 0);
     }
     /**
-     * Returns the value of broken
-     * @return broken
+     * Get the broek status of the Brick.
+     * @return A Boolean value of the broken status of the Brick.
      */
     public boolean isBroken(){
         return broken;
     }
     /**
-     * Method to default the strength of the brick when the game restarts
+     * Sets the Brick's broken status to true and restores its full
+     * strength.
      */
     public void repair() {
         broken = false;
         strength = fullStrength;
     }
-    /**
-     * Returns the Brick's Border Color
-     * @return Brick_Border_Color
-     */
-    public Color getBorderColor(){
-        return  Brick_Border_Color;
-    }
-    /**
-     * Returns the Brick's Inner Color
-     * @return Brick_Inner_Color
-     */
-    public Color getInnerColor(){
-        return Brick_Inner_Color;
-    }
-
-    /**
-     * Returns the super brick face
-     * @return brickFace
-     */
-    public Shape getBrickFace() {
-        return brickFace;
-    }
-    /**
-     * Sets the brick face
-     * @param brickFace
-     */
-    public void setBrickFace(Shape brickFace) {
-        this.brickFace = brickFace;
-    }
 
     /**Returns the random value
-     * @return rnd
+     * @return rnd - A Random Value
      */
     public static Random getRnd() {
         return rnd;
     }
     /**
      * Sets the random value
-     * @param rnd
+     * @param rnd - A Random Value for the Steel Brick Probability
      */
     public static void setRnd(Random rnd) {
         BrickController.rnd = rnd;

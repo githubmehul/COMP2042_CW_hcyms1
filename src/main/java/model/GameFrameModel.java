@@ -19,8 +19,8 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     private GameBoardView GameBoard = new GameBoardView(this);
     private HomeMenuView HomeMenu = new HomeMenuView(this,new Dimension(450,300));
-
     private boolean Gaming;
+
 
     /**
      *GameFrameModel constructor:<br>
@@ -59,10 +59,10 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
      *4.Calls the initialize method
      *5.To avoid GraphicIssues,a WindowFocusListener is added.
      */
-    public void enableGameBoard(){
+    public void enableGameBoard() {
         this.dispose();
         this.remove(HomeMenu);
-        this.add(GameBoard,BorderLayout.CENTER);
+        this.add(GameBoard, BorderLayout.CENTER);
         this.setUndecorated(false);
         initialize();
         /*to avoid problems with graphics focus controller is added here*/

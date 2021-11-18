@@ -29,14 +29,16 @@ public class CrackController {
 
     /**
      * Sets the General Path , with the crackDepth and steps
-     * @param crackDepth
-     * @param steps
+     * @param crackDepth - Crack Depth
+     * @param steps - The steps in each crack (sort of like the noise)
      */
-    public CrackController( int crackDepth, int steps) {
+    public CrackController( BrickController brick , int crackDepth, int steps) {
+        this.brick = brick;
         crack = new GeneralPath();
         this.crackDepth = crackDepth;
         this.steps = steps;
     }
+
     /**
      * Method to draw the Crack
      * @return crack
@@ -101,28 +103,19 @@ public class CrackController {
      * @param end
      */
     protected void makeCrack(Point start, Point end) {
-
         GeneralPath path = new GeneralPath();
         path.moveTo(start.x, start.y);
-
         double w = (end.x - start.x) / (double) steps;
         double h = (end.y - start.y) / (double) steps;
-
         int bound = crackDepth;
         int jump = bound * 5;
-
         double x, y;
-
         for (int i = 1; i < steps; i++) {
-
             x = (i * w) + start.x;
             y = (i * h) + start.y + randomInBounds(bound);
-
             if (inMiddle(i, CRACK_SECTIONS, steps))
                 y += jumps(jump, JUMP_PROBABILITY);
-
             path.lineTo(x, y);
-
         }
         path.lineTo(end.x, end.y);
         crack.append(path, true);
@@ -147,7 +140,6 @@ public class CrackController {
         return 0;
 
     }
-
     private Point makeRandomPoint(Point from, Point to, int direction) {
         Point out = new Point();
         int pos;

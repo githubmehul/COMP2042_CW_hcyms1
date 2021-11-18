@@ -8,49 +8,48 @@ import java.util.Random;
 
 
 /***
- * SteelBrickModel Class extends BrickController Class to create the implementation of
- * the SteelBrickModel (Abstraction)
+ * The SteelBrickModel class is a child class of BrickController class.
+ * SteelBrickModel Class extends BrickControllerClass to create the implementation of
+ * the SteelBrickModel.
+ * It is responsible for defining its colours, strength and crack properties.
  */
 public class SteelBrickModel extends BrickController {
 
-    //Brick Name
-    private static final String BRICK_NAME = "Steel Brick";
     //Inner Color and Border Color
     private static final Color BRICK_INNER_COLOR = new Color(203, 203, 201);
     private static final Color BRICK_BORDER_COLOR = Color.BLACK;
-    //Strength of Brick
     private static final int BRICK_STRENGTH = 1;
     //Probability to determine a crack
     private static final double BRICK_BREAK_PROBABILITY = 0.4;
 
     private Random random;
-    private Shape brickSteelFace;
+    private Shape brickFace;
 
     /**
      * Implement the super BrickController Class
-     * Creates a Random Object
-     * BrickFace is Assigned the super classes brickFace
-     * @param point
-     * @param size
+     * @param point - The point position of the brick (left)
+     * @param size - Encapsulates the Width and Height of Brick
      */
     public SteelBrickModel(Point point, Dimension size){
-        super(BRICK_NAME,point,size,BRICK_STRENGTH);
+        super(point,size,BRICK_STRENGTH);
         random = new Random();
-        brickSteelFace = super.getBrickFace();
+        brickFace = super.getBrickFace();
     }
+
     /**
-     * An abstract implementation of makeBrickFace of BrickController class to create the
-     * shape of the brick.
-     * @param pos
-     * @param size
-     * @return Rectangle(pos , size)
+     * Implements the makeBall Method from the BrickController Class
+     * @param pos- The position coordinate of the Brick
+     * @param size  - Encapsulates the Width and Height of Brick
+     * @return
      */
     @Override
     protected Shape makeBrickFace(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
+
     /**
-     * Abstract Method for setting the Border Color of the Brick
+     * Sets the Inner Color of the Ball
+     * @return BRICK_INNER_COLOR - Inner Color of the Brick
      */
     @Override
     protected Color setBrickInnerColor() {
@@ -58,34 +57,34 @@ public class SteelBrickModel extends BrickController {
     }
 
     /**
-     * Abstract Method for setting the Border Color of the Brick
+     * Sets the Border Color of the Ball
+     * @return BRICK_BORDER_COLOR - Border Color of the Brick
      */
     @Override
     protected Color setBrickBorderColor() {
         return BRICK_BORDER_COLOR;
     }
+
     /**
-     * Returns the Steel BrickFace
-     * @return brickFace
+     * {@inheritDoc}
      */
     @Override
     public Shape getBrick() {
-        return brickSteelFace;
+        return brickFace;
     }
+
     /**
-     * Set's the Impact of the Steel Brick Model
-     * @param point
-     * @param dir
-     * @return
+     * {@inheritDoc}
      */
-    public  boolean setImpact(Point2D point , int dir){
+    public boolean setImpact(Point2D point , int dir){
         if(super.isBroken())
             return false;
         impact();
         return super.isBroken();
     }
+
     /**
-     * If the Randomly Generated Value is less than the Steel Probability , impact the block
+     * Calls the parent's {@code impact()} method based on the probability.
      */
     public void impact(){
         if(random.nextDouble() < BRICK_BREAK_PROBABILITY){

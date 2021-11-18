@@ -4,29 +4,29 @@ import controller.BrickController;
 import controller.WallController;
 
 import java.awt.*;
-
+/**
+ * The LevelModel class creates levels for the Game. I separated these
+ * methods from the WallController class  the Game
+ * should not be responsible for creating the levels.
+ * This class contains simple implementations of next level as well.
+ */
 public class LevelModel {
 
     private static final int LEVELS_COUNT = 4;
-
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
-
     private BrickController[][] levels;
-    private int level;
-
+    private int level = 0;
     private WallController wall;
+
 
     public LevelModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, WallController wall){
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
-        level = 0;
         this.wall = wall;
-
     }
 
     /**
-     * makeSingleTypeLevel Method:
      * Creates the 1st Level for The ClayBrickModel
      * @param drawArea
      * @param brickCnt
@@ -75,7 +75,6 @@ public class LevelModel {
 
     }
     /**
-     * makeChessboardLevel Method:
      * Implement the Chessboard Pattern for the levels after the 1st level
      * @param drawArea
      * @param brickCnt
@@ -167,6 +166,9 @@ public class LevelModel {
         return  out;
     }
 
+    /**
+     * Sets the next level
+     */
     public void nextLevel(){
         wall.setBricks(levels[level++]);
         wall.setBrickCount(wall.getBricks().length);
@@ -176,6 +178,10 @@ public class LevelModel {
         return level;
     }
 
+    /**
+     * Checks if there is a next level
+     * @return boolean
+     */
     public boolean hasLevel(){
         return level < levels.length;
     }
