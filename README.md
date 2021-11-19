@@ -23,6 +23,10 @@ A build file is added as it automatically downloads and configures the dependenc
 The Encapsulate Fields refactoring lets data be hidden and create the necessary accessors for it.
 Hiding data and accessing it through an outward interface based on accessor methods enabling changes to be made to this storage without the necessity of changing the code that references the data.<br>
 Considerable Changes have been made to the PlayerModel , BallController , and BrickController Class<br><br>
-<b>6.	Reduce Large Classes – Improve Single Responsibility</br>
+<b>6.	Reduce Large Classes – Improve Single Responsibility</b></br>
+When one class does the work of two, awkwardness results.Instead, create a new class and place the fields and methods responsible for the relevant functionality in it.<br>
+This refactoring method will help maintain adherence to the Single Responsibility Principle. The code of the classes will be more obvious and understandable.<br>
+Considerable changes have been made to the WallController Class and BallController Class . The level making functions were extracted , and a new class was created , LevelModelClass. From BallController Class , the CrackController Class was created.<br>
+<b>7. 
 
 
