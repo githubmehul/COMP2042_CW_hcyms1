@@ -1,12 +1,9 @@
 package view;
-
-import controller.BallController;
-import controller.BrickController;
 import model.LevelModel;
-import model.PlayerModel;
 import controller.WallController;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.FontRenderContext;
@@ -31,6 +28,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     private static final int TEXT_SIZE = 30;
     private static final int GAMEBOARD_WIDTH = 600;
     private static final int GAMEBOARD_HEIGHT = 450;
+    String name;
 
     //Final Font Declaration
     private static final Font PAUSE_MENU_FONT = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
@@ -61,9 +59,11 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     public GameBoardView(JFrame owner){
         // Create the View of the GameBoard
         this.initialize();
+        inputname();
         //initialize the first level
         DebugConsole = new DebugConsoleView(owner,wall,this , level);;
         level.nextLevel();
+        message = "Welcome to the Game " + name;
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
         GAMEBOARD_TIMER = new Timer(10,e ->{
             // Calls the move function in the WallModel Class
@@ -139,21 +139,17 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         BackgroundColor(g2d);
         //Setting the color of the Message
         g2d.setColor(Color.BLUE);
-        g2d.drawString(message,250,225);
-        //Calling the drawBall Method , with the parameters of the ball object and g2d
-        DrawBall(wall.getBall(),g2d);
-        // If the brick is not broken , then call the method drawBrick
-        for(BrickController b : wall.getBricks()) {
-            if(!b.isBroken())
-                DrawBrick(b,g2d);
-        }
-        //Calling the drawPlayer method to draw the player
-        DrawPlayer(wall.getPlayer(),g2d);
+        drawString(g, message, 240, 225);
+        wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
             PauseMenu(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
+    }
+    private void drawString(Graphics g, String text, int x, int y) {
+        for (String line : text.split("\n"))
+            g.drawString(line, x, y += g.getFontMetrics().getHeight());
     }
     /**
      * BackgroundColor method:
@@ -166,71 +162,6 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         g2d.fillRect(0,0,getWidth(),getHeight());
         g2d.setColor(tmp);
     }
-
-    /**
-     * drawBrick method:
-     * Uses the Graphics2D Object to paint the Brick of the GameBoard
-     * @param g2d
-     */
-    private void DrawBrick(BrickController brick, Graphics2D g2d){
-        Color tmp = g2d.getColor();
-        // Calling the getInnerColor of the BrickController Class to get the Inner Color of the Brick
-        // And the inner color of it's abstract implementation
-        g2d.setColor(brick.getBrickInnerColor());
-        // Calls the getBrick Method of the BrickController Class , which captures the Dimension and
-        //Size of the Brick in the abstract implementations.
-        g2d.fill(brick.getBrick());
-        //Calls the getBorderColor Method of the BrickController Class , whcih captures the
-        //the Border Color of the Brick by the Abstract Implementations.
-        g2d.setColor(brick.getBrickBorderColor());
-        // By Taking all parameters , it then paints the brick
-        g2d.draw(brick.getBrick());
-        g2d.setColor(tmp);
-    }
-
-
-    /**
-     * drawBall Method:
-     * Uses the Graphics2D Object to Paint the Ball of the GameBoard
-     * @param ball
-     * @param g2d
-     */
-    private void DrawBall(BallController ball, Graphics2D g2d){
-        Color tmp = g2d.getColor();
-        // s takes the ball's coordinates to get it's structure
-        Shape ballFace = ball.getBallFace();
-        //sets the inner color of the ball by calling the getInnerColor method which returns the inner color.
-        g2d.setColor(ball.getInnerColor());
-        // fill the ball shape with that color
-        g2d.fill(ballFace);
-        //sets the border color of the ball by calling the getBorderColor method which returns the border color
-        g2d.setColor(ball.getBorderColor());
-        //draws the border color in the balls face shape s
-        g2d.draw(ballFace);
-
-        g2d.setColor(tmp);
-    }
-
-    /**
-     * drawPlayer Method:
-     * To Draw the PLatform Player in the Game
-     * @param p
-     * @param g2d
-     */
-    private void DrawPlayer(PlayerModel p, Graphics2D g2d){
-        Color tmp = g2d.getColor();
-        // s takes the ball's coordinates to get it's structure
-        Shape PlayerFace = p.getPlayerFace();
-        //sets the inner color of the platform by calling the InnerColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.getInnerColor());
-        g2d.fill(PlayerFace);
-        //sets the border color of the platform by calling the BorderColor attribute of the PlayerModel Class.
-        g2d.setColor(PlayerModel.getBorderColor());
-        g2d.draw(PlayerFace);
-
-        g2d.setColor(tmp);
-    }
-
     /**
      * drawMenu Method:
      * Method that contains the function call to ObscureGameBoard and drawPauseMenu
@@ -403,7 +334,6 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         }
 
     }
-
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
 
@@ -463,6 +393,13 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         //Print this message
         message = "Focus Lost";
         repaint();
+    }
+    public void inputname(){
+        UIManager UI=new UIManager();
+        UI.put("OptionPane.background",new ColorUIResource(255,0,0));
+        UI.put("Panel.background",new ColorUIResource(255,0,0));
+        // Get the user's name.
+        name = JOptionPane.showInputDialog("What is your name?");
     }
 
 }

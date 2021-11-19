@@ -140,4 +140,15 @@ public class PlayerModel {
     public static Color getInnerColor() {
         return PLAYER_INNER_COLOR;
     }
+    public void render(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        // Set the interior colour
+        g2d.setColor(getInnerColor());
+        g2d.fill(getPlayerFace());
+
+        // Set the border colour
+        g2d.setColor(getBorderColor());
+        g2d.draw(getPlayerFace());
+    }
 }

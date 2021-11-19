@@ -290,4 +290,16 @@ abstract public class BallController {
         return BallFace;
     }
 
+    public void render(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        // Set the interior colour
+        g2d.setColor(getInnerColor());
+        g2d.fill(getBallFace());
+
+        // Set the border colour
+        g2d.setColor(getBorderColor());
+        g2d.draw(getBallFace());
+    }
+
 }

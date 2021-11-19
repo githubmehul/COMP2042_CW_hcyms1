@@ -23,10 +23,9 @@ public class WallController {
     private Random random;
     private Rectangle area;
 
-    private BrickController[] bricks;
     private BallController ball;
     private PlayerModel player;
-
+    private BrickController[] bricks;
     private Point StartPoint;
     private int brickCount;
     private int ballCount;
@@ -281,5 +280,15 @@ public class WallController {
     }
     public int getBrickCount() {
         return brickCount;
+    }
+
+    public void render(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+        for(BrickController b : getBricks()) {
+            if(!b.isBroken())
+                b.render(g2d);
+        }
+        player.render(g2d);
+        ball.render(g2d);
     }
 }

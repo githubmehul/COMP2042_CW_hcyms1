@@ -181,6 +181,17 @@ abstract public class BrickController {
     public static void setRnd(Random rnd) {
         BrickController.rnd = rnd;
     }
+    public void render(Graphics2D g) {
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        // Set the interior colour
+        g2d.setColor(getBrickInnerColor());
+        g2d.fill(getBrick());
+
+        // Set the border colour
+        g2d.setColor(getBrickBorderColor());
+        g2d.draw(getBrick());
+    }
 }
 
 
