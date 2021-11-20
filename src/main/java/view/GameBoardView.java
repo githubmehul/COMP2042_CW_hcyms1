@@ -1,6 +1,7 @@
 package view;
 import model.LevelModel;
 import controller.WallController;
+import model.PauseMenuModel;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -14,42 +15,24 @@ import java.awt.font.FontRenderContext;
  */
 public class GameBoardView extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
-    //Final String Declarations
-    private static final String CONTINUE_TEXT = "Continue";
-    private static final String RESTART_TEXT = "Restart";
-    private static final String EXIT_TEXT = "Exit";
-    private static final String PAUSE_MENU_TEXT = "Pause Menu";
-
     //Final Color Declarations
-    private static final Color MENU_COLOR = new Color(0,255,0);
     private static final Color GAMEBOARD_COLOR = Color.WHITE;
-
     //Final int Declarations
-    private static final int TEXT_SIZE = 30;
     private static final int GAMEBOARD_WIDTH = 600;
     private static final int GAMEBOARD_HEIGHT = 450;
-    String name;
-
-    //Final Font Declaration
-    private static final Font PAUSE_MENU_FONT = new Font("Monospaced",Font.PLAIN,TEXT_SIZE);
 
     //Final Object Declarations
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleView DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
-    //PauseMenu Button Declaration Button
-    private Rectangle ContinueButtonRect;
-    private Rectangle ExitButtonRect;
-    private Rectangle RestartButtonRect;
-
+    private PauseMenuModel pauseMenuModel = new PauseMenuModel();
     //Game Timer Declaration
     private Timer GAMEBOARD_TIMER;
     //Boolean Declaration
     private boolean ShowPauseMenu = false;
-
     public String message = "";
-    private int StrLen = 0;
+    private String name;
 
 
     /**
@@ -59,11 +42,11 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     public GameBoardView(JFrame owner){
         // Create the View of the GameBoard
         this.initialize();
-        inputname();
         //initialize the first level
         DebugConsole = new DebugConsoleView(owner,wall,this , level);;
         level.nextLevel();
-        message = "Welcome to the Game " + name;
+//        inputname();
+//        message = " Welcome to the Game "  + name;
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
         GAMEBOARD_TIMER = new Timer(10,e ->{
             // Calls the move function in the WallModel Class
@@ -143,7 +126,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
-            PauseMenu(g2d);
+            pauseMenuModel.render(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
     }
@@ -162,88 +145,6 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         g2d.fillRect(0,0,getWidth(),getHeight());
         g2d.setColor(tmp);
     }
-    /**
-     * drawMenu Method:
-     * Method that contains the function call to ObscureGameBoard and drawPauseMenu
-     * @param g2d
-     */
-    private void PauseMenu(Graphics2D g2d){
-        GameBoardWhenPauseMenu(g2d);
-        DrawPauseMenu(g2d);
-    }
-    /**
-     *obscureGameBoard Method:
-     * To Paint the Look of the GameBoard when the Pause Menu is called
-     * @param g2d
-     */
-    private void GameBoardWhenPauseMenu(Graphics2D g2d){
-
-        Composite tmp = g2d.getComposite();
-        Color tmpColor = g2d.getColor();
-        //Setting the Alpha
-        AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.55f);
-        g2d.setComposite(ac);
-        //Setting GameBoard Color when Pause Menu is Called
-        g2d.setColor(Color.BLACK);
-        //Setting the GameBoard Shape when pause Menu is Called
-        g2d.fillRect(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT);
-        g2d.setComposite(tmp);
-        g2d.setColor(tmpColor);
-    }
-
-    /**
-     * drawPauseMenu Method:
-     * To draw the Pause Menu , after obscuring the GameBoard
-     * @param g2d
-     */
-    private void DrawPauseMenu(Graphics2D g2d){
-        //Getting the methods getFont and getColor
-        Font tmpFont = g2d.getFont();
-        Color tmpColor = g2d.getColor();
-        // Setting the Font and Color of the Menu Screen
-        g2d.setFont(PAUSE_MENU_FONT);
-        g2d.setColor(MENU_COLOR);
-        //so they can position it where they want it
-        //what this is doing is it's checking the text's width based on its font
-
-        if(StrLen == 0){
-            FontRenderContext frc = g2d.getFontRenderContext();
-            StrLen = PAUSE_MENU_FONT.getStringBounds(PAUSE_MENU_TEXT,frc).getBounds().width;
-        }
-        int x = (this.getWidth() - StrLen) / 2;
-        int y = this.getHeight() / 10;
-        g2d.drawString(PAUSE_MENU_TEXT,x,y);
-
-        x = this.getWidth() / 8;
-        y = this.getHeight() / 4;
-        //Setting the Location and Drawing the continueButtonRect
-        if(ContinueButtonRect == null){
-            FontRenderContext frc = g2d.getFontRenderContext();
-            ContinueButtonRect = PAUSE_MENU_FONT.getStringBounds(CONTINUE_TEXT,frc).getBounds();
-            ContinueButtonRect.setLocation(x,y-ContinueButtonRect.height);
-        }
-        g2d.drawString(CONTINUE_TEXT,x,y);
-
-        y *= 2;
-        //Setting the Location and Drawing the restartButtonRect
-        if(RestartButtonRect == null){
-            RestartButtonRect = (Rectangle) ContinueButtonRect.clone();
-            RestartButtonRect.setLocation(x,y-RestartButtonRect.height);
-        }
-        g2d.drawString(RESTART_TEXT,x,y);
-
-        y *= 3.0/2;
-        //Setting the Location and Drawing the exitButtonRect
-        if(ExitButtonRect == null){
-            ExitButtonRect = (Rectangle) ContinueButtonRect.clone();
-            ExitButtonRect.setLocation(x,y-ExitButtonRect.height);
-        }
-        g2d.drawString(EXIT_TEXT,x,y);
-
-        g2d.setFont(tmpFont);
-        g2d.setColor(tmpColor);
-    }
-
     @Override
     public void keyTyped(KeyEvent keyEvent) {
     }
@@ -310,13 +211,13 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         if(!ShowPauseMenu)
             return;
         //if clicked the continueButtonRect
-        if(ContinueButtonRect.contains(p)){
+        if(pauseMenuModel.getContinueButtonRect().contains(p)){
             //remove the pause menu and repaint
             ShowPauseMenu = false;
             repaint();
         }
         //if clicked the restartButtonrect
-        else if(RestartButtonRect.contains(p)){
+        else if(pauseMenuModel.getRestartButtonRect().contains(p)){
             //show the message
             message = "Restarting Game...";
             //restart the ball
@@ -328,7 +229,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
             repaint();
         }
         //if the exitButtonRect is clicked
-        else if(ExitButtonRect.contains(p)){
+        else if(pauseMenuModel.getExitButtonRect().contains(p)){
             //exit the system
             System.exit(0);
         }
@@ -369,9 +270,9 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         //get the mouse point
         Point p = mouseEvent.getPoint();
         //if the exitButtonRect is not clicked and the Pause Menu is shown
-        if(ExitButtonRect != null && ShowPauseMenu) {
+        if(pauseMenuModel.getExitButtonRect() != null && ShowPauseMenu) {
             // if the cursor is on any of the Rect in the Pause Menu
-            if (ExitButtonRect.contains(p) || ContinueButtonRect.contains(p) || RestartButtonRect.contains(p))
+            if (pauseMenuModel.getExitButtonRect().contains(p) || pauseMenuModel.getContinueButtonRect().contains(p) || pauseMenuModel.getRestartButtonRect().contains(p))
                 //Change it to a hand cursor
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             else
@@ -401,5 +302,4 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         // Get the user's name.
         name = JOptionPane.showInputDialog("What is your name?");
     }
-
 }

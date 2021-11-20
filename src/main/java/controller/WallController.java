@@ -288,7 +288,7 @@ public class WallController {
             if(!b.isBroken())
                 b.render(g2d);
         }
-        player.render(g2d);
-        ball.render(g2d);
+        getPlayer().render(g2d);
+        getBall().render(g2d);
     }
 }

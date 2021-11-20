@@ -18,7 +18,7 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
     private static final String GAMEFRAME_TITLE_TEXT= "Brick Destroy";
 
     private GameBoardView GameBoard = new GameBoardView(this);
-    private HomeMenuView HomeMenu = new HomeMenuView(this,new Dimension(450,300));
+    private HomeMenuView HomeMenu = new HomeMenuView(this,new Dimension(450,300) , GameBoard);
     private boolean Gaming;
 
 

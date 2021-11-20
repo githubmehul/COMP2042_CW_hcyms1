@@ -6,6 +6,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -58,6 +59,7 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
 
     //The JFrame Owner
     private GameFrameModel owner;
+    private GameBoardView gameBoardView;
 
     //Boolean to mark when the start is clicked
     private boolean Start_Button_Clicked;
@@ -65,6 +67,7 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
     private boolean Exit_Button_Clicked;
     //Boolean to mark when the Instruction is clicked
     private boolean Instruction_Button_Clicked;
+    public String name;
 
 
     /**
@@ -73,12 +76,13 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
      * @param owner
      * @param area
      */
-    public HomeMenuView(GameFrameModel owner, Dimension area){
+    public HomeMenuView(GameFrameModel owner, Dimension area , GameBoardView gameBoardView){
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.owner = owner;
+        this.gameBoardView = gameBoardView;
         //Define the Menu Area
         MenuFace = new Rectangle(new Point(0,0),area);
         this.setPreferredSize(area);
@@ -291,7 +295,6 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
         Point p = mouseEvent.getPoint();
         if(StartButton.contains(p)){
             owner.enableGameBoard();
-
         }
         else if(ExitButton.contains(p)){
             System.out.println("Goodbye " + System.getProperty("user.name"));
