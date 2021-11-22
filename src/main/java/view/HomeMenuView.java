@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameBoardController;
 import model.GameFrameModel;
 
 import javax.sound.sampled.AudioInputStream;
@@ -59,7 +60,7 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
 
     //The JFrame Owner
     private GameFrameModel owner;
-    private GameBoardView gameBoardView;
+    private GameBoardController gameBoardController;
 
     //Boolean to mark when the start is clicked
     private boolean Start_Button_Clicked;
@@ -76,13 +77,13 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
      * @param owner
      * @param area
      */
-    public HomeMenuView(GameFrameModel owner, Dimension area , GameBoardView gameBoardView){
+    public HomeMenuView(GameFrameModel owner, Dimension area , GameBoardController gameBoardController){
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         this.owner = owner;
-        this.gameBoardView = gameBoardView;
+        this.gameBoardController = gameBoardController;
         //Define the Menu Area
         MenuFace = new Rectangle(new Point(0,0),area);
         this.setPreferredSize(area);
@@ -301,6 +302,7 @@ public class HomeMenuView extends JComponent implements MouseListener, MouseMoti
             System.exit(0);
         }
         else if(InstructionButton.contains(p)){
+            InstructionView instructionView = new InstructionView();
 
         }
     }

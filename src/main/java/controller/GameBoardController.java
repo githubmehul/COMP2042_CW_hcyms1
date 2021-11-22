@@ -1,19 +1,17 @@
-package view;
+package controller;
 import model.LevelModel;
-import controller.WallController;
-import model.PauseMenuModel;
+import view.PauseMenuView;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.font.FontRenderContext;
 
 /***
  *GameBoardView Class extends JComponent and implements KeyListener , MouseListener and MouseMotionListener
  *to generate the GameBoard(The Actual Game on the GameFrameModel).
  */
-public class GameBoardView extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
+public class GameBoardController extends JComponent implements KeyListener,MouseListener,MouseMotionListener {
 
     //Final Color Declarations
     private static final Color GAMEBOARD_COLOR = Color.WHITE;
@@ -24,9 +22,9 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
     //Final Object Declarations
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
-    private DebugConsoleView DebugConsole;
+    private DebugConsoleController DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
-    private PauseMenuModel pauseMenuModel = new PauseMenuModel();
+    private PauseMenuView pauseMenuView = new PauseMenuView();
     //Game Timer Declaration
     private Timer GAMEBOARD_TIMER;
     //Boolean Declaration
@@ -39,11 +37,11 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
      * GameBoardView Constructor implements Gameboard characteristics
      * @param owner
      */
-    public GameBoardView(JFrame owner){
+    public GameBoardController(JFrame owner){
         // Create the View of the GameBoard
         this.initialize();
         //initialize the first level
-        DebugConsole = new DebugConsoleView(owner,wall,this , level);;
+        DebugConsole = new DebugConsoleController(owner,wall, level);;
         level.nextLevel();
 //        inputname();
 //        message = " Welcome to the Game "  + name;
@@ -126,7 +124,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
-            pauseMenuModel.render(g2d);
+            pauseMenuView.render(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
     }
@@ -211,13 +209,13 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         if(!ShowPauseMenu)
             return;
         //if clicked the continueButtonRect
-        if(pauseMenuModel.getContinueButtonRect().contains(p)){
+        if(pauseMenuView.getContinueButtonRect().contains(p)){
             //remove the pause menu and repaint
             ShowPauseMenu = false;
             repaint();
         }
         //if clicked the restartButtonrect
-        else if(pauseMenuModel.getRestartButtonRect().contains(p)){
+        else if(pauseMenuView.getRestartButtonRect().contains(p)){
             //show the message
             message = "Restarting Game...";
             //restart the ball
@@ -229,7 +227,7 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
             repaint();
         }
         //if the exitButtonRect is clicked
-        else if(pauseMenuModel.getExitButtonRect().contains(p)){
+        else if(pauseMenuView.getExitButtonRect().contains(p)){
             //exit the system
             System.exit(0);
         }
@@ -270,9 +268,9 @@ public class GameBoardView extends JComponent implements KeyListener,MouseListen
         //get the mouse point
         Point p = mouseEvent.getPoint();
         //if the exitButtonRect is not clicked and the Pause Menu is shown
-        if(pauseMenuModel.getExitButtonRect() != null && ShowPauseMenu) {
+        if(pauseMenuView.getExitButtonRect() != null && ShowPauseMenu) {
             // if the cursor is on any of the Rect in the Pause Menu
-            if (pauseMenuModel.getExitButtonRect().contains(p) || pauseMenuModel.getContinueButtonRect().contains(p) || pauseMenuModel.getRestartButtonRect().contains(p))
+            if (pauseMenuView.getExitButtonRect().contains(p) || pauseMenuView.getContinueButtonRect().contains(p) || pauseMenuView.getRestartButtonRect().contains(p))
                 //Change it to a hand cursor
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             else

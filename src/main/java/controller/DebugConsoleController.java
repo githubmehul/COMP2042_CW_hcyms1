@@ -1,10 +1,7 @@
-package view;
+package controller;
 
-import controller.BallController;
-import controller.DebugPanelController;
 import model.LevelModel;
-import controller.WallController;
-
+import view.DebugPanelView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
@@ -14,13 +11,13 @@ import java.awt.event.WindowListener;
  * DebugConsoleView Class extends JDialog and implements WindowListener
  * to generate the GameBoard(The Actual Game on the GameFrameModel).
  */
-public class DebugConsoleView extends JDialog implements WindowListener{
+public class DebugConsoleController extends JDialog implements WindowListener{
     //The title of the Debug Console Window
     private static final String DEBUG_CONSOLE_TITLE = "Dialog Console";
 
     private JFrame owner;
-    private DebugPanelController DebugPanel;
-    private GameBoardView Gameboard;
+    private DebugPanelView DebugPanel;
+    private GameBoardController Gameboard;
     private WallController wall;
     private LevelModel level;
 
@@ -30,17 +27,15 @@ public class DebugConsoleView extends JDialog implements WindowListener{
      * Calls the Initialize Method to initialize the Debug Panel Window
      * @param owner
      * @param wall
-     * @param gameboard
      */
-    public DebugConsoleView(JFrame owner, WallController wall, GameBoardView gameboard , LevelModel level){
+    public DebugConsoleController(JFrame owner, WallController wall, LevelModel level){
         this.wall = wall;
         this.owner = owner;
-        this.Gameboard = gameboard;
         this.level = level;
         //Calling the initialize method
         initialize();
         // debugPanel is an object of the DebugPanelController Method
-        DebugPanel = new DebugPanelController(wall , level);
+        DebugPanel = new DebugPanelView(wall , level);
         //Add the Panel , and keep the Border Layout as Center
         this.add(DebugPanel,BorderLayout.CENTER);
         this.pack();

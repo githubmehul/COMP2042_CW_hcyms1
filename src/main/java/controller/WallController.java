@@ -30,7 +30,6 @@ public class WallController {
     private int brickCount;
     private int ballCount;
     private boolean BallLost;
-
     /**
      * WallModel Constructor:
      * Takes in the parameters , to make the level , specifiy the ball start point , the player model and
@@ -289,6 +288,6 @@ public class WallController {
                 b.render(g2d);
         }
         getPlayer().render(g2d);
-        getBall().render(g2d);
+       getBall().render(g2d);
     }
 }

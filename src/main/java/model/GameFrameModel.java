@@ -1,6 +1,6 @@
 package model;
 
-import view.GameBoardView;
+import controller.GameBoardController;
 import view.HomeMenuView;
 
 import javax.swing.*;
@@ -17,8 +17,8 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     private static final String GAMEFRAME_TITLE_TEXT= "Brick Destroy";
 
-    private GameBoardView GameBoard = new GameBoardView(this);
-    private HomeMenuView HomeMenu = new HomeMenuView(this,new Dimension(450,300) , GameBoard);
+    private GameBoardController GameBoard = new GameBoardController(this);
+    private HomeMenuView HomeMenu = new HomeMenuView(this, new Dimension(450 , 300) , GameBoard);
     private boolean Gaming;
 
 

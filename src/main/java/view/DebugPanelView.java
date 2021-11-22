@@ -1,5 +1,6 @@
-package controller;
+package view;
 
+import controller.WallController;
 import model.LevelModel;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * DebugPanelController extends the JPanel to provide implementation for the Debug Console
  */
-public class DebugPanelController extends JPanel {
+public class DebugPanelView extends JPanel {
 
     //Background Color of the Debug Console
     private static final Color DEF_BKG = Color.WHITE;
@@ -31,7 +32,7 @@ public class DebugPanelController extends JPanel {
      * To implement the Debug Panel Controller
      * @param wall
      */
-    public DebugPanelController(WallController wall , LevelModel level){
+    public DebugPanelView(WallController wall , LevelModel level){
 
         this.wall = wall;
         this.level = level;
