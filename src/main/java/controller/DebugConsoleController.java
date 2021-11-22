@@ -17,7 +17,7 @@ public class DebugConsoleController extends JDialog implements WindowListener{
 
     private JFrame owner;
     private DebugPanelView DebugPanel;
-    private GameBoardController Gameboard;
+    private GameBoardController gameboard;
     private WallController wall;
     private LevelModel level;
 
@@ -28,9 +28,10 @@ public class DebugConsoleController extends JDialog implements WindowListener{
      * @param owner
      * @param wall
      */
-    public DebugConsoleController(JFrame owner, WallController wall, LevelModel level){
+    public DebugConsoleController(JFrame owner, WallController wall, GameBoardController gameboard, LevelModel level){
         this.wall = wall;
         this.owner = owner;
+        this.gameboard = gameboard;
         this.level = level;
         //Calling the initialize method
         initialize();
@@ -76,7 +77,7 @@ public class DebugConsoleController extends JDialog implements WindowListener{
      */
     @Override
     public void windowClosing(WindowEvent windowEvent) {
-        Gameboard.repaint();
+        gameboard.repaint();
     }
 
     @Override

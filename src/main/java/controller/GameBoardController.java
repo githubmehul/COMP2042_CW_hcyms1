@@ -41,7 +41,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         // Create the View of the GameBoard
         this.initialize();
         //initialize the first level
-        DebugConsole = new DebugConsoleController(owner,wall, level);;
+        DebugConsole = new DebugConsoleController(owner,wall , this , level);;
         level.nextLevel();
 //        inputname();
 //        message = " Welcome to the Game "  + name;

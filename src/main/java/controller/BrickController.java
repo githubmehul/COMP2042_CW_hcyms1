@@ -88,10 +88,9 @@ abstract public class BrickController {
      * Returns the Brick's Inner Color from Child Classes
      * @return Brick_Inner_Color - Inner Color of Brick
      */
-    public Color getBrickInnerColor(){
+    public Color getBrick_Inner_Color() {
         return Brick_Inner_Color;
     }
-
 
     /**
      * Abstract Method for setting the Border Color of the Ball
@@ -185,13 +184,14 @@ abstract public class BrickController {
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Set the interior colour
-        g2d.setColor(getBrickInnerColor());
+        g2d.setColor(getBrick_Inner_Color());
         g2d.fill(getBrick());
 
         // Set the border colour
         g2d.setColor(getBrickBorderColor());
         g2d.draw(getBrick());
     }
+
 }
 
 

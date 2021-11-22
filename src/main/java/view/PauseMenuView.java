@@ -1,8 +1,8 @@
-package model;
+package view;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 
-public class PauseMenuModel{
+public class PauseMenuView{
     //PauseMenu Button Declaration Button
     private Rectangle ContinueButtonRect;
     private Rectangle ExitButtonRect;
