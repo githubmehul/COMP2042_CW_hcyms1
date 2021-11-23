@@ -23,7 +23,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
-    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,1,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
     //Game Timer Declaration
     private Timer GAMEBOARD_TIMER;
@@ -46,7 +46,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
 //        inputname();
 //        message = " Welcome to the Game "  + name;
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
-        GAMEBOARD_TIMER = new Timer(10,e ->{
+        GAMEBOARD_TIMER = new Timer(1,e ->{
             // Calls the move function in the WallModel Class
             wall.move();
             //Calls the findImpacts function in the WallModel Class
@@ -73,8 +73,6 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             else if(wall.isDone()){
                 //If the Wall has another level
                 if(level.hasLevel()){
-                    //Display Message
-                    message = "Go to Next Level";
                     //Stop the GameTimer
                     GAMEBOARD_TIMER.stop();
                     //Reset the Number of Balls
@@ -83,6 +81,15 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     wall.wallReset();
                     //Go to the Next Level
                     level.nextLevel();
+                    if (level.getLevel() == 2){
+                        message = "Welcome to Level 2!";
+                    }
+                    else if(level.getLevel() == 3){
+                        message = "Welcome to Level 3!";
+                    }
+                    else if(level.getLevel() == 4){
+                        message = "Welcome to the Last Level!";
+                    }
                 }
                 else{
                     //If the Player reaches end of game , Display this message

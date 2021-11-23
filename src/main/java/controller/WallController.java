@@ -108,7 +108,6 @@ public class WallController {
              * because for every brick program checks for horizontal and vertical impacts
              */
             brickCount--;
-            setBrickCount(getBrickCount() - 1);
             setTotalBrickBroken(getTotalBrickBroken() + 1);
         }
         //if the ball hits the border of the wall , reverse x
