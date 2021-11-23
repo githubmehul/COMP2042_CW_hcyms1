@@ -1,6 +1,6 @@
 package controller;
-import model.PlayerModel;
 import model.RubberBallModel;
+import view.PlayerView;
 
 
 import java.awt.*;
@@ -24,12 +24,13 @@ public class WallController {
     private Rectangle area;
 
     private BallController ball;
-    private PlayerModel player;
+    private PlayerController player;
     private BrickController[] bricks;
     private Point StartPoint;
     private int brickCount;
     private int ballCount;
     private boolean BallLost;
+    private PlayerView playerView;
     /**
      * WallModel Constructor:
      * Takes in the parameters , to make the level , specifiy the ball start point , the player model and
@@ -65,7 +66,7 @@ public class WallController {
         getBall().setSpeedY(speedY);
 
         //Adds in the Parameters for the player model
-        setPlayer(new PlayerModel((Point) ballPos.clone(),150,10, drawArea));
+        setPlayer(new PlayerController((Point) ballPos.clone(),150,10, drawArea));
         //Define the Area of the wall
         area = drawArea;
 
@@ -270,11 +271,11 @@ public class WallController {
         this.ball = ball;
     }
 
-    public PlayerModel getPlayer() {
+    public PlayerController getPlayer() {
         return player;
     }
 
-    public void setPlayer(PlayerModel player) {
+    public void setPlayer(PlayerController player) {
         this.player = player;
     }
     public int getBrickCount() {
@@ -287,7 +288,9 @@ public class WallController {
             if(!b.isBroken())
                 b.render(g2d);
         }
-        getPlayer().render(g2d);
-       getBall().render(g2d);
+
+        playerView = new PlayerView(g2d , player);
+        playerView.render(g2d);
+        ball.render(g2d);
     }
 }

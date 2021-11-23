@@ -1,4 +1,4 @@
-package model;
+package controller;
 
 import controller.BallController;
 
@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
  * The PlayerModel class is responsible for defining the Player's shape, looks,
  * location and behaviour.
  */
-public class PlayerModel {
+public class PlayerController {
     //Final Color Declarations
     private static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
     private static final Color PLAYER_INNER_COLOR = Color.GREEN;
@@ -36,7 +36,7 @@ public class PlayerModel {
      * @param height
      * @param container
      */
-    public PlayerModel(Point BallPoint, int width, int height, Rectangle container) {
+    public PlayerController(Point BallPoint, int width, int height, Rectangle container) {
 
         // Define location (center)
         this.BallPointX = (int) BallPoint.getX();
@@ -139,16 +139,5 @@ public class PlayerModel {
      */
     public static Color getInnerColor() {
         return PLAYER_INNER_COLOR;
-    }
-    public void render(Graphics2D g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-
-        // Set the interior colour
-        g2d.setColor(getInnerColor());
-        g2d.fill(getPlayerFace());
-
-        // Set the border colour
-        g2d.setColor(getBorderColor());
-        g2d.draw(getPlayerFace());
     }
 }

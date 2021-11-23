@@ -1,7 +1,7 @@
 
 package game;
 
-import model.GameFrameModel;
+import controller.GameFrameController;
 
 import java.awt.*;
 
@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args){
 
-        EventQueue.invokeLater(() -> new GameFrameModel().initialize());
+        EventQueue.invokeLater(() -> new GameFrameController().initialize());
     }
 
 }

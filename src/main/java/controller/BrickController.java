@@ -180,6 +180,7 @@ abstract public class BrickController {
     public static void setRnd(Random rnd) {
         BrickController.rnd = rnd;
     }
+
     public void render(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
 
@@ -191,7 +192,6 @@ abstract public class BrickController {
         g2d.setColor(getBrickBorderColor());
         g2d.draw(getBrick());
     }
-
 }
 
 

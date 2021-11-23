@@ -1,5 +1,6 @@
 package view;
-import controller.GameBoardController;
+import controller.GameFrameController;
+
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,9 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InstructionView extends JFrame {
-    GameBoardController gameBoardController = new GameBoardController(this);
-    private ImageIcon infoBackground;
+public class InstructionButtonView extends JButton implements ActionListener {
+    private final GameFrameController owner;
     JFrame frame = new JFrame();
     JLabel label = new JLabel("<html>Game commands:<br/>SPACE - start or pause game <br/>" +
             "A - Move left <br/>" +
@@ -19,7 +19,15 @@ public class InstructionView extends JFrame {
             "</html>");
     JButton button = new JButton("Exit Instruction Page!");
 
-    InstructionView(){
+    public InstructionButtonView(GameFrameController owner){
+        this.owner = owner;
+        this.setBounds(150, 253, 150, 35);
+        this.setText("INSTRUCTION");
+        this.addActionListener(this);
+
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
         label.setBackground(Color.red);
         label.setBounds(0, 0, 400, 350);
         label.setFont(new Font(null, Font.PLAIN,25));

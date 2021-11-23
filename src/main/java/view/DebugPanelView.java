@@ -76,7 +76,6 @@ public class DebugPanelView extends JPanel {
         out.addActionListener(e);
         return  out;
     }
-
     /**
      * makeSlider Implementation:
      * Provides method implementation for the slider in the Debug Panel

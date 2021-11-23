@@ -1,7 +1,9 @@
-package model;
+package controller;
 
-import controller.GameBoardController;
 import view.HomeMenuView;
+import view.ExitButtonView;
+import view.InstructionButtonView;
+import view.StartButtonView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +15,15 @@ import java.awt.event.WindowFocusListener;
  *GameFrameModel extends JFrame,which further implements WindowFocusListener,which takes care
  *of the implementation of the game
  */
-public class GameFrameModel extends JFrame implements WindowFocusListener {
+public class GameFrameController extends JFrame implements WindowFocusListener {
 
     private static final String GAMEFRAME_TITLE_TEXT= "Brick Destroy";
 
-    private GameBoardController GameBoard = new GameBoardController(this);
-    private HomeMenuView HomeMenu = new HomeMenuView(this, new Dimension(450 , 300) , GameBoard);
+    private GameBoardController GameBoard;
+    private HomeMenuView HomeMenu;
+    private StartButtonView startBtn;
+    private ExitButtonView exitBtn;
+    private InstructionButtonView instructionView;
     private boolean Gaming;
 
 
@@ -28,11 +33,23 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
      *2.Adds the homeMenu as a BorderLayout with Center Alignment<br>
      *3.Sets undecorated as true
      */
-    public GameFrameModel(){
-        Gaming = false;
-        this.setLayout(new BorderLayout());
-        this.add(HomeMenu,BorderLayout.CENTER);
-        this.setUndecorated(true);
+    public GameFrameController(){
+        this.initialize();
+         Gaming = false;
+
+        HomeMenu = new HomeMenuView();
+        this.add(HomeMenu);
+
+        startBtn = new StartButtonView(this);
+        HomeMenu.add(startBtn);
+
+        exitBtn = new ExitButtonView(this);
+        HomeMenu.add(exitBtn);
+
+        instructionView = new InstructionButtonView(this);
+        HomeMenu.add(instructionView);
+
+        GameBoard = new GameBoardController(this);
     }
 
 
@@ -46,7 +63,9 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
     public void initialize(){
         this.setTitle(GAMEFRAME_TITLE_TEXT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
+        this.setSize(450, 370);
+        this.setResizable(false);
+        this.setLayout(null);
         this.autoLocate();
         this.setVisible(true);
     }
@@ -62,9 +81,14 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
     public void enableGameBoard() {
         this.dispose();
         this.remove(HomeMenu);
-        this.add(GameBoard, BorderLayout.CENTER);
+        this.setSize(600, 480);
         this.setUndecorated(false);
-        initialize();
+        this.setTitle(GAMEFRAME_TITLE_TEXT);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.autoLocate();
+        this.setLayout(new BorderLayout());
+        this.add(GameBoard,BorderLayout.CENTER);
+        this.setVisible(true);
         /*to avoid problems with graphics focus controller is added here*/
         this.addWindowFocusListener(this);
     }
