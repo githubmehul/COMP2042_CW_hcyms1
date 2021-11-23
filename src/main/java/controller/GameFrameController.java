@@ -39,15 +39,14 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
 
         HomeMenu = new HomeMenuView();
         this.add(HomeMenu);
-
         startBtn = new StartButtonView(this);
         HomeMenu.add(startBtn);
 
-        exitBtn = new ExitButtonView(this);
-        HomeMenu.add(exitBtn);
-
         instructionView = new InstructionButtonView(this);
         HomeMenu.add(instructionView);
+
+        exitBtn = new ExitButtonView(this);
+        HomeMenu.add(exitBtn);
 
         GameBoard = new GameBoardController(this);
     }
@@ -63,7 +62,7 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     public void initialize(){
         this.setTitle(GAMEFRAME_TITLE_TEXT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(450, 370);
+        this.setSize(600, 480);
         this.setResizable(false);
         this.setLayout(null);
         this.autoLocate();
@@ -81,7 +80,7 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     public void enableGameBoard() {
         this.dispose();
         this.remove(HomeMenu);
-        this.setSize(600, 480);
+        this.setSize(603, 480);
         this.setUndecorated(false);
         this.setTitle(GAMEFRAME_TITLE_TEXT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

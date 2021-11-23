@@ -19,6 +19,7 @@ public class WallController {
     private static final int CLAY_BRICK = 1;
     private static final int STEEL_BRICK = 2;
     private static final int CEMENT_BRICK = 3;
+    private int totalBrickBroken = 0;
 
     private Random random;
     private Rectangle area;
@@ -107,6 +108,8 @@ public class WallController {
              * because for every brick program checks for horizontal and vertical impacts
              */
             brickCount--;
+            setBrickCount(getBrickCount() - 1);
+            setTotalBrickBroken(getTotalBrickBroken() + 1);
         }
         //if the ball hits the border of the wall , reverse x
         else if(impactBorder()) {
@@ -292,5 +295,12 @@ public class WallController {
         playerView = new PlayerView(g2d , player);
         playerView.render(g2d);
         ball.render(g2d);
+    }
+    public int getTotalBrickBroken() {
+        return totalBrickBroken;
+    }
+
+    public void setTotalBrickBroken(int totalBrickBroken) {
+        this.totalBrickBroken = totalBrickBroken;
     }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import controller.GameBoardController;
 import controller.WallController;
 import model.LevelModel;
 
@@ -26,20 +27,23 @@ public class DebugPanelView extends JPanel {
 
     private WallController wall;
     private LevelModel level;
+    private GameBoardController gameBoardController;
+    public String finallevelmessage;
 
     /**
      * DebugPanelController Constructor:
      * To implement the Debug Panel Controller
      * @param wall
      */
-    public DebugPanelView(WallController wall , LevelModel level){
+    public DebugPanelView(WallController wall , LevelModel level , GameBoardController gameBoardController){
 
         this.wall = wall;
         this.level = level;
+        this.gameBoardController = gameBoardController;
         initialize();
         //Button to Skip level and reset balls
-        skipLevel = makeButton("Skip Level",e -> level.nextLevel());
-        resetBalls = makeButton("Reset Balls",e -> wall.resetBallCount());
+        skipLevel = makeButton("Skip Level",e -> skipLevel());
+        resetBalls = makeButton("Reset Balls",e -> resetBalls());
 
         //Setting the X and Y Speed for the ball
         ballXSpeed = makeSlider(-4,4,e -> wall.setBallXSpeed(ballXSpeed.getValue()));
@@ -53,6 +57,25 @@ public class DebugPanelView extends JPanel {
         this.add(ballYSpeed);
 
     }
+    private void skipLevel(){
+        if (level.hasLevel()) {
+            level.nextLevel();
+            wall.setTotalBrickBroken((level.getLevel() - 1) * wall.getBrickCount());
+        }
+        if(level.getLevel() == 2){
+            gameBoardController.message = "Welcome to Level 2!";
+        }
+        else if(level.getLevel() == 3){
+            gameBoardController.message = "Welcome to Level 3!";
+        }
+        else if(level.getLevel() == 4){
+            gameBoardController.message = "Welcome to Last Level!";
+        }
+    }
+    private void resetBalls(){
+        wall.resetBallCount();
+    }
+
 
 
     /**

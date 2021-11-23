@@ -21,9 +21,11 @@ public class InstructionButtonView extends JButton implements ActionListener {
 
     public InstructionButtonView(GameFrameController owner){
         this.owner = owner;
-        this.setBounds(150, 253, 150, 35);
+        this.setBounds(150, 400, 150, 35);
         this.setText("INSTRUCTION");
+        this.setBackground(Color.decode("#FF007F"));
         this.addActionListener(this);
+        this.setFocusPainted(false);
 
     }
     @Override

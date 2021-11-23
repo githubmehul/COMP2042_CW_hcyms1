@@ -52,13 +52,15 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             //Calls the findImpacts function in the WallModel Class
             wall.findImpacts();
             // Message Display for Brick Count and Ball Count
-            message = String.format("Bricks: %d Balls %d",wall.getBrickCount(),wall.getBallCount());
+            message = String.format("Bricks: %d Balls %d Total Bricks Broken %d",
+                    wall.getBrickCount(),wall.getBallCount(), wall.getTotalBrickBroken());
             //If the Ball is Lost at the bottom
             if(wall.isBallLost()){
                 //And If Ball Count is 0
                 if(wall.ballEnd()){
                     //Reset the Wall
                     wall.wallReset();
+                    wall.setTotalBrickBroken(0);
                     //Display Message Game Over
                     message = "Game over!";
                 }
@@ -139,7 +141,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
      */
     private void BackgroundColor(Graphics2D g2d){
         Color tmp = g2d.getColor();
-        g2d.setColor(GAMEBOARD_COLOR);
+        g2d.setColor(Color.BLACK);
         g2d.fillRect(0,0,getWidth(),getHeight());
         g2d.setColor(tmp);
     }
@@ -222,6 +224,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             wall.ballReset();
             //restart the wall
             wall.wallReset();
+            wall.setTotalBrickBroken((level.getLevel() - 1) * wall.getBrickCount());
             //remove the pause menu
             ShowPauseMenu = false;
             repaint();
