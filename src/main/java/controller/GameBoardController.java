@@ -87,7 +87,6 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     wall.wallReset();
                     //Go to the Next Level
                     level.nextLevel();
-                    highScoreController.CheckScore();
                     if (level.getLevel() == 2){
                         message = "Welcome to Level 2!";
                     }
