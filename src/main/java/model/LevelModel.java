@@ -170,10 +170,8 @@ public class LevelModel {
      * Sets the next level
      */
     public void nextLevel(){
-        if (hasLevel()) {
-            wall.setBricks(levels[level++]);
-            wall.setBrickCount(wall.getBricks().length);
-        }
+        wall.setBricks(levels[level++]);
+        wall.setBrickCount(wall.getBricks().length);
     }
 
     /**
@@ -184,7 +182,7 @@ public class LevelModel {
         return level < levels.length;
     }
 
-    public int getLevel(){
+    public int getLevel() {
         return level;
     }
 }

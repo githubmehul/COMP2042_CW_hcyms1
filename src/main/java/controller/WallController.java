@@ -204,7 +204,6 @@ public class WallController {
         brickCount = getBricks().length;
         ballCount = 3;
     }
-
     /**
      * ballEnd Method:
      * If the ball's have ended , then set the ballcount to 0

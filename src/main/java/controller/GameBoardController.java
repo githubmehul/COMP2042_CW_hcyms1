@@ -1,5 +1,6 @@
 package controller;
 import model.LevelModel;
+import view.HighScoreView;
 import view.PauseMenuView;
 
 import javax.swing.*;
@@ -25,6 +26,8 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     private DebugConsoleController DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,1,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
+    private HighScoreController highScoreController= new HighScoreController(wall);
+    private HighScoreView highScoreView = new HighScoreView();
     //Game Timer Declaration
     private Timer GAMEBOARD_TIMER;
     //Boolean Declaration
@@ -60,9 +63,12 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                 if(wall.ballEnd()){
                     //Reset the Wall
                     wall.wallReset();
+                    wall.ballReset();
+                    highScoreController.CheckScore();
                     wall.setTotalBrickBroken(0);
                     //Display Message Game Over
-                    message = "Game over!";
+                    message = "GAME OVER! Would you like to Restart the Game ?";
+
                 }
                 // If the Ball Is Lost , Reset Ball and the Player
                 wall.ballReset();
@@ -81,6 +87,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     wall.wallReset();
                     //Go to the Next Level
                     level.nextLevel();
+                    highScoreController.CheckScore();
                     if (level.getLevel() == 2){
                         message = "Welcome to Level 2!";
                     }
@@ -94,6 +101,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                 else{
                     //If the Player reaches end of game , Display this message
                     message = "ALL WALLS DESTROYED";
+                    highScoreController.CheckScore();
                     //Game Timer Stopped.
                    GAMEBOARD_TIMER.stop();
                 }
@@ -130,12 +138,16 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         //Setting the color of the Message
         g2d.setColor(Color.BLUE);
         drawString(g, message, 240, 225);
+        highScoreView.drawscore(g2d , wall ,highScoreController);
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
             pauseMenuView.render(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
+        if (highScoreController.getHighScore() == ("")) {
+            highScoreController.setHighScore(highScoreController.GetHighScore());
+        }
     }
     private void drawString(Graphics g, String text, int x, int y) {
         for (String line : text.split("\n"))
@@ -231,7 +243,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             wall.ballReset();
             //restart the wall
             wall.wallReset();
-            wall.setTotalBrickBroken((level.getLevel() - 1) * wall.getBrickCount());
+            wall.setTotalBrickBroken(wall.getBrickCount());
             //remove the pause menu
             ShowPauseMenu = false;
             repaint();

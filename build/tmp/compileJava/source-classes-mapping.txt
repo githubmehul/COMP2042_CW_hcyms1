@@ -27,12 +27,16 @@ view/PauseMenuView.java
  view.PauseMenuView
 controller/WallController.java
  controller.WallController
+controller/HighScoreController.java
+ controller.HighScoreController
 view/DebugPanelView.java
  view.DebugPanelView
 view/HomeMenuView.java
  view.HomeMenuView
 model/CementBrickModel.java
  model.CementBrickModel
+view/HighScoreView.java
+ view.HighScoreView
 controller/BrickController.java
  controller.BrickController
 model/SteelBrickModel.java

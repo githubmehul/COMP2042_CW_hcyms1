@@ -60,7 +60,7 @@ public class DebugPanelView extends JPanel {
     private void skipLevel(){
         if (level.hasLevel()) {
             level.nextLevel();
-            wall.setTotalBrickBroken((level.getLevel() - 1) * wall.getBrickCount());
+            wall.getTotalBrickBroken();
         }
         if(level.getLevel() == 2){
             gameBoardController.message = "Welcome to Level 2!";
