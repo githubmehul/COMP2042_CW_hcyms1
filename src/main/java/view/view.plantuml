@@ -4,6 +4,7 @@ title __VIEW's Class Diagram__\n
 
   namespace view {
     class view.DebugPanelView {
+        + finallevelmessage : String
         {static} - DEF_BKG : Color
         - ballXSpeed : JSlider
         - ballYSpeed : JSlider
@@ -14,6 +15,8 @@ title __VIEW's Class Diagram__\n
         - initialize()
         - makeButton()
         - makeSlider()
+        - resetBalls()
+        - skipLevel()
     }
   }
   
@@ -27,6 +30,13 @@ title __VIEW's Class Diagram__\n
   
 
   namespace view {
+    class view.HighScoreView {
+        + drawscore()
+    }
+  }
+  
+
+  namespace view {
     class view.HomeMenuView {
         + HomeMenuView()
     }
@@ -34,11 +44,11 @@ title __VIEW's Class Diagram__\n
   
 
   namespace view {
-    class view.InstructionView {
+    class view.InstructionButtonView {
         ~ button : JButton
         ~ frame : JFrame
         ~ label : JLabel
-        + InstructionView()
+        + InstructionButtonView()
         + actionPerformed()
     }
   }
@@ -84,15 +94,18 @@ title __VIEW's Class Diagram__\n
   
 
   view.DebugPanelView -up-|> javax.swing.JPanel
+  view.DebugPanelView o-- controller.GameBoardController : gameBoardController
   view.DebugPanelView o-- model.LevelModel : level
   view.DebugPanelView o-- controller.WallController : wall
   view.ExitButtonView .up.|> java.awt.event.ActionListener
   view.ExitButtonView -up-|> javax.swing.JButton
   view.ExitButtonView o-- controller.GameFrameController : owner
+  view.HighScoreView o-- controller.HighScoreController : highScoreController
+  view.HighScoreView o-- controller.WallController : wall
   view.HomeMenuView -up-|> javax.swing.JPanel
-  view.InstructionView .up.|> java.awt.event.ActionListener
-  view.InstructionView -up-|> javax.swing.JButton
-  view.InstructionView o-- controller.GameFrameController : owner
+  view.InstructionButtonView .up.|> java.awt.event.ActionListener
+  view.InstructionButtonView -up-|> javax.swing.JButton
+  view.InstructionButtonView o-- controller.GameFrameController : owner
   view.PlayerView o-- controller.PlayerController : playerController
   view.StartButtonView .up.|> java.awt.event.ActionListener
   view.StartButtonView -up-|> javax.swing.JButton

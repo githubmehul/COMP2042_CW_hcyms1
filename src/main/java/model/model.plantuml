@@ -45,6 +45,7 @@ title __MODEL's Class Diagram__\n
         - level : int
         - levels : BrickController[][]
         + LevelModel()
+        + getLevel()
         + hasLevel()
         + nextLevel()
         - makeBrick()

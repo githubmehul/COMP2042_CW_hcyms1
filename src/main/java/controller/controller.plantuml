@@ -172,6 +172,18 @@ title __CONTROLLER's Class Diagram__\n
   
 
   namespace controller {
+    class controller.HighScoreController {
+        - highScore : String
+        + CheckScore()
+        + GetHighScore()
+        + HighScoreController()
+        + getHighScore()
+        + setHighScore()
+    }
+  }
+  
+
+  namespace controller {
     class controller.PlayerController {
         - BallPoint : Point
         - BallPointX : int
@@ -211,6 +223,7 @@ title __CONTROLLER's Class Diagram__\n
         - brickCount : int
         - bricks : BrickController[]
         - random : Random
+        - totalBrickBroken : int
         + WallController()
         + ballEnd()
         + ballReset()
@@ -220,6 +233,7 @@ title __CONTROLLER's Class Diagram__\n
         + getBrickCount()
         + getBricks()
         + getPlayer()
+        + getTotalBrickBroken()
         + isBallLost()
         + isDone()
         + move()
@@ -231,6 +245,7 @@ title __CONTROLLER's Class Diagram__\n
         + setBrickCount()
         + setBricks()
         + setPlayer()
+        + setTotalBrickBroken()
         + wallReset()
         - impactBorder()
         - impactWall()
@@ -251,6 +266,8 @@ title __CONTROLLER's Class Diagram__\n
   controller.GameBoardController .up.|> java.awt.event.MouseMotionListener
   controller.GameBoardController -up-|> javax.swing.JComponent
   controller.GameBoardController o-- controller.DebugConsoleController : DebugConsole
+  controller.GameBoardController o-- controller.HighScoreController : highScoreController
+  controller.GameBoardController o-- view.HighScoreView : highScoreView
   controller.GameBoardController o-- model.LevelModel : level
   controller.GameBoardController o-- view.PauseMenuView : pauseMenuView
   controller.GameBoardController o-- controller.WallController : wall
@@ -259,8 +276,9 @@ title __CONTROLLER's Class Diagram__\n
   controller.GameFrameController o-- controller.GameBoardController : GameBoard
   controller.GameFrameController o-- view.HomeMenuView : HomeMenu
   controller.GameFrameController o-- view.ExitButtonView : exitBtn
-  controller.GameFrameController o-- view.InstructionView : instructionView
+  controller.GameFrameController o-- view.InstructionButtonView : instructionView
   controller.GameFrameController o-- view.StartButtonView : startBtn
+  controller.HighScoreController o-- controller.WallController : wallController
   controller.WallController o-- controller.BallController : ball
   controller.WallController o-- controller.PlayerController : player
   controller.WallController o-- view.PlayerView : playerView

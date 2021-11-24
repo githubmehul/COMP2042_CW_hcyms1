@@ -12,7 +12,7 @@ public class HighScoreView {
     public void drawscore(Graphics g , WallController wall , HighScoreController highScoreController) {
         this.wall = wall;
         this.highScoreController = highScoreController;
-        g.setColor(Color.green);
+        g.setColor(Color.yellow);
         g.setFont(new Font("serif",Font.BOLD,15));
         g.drawString("Score: "+wall.getTotalBrickBroken(), 0, 100);
         g.drawString("Highscore: "+highScoreController.GetHighScore(),0,125);

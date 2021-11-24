@@ -4,8 +4,8 @@ controller/DebugConsoleController.java
  controller.DebugConsoleController
 view/ExitButtonView.java
  view.ExitButtonView
-view/StartButtonView.java
- view.StartButtonView
+controller/CrackController.java
+ controller.CrackController
 game/Main.java
  game.Main
 controller/BallController.java
@@ -13,8 +13,8 @@ controller/BallController.java
 view/InstructionButtonView.java
  view.InstructionButtonView
  view.InstructionButtonView$1
-controller/GameFrameController.java
- controller.GameFrameController
+model/ClayBrickModel.java
+ model.ClayBrickModel
 controller/GameBoardController.java
  controller.GameBoardController
 model/LevelModel.java
@@ -41,7 +41,7 @@ controller/BrickController.java
  controller.BrickController
 model/SteelBrickModel.java
  model.SteelBrickModel
-model/ClayBrickModel.java
- model.ClayBrickModel
-controller/CrackController.java
- controller.CrackController
+view/StartButtonView.java
+ view.StartButtonView
+controller/GameFrameController.java
+ controller.GameFrameController

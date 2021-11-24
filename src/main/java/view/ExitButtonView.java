@@ -13,7 +13,7 @@ public class ExitButtonView extends JButton implements ActionListener {
         this.owner =owner;
 
         this.setBounds(500 , 500, 150, 35);
-        this.setText("EXIT");
+        this.setText("QUIT");
         this.setBackground(Color.decode("#FF007F"));
         this.addActionListener(this);
         this.setFocusPainted(false);
