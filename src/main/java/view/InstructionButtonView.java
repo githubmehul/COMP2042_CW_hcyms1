@@ -1,4 +1,5 @@
 package view;
+import controller.AudioController;
 import controller.GameFrameController;
 
 import javax.swing.*;
@@ -31,6 +32,7 @@ public class InstructionButtonView extends JButton implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        AudioController audioController = new AudioController("Button Sound.wav");
         label.setBackground(Color.red);
         label.setBounds(100, 0, 400, 350);
         label.setFont(new Font(null, Font.PLAIN,25));

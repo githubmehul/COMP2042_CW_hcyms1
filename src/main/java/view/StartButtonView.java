@@ -31,7 +31,7 @@ public class StartButtonView extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this) {
-            AudioController audioController = new AudioController("StartButtonSound.wav");
+            AudioController audioController = new AudioController("Button Sound.wav");
             owner.enableGameBoard();
 
         }
