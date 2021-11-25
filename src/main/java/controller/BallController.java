@@ -26,7 +26,7 @@ abstract public class BallController {
     private Point2D left;
     private Point2D right;
 
-    //Border Color and Inner Color of the Ball
+    //Border Color and Inner Color ofl
     private Color Ball_Border_Color;
     private Color Ball_Inner_Color;
 

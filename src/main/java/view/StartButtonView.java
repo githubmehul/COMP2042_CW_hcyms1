@@ -1,5 +1,6 @@
 package view;
 
+import controller.AudioController;
 import controller.GameFrameController;
 
 import javax.sound.sampled.*;
@@ -17,7 +18,6 @@ import java.net.URL;
 public class StartButtonView extends JButton implements ActionListener {
 
     private GameFrameController owner;
-    Clip clip;
     public StartButtonView(GameFrameController owner) {
 
         this.owner = owner;
@@ -31,28 +31,9 @@ public class StartButtonView extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this) {
+            AudioController audioController = new AudioController("StartButtonSound.wav");
             owner.enableGameBoard();
-            AudioInputStream input= null;
-            try {
-                input = AudioSystem.getAudioInputStream(new File("src/main/resources/StartButtonSound.wav"));
-            } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
-                unsupportedAudioFileException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            try {
-                clip=AudioSystem.getClip();
-            } catch (LineUnavailableException lineUnavailableException) {
-                lineUnavailableException.printStackTrace();
-            }
-            try {
-                clip.open(input);
-            } catch (LineUnavailableException lineUnavailableException) {
-                lineUnavailableException.printStackTrace();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-            clip.start();
+
         }
     }
 }

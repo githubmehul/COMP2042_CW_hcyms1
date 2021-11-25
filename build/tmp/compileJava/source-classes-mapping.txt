@@ -1,38 +1,40 @@
+view/HomeMenuView.java
+ view.HomeMenuView
+controller/GameBoardController.java
+ controller.GameBoardController
+view/ExitButtonView.java
+ view.ExitButtonView
+view/InstructionButtonView.java
+ view.InstructionButtonView
+ view.InstructionButtonView$1
+game/Main.java
+ game.Main
+view/PauseMenuView.java
+ view.PauseMenuView
 controller/PlayerController.java
  controller.PlayerController
 controller/DebugConsoleController.java
  controller.DebugConsoleController
-view/ExitButtonView.java
- view.ExitButtonView
 controller/CrackController.java
  controller.CrackController
-game/Main.java
- game.Main
 controller/BallController.java
  controller.BallController
-view/InstructionButtonView.java
- view.InstructionButtonView
- view.InstructionButtonView$1
-model/ClayBrickModel.java
- model.ClayBrickModel
-controller/GameBoardController.java
- controller.GameBoardController
+controller/GameFrameController.java
+ controller.GameFrameController
 model/LevelModel.java
  model.LevelModel
 view/PlayerView.java
  view.PlayerView
 model/RubberBallModel.java
  model.RubberBallModel
-view/PauseMenuView.java
- view.PauseMenuView
 controller/WallController.java
  controller.WallController
 controller/HighScoreController.java
  controller.HighScoreController
 view/DebugPanelView.java
  view.DebugPanelView
-view/HomeMenuView.java
- view.HomeMenuView
+model/ClayBrickModel.java
+ model.ClayBrickModel
 model/CementBrickModel.java
  model.CementBrickModel
 view/HighScoreView.java
@@ -43,5 +45,5 @@ model/SteelBrickModel.java
  model.SteelBrickModel
 view/StartButtonView.java
  view.StartButtonView
-controller/GameFrameController.java
- controller.GameFrameController
+controller/AudioController.java
+ controller.AudioController
