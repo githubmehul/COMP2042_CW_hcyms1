@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameBoardController;
+import controller.TimerController;
 import controller.WallController;
 import model.LevelModel;
 
@@ -28,6 +29,7 @@ public class DebugPanelView extends JPanel {
     private WallController wall;
     private LevelModel level;
     private GameBoardController gameBoardController;
+    private TimerController displayTimer;
     public String finallevelmessage;
 
     /**
@@ -35,11 +37,12 @@ public class DebugPanelView extends JPanel {
      * To implement the Debug Panel Controller
      * @param wall
      */
-    public DebugPanelView(WallController wall , LevelModel level , GameBoardController gameBoardController){
+    public DebugPanelView(WallController wall , LevelModel level , GameBoardController gameBoardController , TimerController displayTimer){
 
         this.wall = wall;
         this.level = level;
         this.gameBoardController = gameBoardController;
+        this.displayTimer = displayTimer;
         initialize();
         //Button to Skip level and reset balls
         skipLevel = makeButton("Skip Level",e -> skipLevel());
@@ -61,6 +64,8 @@ public class DebugPanelView extends JPanel {
         if (level.hasLevel()) {
             level.nextLevel();
             wall.getTotalBrickBroken();
+            displayTimer.setTempSeconds(displayTimer.getSeconds());
+            displayTimer.setTempMinutes(displayTimer.getMinutes());
         }
         if(level.getLevel() == 2){
             gameBoardController.message = "Welcome to Level 2!";

@@ -1,9 +1,6 @@
 package controller;
 
-import view.HomeMenuView;
-import view.ExitButtonView;
-import view.InstructionButtonView;
-import view.StartButtonView;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +21,8 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     private StartButtonView startBtn;
     private ExitButtonView exitBtn;
     private InstructionButtonView instructionView;
+    private HighScoreButtonView highScoreButtonView;
+    private HighScoreGameView highScoreGameView;
     private boolean Gaming;
 
 
@@ -36,7 +35,6 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     public GameFrameController(){
         this.initialize();
          Gaming = false;
-
         HomeMenu = new HomeMenuView();
         this.add(HomeMenu);
         startBtn = new StartButtonView(this);
@@ -44,6 +42,9 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
 
         instructionView = new InstructionButtonView(this);
         HomeMenu.add(instructionView);
+
+        highScoreButtonView = new HighScoreButtonView(this);
+        HomeMenu.add(highScoreButtonView);
 
         exitBtn = new ExitButtonView(this);
         HomeMenu.add(exitBtn);

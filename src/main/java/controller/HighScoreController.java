@@ -5,10 +5,13 @@ import java.io.*;
 
 public class HighScoreController {
     private WallController wallController;
+    private TimerController timerController;
     private String highScore = "Name:0";
 
-    public HighScoreController(WallController wallController){
+    public HighScoreController(WallController wallController , TimerController timerController){
         this.wallController = wallController;
+        this.timerController = timerController;
+
     }
     public String GetHighScore()  {
         FileReader readFile ;
@@ -36,7 +39,7 @@ public class HighScoreController {
         if (wallController.getTotalBrickBroken() > Integer.parseInt((highScore.split(":")[1]))) {
 
             String name = JOptionPane.showInputDialog("You set a new highScore. What your name?");
-            highScore = name + ":" + wallController.getTotalBrickBroken();
+            highScore = name + ":" + wallController.getTotalBrickBroken() + "Time" + timerController.getMinutes() + timerController.getSeconds();
 
             File scoreFile = new File("highscore.csv");
             if (!scoreFile.exists()) {
@@ -64,6 +67,9 @@ public class HighScoreController {
                 catch (Exception e) {}
 
             }
+        }
+        else{
+            wallController.getTotalBrickBroken();
         }
     }
     public String getHighScore() {

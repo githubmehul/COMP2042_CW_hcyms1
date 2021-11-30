@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Time;
 
 /***
  * DebugConsoleView Class extends JDialog and implements WindowListener
@@ -20,7 +21,7 @@ public class DebugConsoleController extends JDialog implements WindowListener{
     private GameBoardController gameboard;
     private WallController wall;
     private LevelModel level;
-
+    private TimerController displayTimer;
 
     /**
      *DebugConsoleView Constructor:
@@ -28,15 +29,16 @@ public class DebugConsoleController extends JDialog implements WindowListener{
      * @param owner
      * @param wall
      */
-    public DebugConsoleController(JFrame owner, WallController wall, GameBoardController gameboard, LevelModel level){
+    public DebugConsoleController(JFrame owner, WallController wall, TimerController displayTimer, GameBoardController gameboard, LevelModel level){
         this.wall = wall;
         this.owner = owner;
         this.gameboard = gameboard;
+        this.displayTimer = displayTimer;
         this.level = level;
         //Calling the initialize method
         initialize();
         // debugPanel is an object of the DebugPanelController Method
-        DebugPanel = new DebugPanelView(wall , level , gameboard);
+        DebugPanel = new DebugPanelView(wall , level , gameboard, displayTimer);
         //Add the Panel , and keep the Border Layout as Center
         this.add(DebugPanel,BorderLayout.CENTER);
         this.pack();
