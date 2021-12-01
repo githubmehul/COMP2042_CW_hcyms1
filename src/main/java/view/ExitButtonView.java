@@ -24,7 +24,6 @@ public class ExitButtonView extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this){
-            AudioController audioController = new AudioController("Button Sound.wav");
             System.out.println("Goodbye " + System.getProperty("user.name"));
             System.exit(0);
         }

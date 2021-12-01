@@ -5,6 +5,9 @@ import controller.GameFrameController;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ import java.net.URL;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.net.URL;
+import javax.swing.border.LineBorder;
 
 public class StartButtonView extends JButton implements ActionListener {
 

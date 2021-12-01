@@ -5,6 +5,8 @@ import controller.GameFrameController;
 import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ import java.nio.file.Paths;
 public class HighScoreButtonView extends JButton implements ActionListener {
     private final GameFrameController owner;
     JFrame frame = new JFrame("Frame");
-    JLabel label = new JLabel();
+    JLabel label = new JLabel("<html></html>" , SwingConstants.CENTER);
 
     public HighScoreButtonView(GameFrameController owner) {
         this.owner = owner;
@@ -30,6 +32,7 @@ public class HighScoreButtonView extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        AudioController audioController = new AudioController("Button Sound.wav");
         frame.setBounds(100, 0, 400, 350);
         frame.setSize(400, 350);
         frame.setLayout(new BorderLayout());
@@ -49,9 +52,20 @@ public class HighScoreButtonView extends JButton implements ActionListener {
         catch(IOException ioe) {
             System.err.println("There was an error while reading the file");
         }
-        label.setText(fileResult);
+        label.setText("High Score- " + fileResult);
+        label.setFont(new Font("Raleway", Font.PLAIN,30));
+        label.setForeground(Color.WHITE);
+        Border b2 = new LineBorder(Color.decode("#FF007F"), 10);
+        label.setBorder(b2);
+
         frame.add(label);
+
+        frame.getContentPane().setBackground(Color.BLACK);
+        frame.setBounds(0,0, 600,510);
         frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setUndecorated(true);
+        frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         frame.setVisible(true);
     }
 }

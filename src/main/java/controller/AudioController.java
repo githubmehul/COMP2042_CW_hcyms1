@@ -4,6 +4,10 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+
+/**
+ * The Audio Controller Class is responsible for setting audio at various points.
+ */
 public class AudioController {
     Clip clip;
     public String filename;
@@ -29,6 +33,5 @@ public class AudioController {
             ioException.printStackTrace();
         }
         clip.start();
-
     }
 }
