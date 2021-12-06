@@ -1,10 +1,13 @@
 package model;
 
-import controller.*;
-
 import java.awt.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
+
+import controller.BrickController;
+import controller.CrackController;
+import controller.WallController;
+import static controller.HighScoreController.getInstance;
 
 /***
  * The CementBrickModel class is a child class of BrickController class.
@@ -24,6 +27,7 @@ public class CementBrickModel extends BrickController {
     public static final int DEF_STEPS = 35;
 
     private CrackController Crack;
+    private WallController wallController;
     private Shape brickFace;
 
     /**
@@ -84,6 +88,7 @@ public class CementBrickModel extends BrickController {
             //return false
             return false;
         }
+        getInstance().setScore(getInstance().getScore()+2);
         return true;
     }
 

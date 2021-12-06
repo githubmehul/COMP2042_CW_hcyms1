@@ -1,6 +1,8 @@
 package controller;
 import model.RubberBallModel;
 import view.PlayerView;
+import controller.HighScoreController;
+import static controller.HighScoreController.getInstance;
 
 
 import java.awt.*;
@@ -27,6 +29,7 @@ public class WallController {
     private BallController ball;
     private PlayerController player;
     private BrickController[] bricks;
+    private AudioController audioController;
     private Point StartPoint;
     private int brickCount;
     private int ballCount;
@@ -42,6 +45,25 @@ public class WallController {
      * @param brickDimensionRatio
      * @param ballPos
      */
+    /**
+     * private Object instance (apply Singleton pattern)
+     */
+    private static WallController instance;
+    /**
+     * private constructor(apply singleton)
+     */
+    private WallController() {}
+    /**
+     * other class can access to Object instance
+     * @return instance of Object
+     */
+    public static WallController getInstance(){
+        if(instance == null){
+            instance = new WallController();
+
+        }
+        return instance;
+    }
     public WallController(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         //specifies the location of the ball position
@@ -100,6 +122,7 @@ public class WallController {
     public void findImpacts(){
         //if the player impacts the ball , then reverse y
         if(getPlayer().impact(getBall())){
+            AudioController audioController = new AudioController("Bounce Sound.wav");
             getBall().reverseY();
         }
         // if the player impacts the wall , then reduce the brick count
@@ -107,11 +130,12 @@ public class WallController {
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
+            AudioController audioController = new AudioController("Bounce Sound.wav");
             brickCount--;
-            setTotalBrickBroken(getTotalBrickBroken() + 1);
         }
         //if the ball hits the border of the wall , reverse x
         else if(impactBorder()) {
+            AudioController audioController = new AudioController("Bounce Sound.wav");
             getBall().reverseX();
         }
 
@@ -294,11 +318,5 @@ public class WallController {
         playerView.render(g2d);
         ball.render(g2d);
     }
-    public int getTotalBrickBroken() {
-        return totalBrickBroken;
-    }
 
-    public void setTotalBrickBroken(int totalBrickBroken) {
-        this.totalBrickBroken = totalBrickBroken;
-    }
 }

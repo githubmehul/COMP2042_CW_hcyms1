@@ -2,10 +2,13 @@ package controller;
 
 import view.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.io.IOException;
 
 
 /***
@@ -23,6 +26,7 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     private InstructionButtonView instructionView;
     private HighScoreButtonView highScoreButtonView;
     private HighScoreGameView highScoreGameView;
+    private AudioController audioController;
     private boolean Gaming;
 
 

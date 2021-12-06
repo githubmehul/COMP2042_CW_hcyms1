@@ -4,6 +4,9 @@ import controller.BrickController;
 
 import java.awt.*;
 import java.awt.Point;
+import java.awt.geom.Point2D;
+
+import static controller.HighScoreController.getInstance;
 
 
 /***
@@ -66,5 +69,21 @@ public class ClayBrickModel extends BrickController {
     public Shape getBrick() {
 
         return super.getBrickFace();
+    }
+    @Override
+    public boolean setImpact(Point2D point, int direction) {
+        //if the cement is not broken
+        if(super.isBroken())
+            return false;
+        //Reduce the strength
+        super.impact();
+        //if the cement is broken
+        if(!super.isBroken()){
+
+            //return false
+            return false;
+        }
+        getInstance().setScore(getInstance().getScore()+1);
+        return true;
     }
 }

@@ -1,10 +1,12 @@
 package model;
 
 import controller.BrickController;
+import static controller.HighScoreController.getInstance;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Random;
+
 
 
 /***
@@ -76,13 +78,20 @@ public class SteelBrickModel extends BrickController {
     /**
      * {@inheritDoc}
      */
-    public boolean setImpact(Point2D point , int dir){
+    public boolean setImpact(Point2D point, int direction) {
+        //if the cement is not broken
         if(super.isBroken())
             return false;
+        //Reduce the strength
         impact();
-        return super.isBroken();
+        //if the cement is broken
+        if(!super.isBroken()){
+            //return false
+            return false;
+        }
+        getInstance().setScore(getInstance().getScore()+3);
+        return true;
     }
-
     /**
      * Calls the parent's {@code impact()} method based on the probability.
      */

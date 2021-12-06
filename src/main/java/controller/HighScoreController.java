@@ -4,12 +4,28 @@ import javax.swing.*;
 import java.io.*;
 
 public class HighScoreController {
-    private WallController wallController;
+    private int score;
     private String highScore = "Name:0";
+    /**
+     * private Object instance (apply Singleton pattern)
+     */
+    private static HighScoreController instance;
 
-    public HighScoreController(WallController wallController ){
-        this.wallController = wallController;
+    /**
+     * other class can access to Object instance
+     * @return instance of Object
+     */
+    public static HighScoreController getInstance(){
+        if(instance == null){
+            instance = new HighScoreController();
+
+        }
+        return instance;
     }
+
+    public HighScoreController(){
+    }
+
     public String GetHighScore()  {
         FileReader readFile ;
         BufferedReader reader = null;
@@ -33,10 +49,11 @@ public class HighScoreController {
         }
     }
     public void CheckScore() {
-        if (wallController.getTotalBrickBroken() > Integer.parseInt((highScore.split(":")[1]))) {
+        getScore();
+        if ( score> Integer.parseInt((highScore.split(":")[1]))) {
 
             String name = JOptionPane.showInputDialog("You set a new highScore. What your name?");
-            highScore = name + ":" + wallController.getTotalBrickBroken() + "Time";
+            highScore = name + ":" + score + "Time";
 
             File scoreFile = new File("highscore.csv");
             if (!scoreFile.exists()) {
@@ -66,7 +83,7 @@ public class HighScoreController {
             }
         }
         else{
-            wallController.getTotalBrickBroken();
+
         }
     }
     public String getHighScore() {
@@ -75,6 +92,12 @@ public class HighScoreController {
 
     public void setHighScore(String highScore) {
         this.highScore = highScore;
+    }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
     }
 
 }

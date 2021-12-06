@@ -2,6 +2,7 @@ package controller;
 import model.LevelModel;
 import view.HighScoreView;
 import view.PauseMenuView;
+import static controller.HighScoreController.getInstance;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -25,9 +26,8 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
     private TimerController displayTimer;
-    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,1,6/2, wall);
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
-    private HighScoreController highScoreController= new HighScoreController(wall);
     private HighScoreView highScoreView = new HighScoreView();
     private Timer gameTimer;
     //Game Timer Declaration
@@ -53,7 +53,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
 //        inputname();
 //        message = " Welcome to the Game "  + name;
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
-        GAMEBOARD_TIMER = new Timer(1,e ->{
+        GAMEBOARD_TIMER = new Timer(0,e ->{
             // Calls the move function in the WallModel Class
             wall.move();
             //Calls the findImpacts function in the WallModel Class
@@ -61,18 +61,20 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             displayTimer.setGameRunning(true);
             // Message Display for Brick Count and Ball Count
             message = String.format("Bricks: %d Balls %d Total Bricks Broken %d",
-                    wall.getBrickCount(),wall.getBallCount(), wall.getTotalBrickBroken());
-            message2 = String.format("Total Bricks Broken: %d Timer: %02dm %02ds", wall.getTotalBrickBroken(),
+                    wall.getBrickCount(),wall.getBallCount(), getInstance().getScore());
+            message2 = String.format("Total Bricks Broken: %d Timer: %02dm %02ds", getInstance().getScore(),
                     displayTimer.getMinutes(), displayTimer.getSeconds());
             if (level.getLevel() == 1){
-                if(displayTimer.getSeconds() == 50){
+                if(displayTimer.getMinutes() == 02 && displayTimer.getSeconds() == 00){
                     GAMEBOARD_TIMER.stop();
+                    message = "Oh No! You couldn't complete the level within the time!";
+                    message2 = "Try Again!";
                     wall.wallReset();
                     wall.ballReset();
                     displayTimer.resetGame();
                 }
             }
-            else if(level.getLevel() == 2){
+            else if(displayTimer.getMinutes() == 02 && displayTimer.getSeconds() == 00){
                 if(displayTimer.getSeconds() == 5){
                     GAMEBOARD_TIMER.stop();
                     wall.wallReset();
@@ -80,7 +82,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     displayTimer.resetGame();
                 }
             }
-            else if (level.getLevel() == 3){
+            else if (displayTimer.getMinutes() == 02 && displayTimer.getSeconds() == 00){
                 if(displayTimer.getSeconds() == 2){
                     GAMEBOARD_TIMER.stop();
                     wall.wallReset();
@@ -95,12 +97,12 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     //Reset the Wall
                     wall.wallReset();
                     wall.ballReset();
-                    highScoreController.CheckScore();
-                    wall.setTotalBrickBroken(0);
+                    getInstance().CheckScore();
+                    getInstance().setScore(0);
                     //Display Message Game Over
                     message = "GAME OVER!";
                     message2 = String.format("Score is %d Bricks at the time of %02dm %02ds",
-                            wall.getTotalBrickBroken(), displayTimer.getMinutes(), displayTimer.getSeconds());
+                            getInstance().getScore(), displayTimer.getMinutes(), displayTimer.getSeconds());
                     displayTimer.resetGame();
                     GameFrameController gameFrameController = new GameFrameController();
                 }
@@ -125,21 +127,21 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     //Go to the Next Level
                     level.nextLevel();
                     if (level.getLevel() == 2){
-                        message = "Welcome to Level 2! Score is" + wall.getTotalBrickBroken();
+                        message = "Welcome to Level 2! Score is" + getInstance().getScore();
                     }
                     else if(level.getLevel() == 3){
-                        message = "Welcome to Level 3! Score is " + wall.getTotalBrickBroken();
+                        message = "Welcome to Level 3! Score is " + getInstance().getScore();
                     }
                     else if(level.getLevel() == 4){
-                        message = "Welcome to the Last Level! Score is " + wall.getTotalBrickBroken();
+                        message = "Welcome to the Last Level! Score is " + getInstance().getScore();
                     }
                 }
                 else{
                     //If the Player reaches end of game , Display this message
                     message = "ALL WALLS DESTROYED";
                     message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",
-                            wall.getTotalBrickBroken(), displayTimer.getMinutes(), displayTimer.getSeconds());
-                    highScoreController.CheckScore();
+                            getInstance().getScore(), displayTimer.getMinutes(), displayTimer.getSeconds());
+                    getInstance().CheckScore();
                     displayTimer.resetGame();
                     //Game Timer Stopped.
                    GAMEBOARD_TIMER.stop();
@@ -178,15 +180,15 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         g2d.setColor(Color.BLUE);
         drawString(g, message, 240, 225);
         g2d.drawString(message2,200,245);
-        highScoreView.drawscore(g2d , wall ,highScoreController);
+        highScoreView.drawscore(g2d , wall);
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(ShowPauseMenu)
             pauseMenuView.render(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
-        if (highScoreController.getHighScore() == ("")) {
-            highScoreController.setHighScore(highScoreController.GetHighScore());
+        if (getInstance().getHighScore() == ("")) {
+            getInstance().setHighScore(getInstance().GetHighScore());
         }
     }
     private void drawString(Graphics g, String text, int x, int y) {
@@ -288,7 +290,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             wall.wallReset();
             displayTimer.setSeconds(displayTimer.getTempSeconds());
             displayTimer.setMinutes(displayTimer.getTempMinutes());
-            wall.setTotalBrickBroken(wall.getBrickCount());
+            getInstance().setScore(wall.getBrickCount());
             //remove the pause menu
             ShowPauseMenu = false;
             repaint();

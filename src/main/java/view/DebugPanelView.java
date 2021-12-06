@@ -3,6 +3,7 @@ package view;
 import controller.GameBoardController;
 import controller.TimerController;
 import controller.WallController;
+import static controller.HighScoreController.getInstance;
 import model.LevelModel;
 
 import javax.swing.*;
@@ -63,18 +64,18 @@ public class DebugPanelView extends JPanel {
     private void skipLevel(){
         if (level.hasLevel()) {
             level.nextLevel();
-            wall.getTotalBrickBroken();
+            getInstance().getScore();
             displayTimer.setTempSeconds(displayTimer.getSeconds());
             displayTimer.setTempMinutes(displayTimer.getMinutes());
         }
         if(level.getLevel() == 2){
-            gameBoardController.message = "Welcome to Level 2!";
+            gameBoardController.message = "Welcome to Level 2 Score is" + getInstance().getScore();
         }
         else if(level.getLevel() == 3){
-            gameBoardController.message = "Welcome to Level 3!";
+            gameBoardController.message = "Welcome to Level 3 Score is" + getInstance().getScore();
         }
         else if(level.getLevel() == 4){
-            gameBoardController.message = "Welcome to Last Level!";
+            gameBoardController.message = "Welcome to Level 4 Score is" + getInstance().getScore();
         }
     }
     private void resetBalls(){
