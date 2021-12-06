@@ -4,6 +4,7 @@ import controller.GameBoardController;
 import controller.TimerController;
 import controller.WallController;
 import static controller.HighScoreController.getInstance;
+import static controller.TimerController.getTimeInstance;
 import model.LevelModel;
 
 import javax.swing.*;
@@ -38,12 +39,11 @@ public class DebugPanelView extends JPanel {
      * To implement the Debug Panel Controller
      * @param wall
      */
-    public DebugPanelView(WallController wall , LevelModel level , GameBoardController gameBoardController , TimerController displayTimer){
+    public DebugPanelView(WallController wall , LevelModel level , GameBoardController gameBoardController){
 
         this.wall = wall;
         this.level = level;
         this.gameBoardController = gameBoardController;
-        this.displayTimer = displayTimer;
         initialize();
         //Button to Skip level and reset balls
         skipLevel = makeButton("Skip Level",e -> skipLevel());
@@ -65,8 +65,8 @@ public class DebugPanelView extends JPanel {
         if (level.hasLevel()) {
             level.nextLevel();
             getInstance().getScore();
-            displayTimer.setTempSeconds(displayTimer.getSeconds());
-            displayTimer.setTempMinutes(displayTimer.getMinutes());
+            getTimeInstance().setTempSeconds(getTimeInstance().getSeconds());
+            getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
         }
         if(level.getLevel() == 2){
             gameBoardController.message = "Welcome to Level 2 Score is" + getInstance().getScore();

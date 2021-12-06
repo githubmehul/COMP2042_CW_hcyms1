@@ -29,16 +29,15 @@ public class DebugConsoleController extends JDialog implements WindowListener{
      * @param owner
      * @param wall
      */
-    public DebugConsoleController(JFrame owner, WallController wall, TimerController displayTimer, GameBoardController gameboard, LevelModel level){
+    public DebugConsoleController(JFrame owner, WallController wall, GameBoardController gameboard, LevelModel level){
         this.wall = wall;
         this.owner = owner;
         this.gameboard = gameboard;
-        this.displayTimer = displayTimer;
         this.level = level;
         //Calling the initialize method
         initialize();
         // debugPanel is an object of the DebugPanelController Method
-        DebugPanel = new DebugPanelView(wall , level , gameboard, displayTimer);
+        DebugPanel = new DebugPanelView(wall , level , gameboard);
         //Add the Panel , and keep the Border Layout as Center
         this.add(DebugPanel,BorderLayout.CENTER);
         this.pack();

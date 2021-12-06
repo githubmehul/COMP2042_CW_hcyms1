@@ -78,10 +78,10 @@ public class WallController {
 
         int speedX,speedY;
         do{
-            speedX = random.nextInt(5) - 2;
+            speedX = 3;
         }while(speedX == 0);
         do{
-            speedY = -random.nextInt(3);
+            speedY = -3;
         }while(speedY == 0);
 
         // sets the ball speed x and speed y

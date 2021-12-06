@@ -10,6 +10,23 @@ public class TimerController {
     private int tempSeconds;
     private int tempMinutes;
     private boolean gameRunning = false;
+    /**
+     * private Object instance (apply Singleton pattern)
+     */
+    private static TimerController timeinstance;
+
+    /**
+     * other class can access to Object instance
+     * @return instance of Object
+     */
+    public static TimerController getTimeInstance(){
+        if(timeinstance == null){
+            timeinstance = new TimerController();
+
+        }
+        return timeinstance;
+    }
+
 
     public TimerController() {
         Timer timer = new Timer();

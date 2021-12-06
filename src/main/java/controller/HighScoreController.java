@@ -2,7 +2,10 @@ package controller;
 
 import javax.swing.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import static controller.TimerController.getTimeInstance;
 public class HighScoreController {
     private int score;
     private String highScore = "Name:0";
@@ -53,7 +56,7 @@ public class HighScoreController {
         if ( score> Integer.parseInt((highScore.split(":")[1]))) {
 
             String name = JOptionPane.showInputDialog("You set a new highScore. What your name?");
-            highScore = name + ":" + score + "Time";
+            highScore = name + ":" + score + "Time" + getTimeInstance().getSeconds();
 
             File scoreFile = new File("highscore.csv");
             if (!scoreFile.exists()) {
@@ -63,12 +66,19 @@ public class HighScoreController {
                     e.printStackTrace();
                 }
             }
-            FileWriter writeFile = null;
             BufferedWriter writer = null;
+            FileWriter writeFile = null;
             try {
+                BufferedReader infile = new BufferedReader(new FileReader(scoreFile));
                 writeFile = new FileWriter(scoreFile);
                 writer = new BufferedWriter(writeFile);
-                writer.write(this.highScore);
+
+                List<String> scores = new ArrayList<>();
+                while ((infile.readLine()) != null) {
+                    scores.add(this.highScore);
+                    writer.write(String.valueOf(scores));
+                }
+                infile.close();
             }
             catch (Exception e) {
 

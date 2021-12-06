@@ -25,8 +25,8 @@ controller/BallController.java
 view/InstructionButtonView.java
  view.InstructionButtonView
  view.InstructionButtonView$1
-model/ClayBrickModel.java
- model.ClayBrickModel
+model/LevelModel.java
+ model.LevelModel
 model/RubberBallModel.java
  model.RubberBallModel
 view/PauseMenuView.java
@@ -48,9 +48,9 @@ controller/BrickController.java
 controller/TimerController.java
  controller.TimerController
  controller.TimerController$1
-controller/CrackController.java
- controller.CrackController
 model/SteelBrickModel.java
  model.SteelBrickModel
-model/LevelModel.java
- model.LevelModel
+model/ClayBrickModel.java
+ model.ClayBrickModel
+controller/CrackController.java
+ controller.CrackController
