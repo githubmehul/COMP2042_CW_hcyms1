@@ -26,7 +26,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
-    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,2,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
     private HighScoreView highScoreView = new HighScoreView();
     private Timer gameTimer;
@@ -64,7 +64,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
             message2 = String.format("Total Bricks Broken: %d Timer: %02dm %02ds", getInstance().getScore(),
                     getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
             if (level.getLevel() == 1){
-                if(getTimeInstance().getMinutes() == 02 && getTimeInstance().getSeconds() == 00){
+                if(getTimeInstance().getSeconds() == 15){
                     GAMEBOARD_TIMER.stop();
                     message = "Oh No! You couldn't complete the level within the time!";
                     message2 = "Try Again!";
@@ -74,15 +74,23 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                 }
             }
             else if(level.getLevel() == 2){
-                if(getTimeInstance().getMinutes() == 02 && getTimeInstance().getSeconds() == 00){
+                if(getTimeInstance().getSeconds() == 10){
                     GAMEBOARD_TIMER.stop();
                     wall.wallReset();
                     wall.ballReset();
                     getTimeInstance().resetGame();
                 }
             }
-            else if (level.getLevel() == 2){
-                if(getTimeInstance().getMinutes() == 02 && getTimeInstance().getSeconds() == 00){
+            else if (level.getLevel() == 3){
+                if(getTimeInstance().getSeconds() == 10){
+                    GAMEBOARD_TIMER.stop();
+                    wall.wallReset();
+                    wall.ballReset();
+                    getTimeInstance().resetGame();
+                }
+            }
+            else if (level.getLevel() == 4){
+                if(getTimeInstance().getSeconds() == 10){
                     GAMEBOARD_TIMER.stop();
                     wall.wallReset();
                     wall.ballReset();
@@ -119,21 +127,27 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     //Stop the GameTimer
                     GAMEBOARD_TIMER.stop();
                     //Reset the Number of Balls
-                    getTimeInstance().setTempSeconds(getTimeInstance().getSeconds());
-                    getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
                     wall.ballReset();
                     //Reset the Wall
                     wall.wallReset();
                     //Go to the Next Level
                     level.nextLevel();
+                    getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
+                    getTimeInstance().setTempSeconds(getTimeInstance().getSeconds());
                     if (level.getLevel() == 2){
                         message = "Welcome to Level 2! Score is" + getInstance().getScore();
+                        message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
+                        getTimeInstance().resetGame();
                     }
                     else if(level.getLevel() == 3){
                         message = "Welcome to Level 3! Score is " + getInstance().getScore();
+                        message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
+                        getTimeInstance().resetGame();
                     }
                     else if(level.getLevel() == 4){
                         message = "Welcome to the Last Level! Score is " + getInstance().getScore();
+                        message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
+                        getTimeInstance().resetGame();
                     }
                 }
                 else{
@@ -179,8 +193,8 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         BackgroundColor(g2d);
         //Setting the color of the Message
         g2d.setColor(Color.BLUE);
-        drawString(g, message, 240, 225);
-        g2d.drawString(message2,200,245);
+        drawString(g, message, 200, 225);
+        g2d.drawString(message2,200,250);
         highScoreView.drawscore(g2d , wall);
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
