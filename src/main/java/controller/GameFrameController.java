@@ -25,7 +25,6 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
     private ExitButtonView exitBtn;
     private InstructionButtonView instructionView;
     private HighScoreButtonView highScoreButtonView;
-    private HighScoreGameView highScoreGameView;
     private AudioController audioController;
     private boolean Gaming;
 

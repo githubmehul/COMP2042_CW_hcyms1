@@ -98,6 +98,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     wall.ballReset();
                     getInstance().CheckScore();
                     getInstance().setScore(0);
+                    getInstance().sortHighScore();
                     //Display Message Game Over
                     message = "GAME OVER!";
                     message2 = String.format("Score is %d Bricks at the time of %02dm %02ds",
@@ -141,6 +142,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",
                             getInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                     getInstance().CheckScore();
+                    getInstance().sortHighScore();
                     getTimeInstance().resetGame();
                     //Game Timer Stopped.
                    GAMEBOARD_TIMER.stop();

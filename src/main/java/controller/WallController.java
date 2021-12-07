@@ -203,6 +203,7 @@ public class WallController {
      * When the ball is lost , this method provides the implementation for ball reset
      */
     public void ballReset(){
+
         getPlayer().moveTo(StartPoint);
         getBall().moveTo(StartPoint);
         int speedX,speedY;

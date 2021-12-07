@@ -1,25 +1,26 @@
-controller/DebugConsoleController.java
- controller.DebugConsoleController
+model/ClayBrickModel.java
+ model.ClayBrickModel
 view/ExitButtonView.java
  view.ExitButtonView
 game/Main.java
  game.Main
-controller/GameFrameController.java
- controller.GameFrameController
-controller/GameBoardController.java
- controller.GameBoardController
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
+controller/WallController.java
+ controller.WallController
 view/PlayerView.java
  view.PlayerView
 controller/AudioController.java
  controller.AudioController
-view/HighScoreView.java
- view.HighScoreView
+controller/BrickController.java
+ controller.BrickController
 controller/PlayerController.java
  controller.PlayerController
 view/StartButtonView.java
  view.StartButtonView
-view/HighScoreButtonView.java
- view.HighScoreButtonView
+view/HomeMenuView.java
+ view.HomeMenuView
 controller/BallController.java
  controller.BallController
 view/InstructionButtonView.java
@@ -31,26 +32,23 @@ model/RubberBallModel.java
  model.RubberBallModel
 view/PauseMenuView.java
  view.PauseMenuView
-view/HighScoreGameView.java
- view.HighScoreGameView
-controller/HighScoreController.java
- controller.HighScoreController
-controller/WallController.java
- controller.WallController
-view/DebugPanelView.java
- view.DebugPanelView
-view/HomeMenuView.java
- view.HomeMenuView
-model/CementBrickModel.java
- model.CementBrickModel
-controller/BrickController.java
- controller.BrickController
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-model/SteelBrickModel.java
- model.SteelBrickModel
-model/ClayBrickModel.java
- model.ClayBrickModel
 controller/CrackController.java
  controller.CrackController
+model/SteelBrickModel.java
+ model.SteelBrickModel
+controller/GameBoardController.java
+ controller.GameBoardController
+controller/HighScoreController.java
+ controller.HighScoreController
+view/HighScoreView.java
+ view.HighScoreView
+model/CementBrickModel.java
+ model.CementBrickModel
+controller/DebugConsoleController.java
+ controller.DebugConsoleController
+view/DebugPanelView.java
+ view.DebugPanelView
+view/HighScoreButtonView.java
+ view.HighScoreButtonView
+controller/GameFrameController.java
+ controller.GameFrameController

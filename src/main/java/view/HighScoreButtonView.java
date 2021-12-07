@@ -7,19 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 
 public class HighScoreButtonView extends JButton implements ActionListener {
+    static String lineSeparator = System.getProperty("line.separator"); //This variable use for displaying Leaderboard
     private final GameFrameController owner;
     JFrame frame = new JFrame("Frame");
-    JLabel label = new JLabel("<html></html>" , SwingConstants.CENTER);
+    JLabel label = new JLabel();
+    JTextArea textArea=new JTextArea();
 
     public HighScoreButtonView(GameFrameController owner) {
         this.owner = owner;
@@ -36,23 +38,29 @@ public class HighScoreButtonView extends JButton implements ActionListener {
         frame.setBounds(100, 0, 400, 350);
         frame.setSize(400, 350);
         frame.setLayout(new BorderLayout());
+        textArea.setBounds(250, 200, 300, 300);
+        textArea.setEditable(false); //This line of code will prevent the user from edit the text in JTextArea
+        textArea.setFont(textArea.getFont().deriveFont(18f)); //set text size
+        textArea.setForeground(Color.white); //set text font
+        textArea.setBackground(Color.BLACK);  //set back ground
+        frame.add(textArea);
         //Reset textpanes content so on every button click the new content of the read file will be displayed
         String fileResult = "";
-        try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("highscore.csv"));
-            String line = null;
-            while ((line = csvReader.readLine()) != null) {
-                //Do your logic here which information you want to parse from the csv file and which information you want to display in your textpane
-                fileResult = fileResult + "\n" +line;
+        File file = new File("leaderboard.dat");
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuilder cont = new StringBuilder();
+            String text;
+
+            while ((text = reader.readLine()) != null) {
+                cont.append(text).append(lineSeparator);
             }
+            textArea.setText("LEADERBOARD");
+            textArea.setText(cont.toString());
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
-        catch(FileNotFoundException ex) {
-            System.err.println("File was not found");
-        }
-        catch(IOException ioe) {
-            System.err.println("There was an error while reading the file");
-        }
-        label.setText("High Score- " + fileResult);
+        label.setText("<html><center>LEADERBOARD</center></html>");
         label.setFont(new Font("Raleway", Font.PLAIN,30));
         label.setForeground(Color.WHITE);
         Border b2 = new LineBorder(Color.decode("#FF007F"), 10);
