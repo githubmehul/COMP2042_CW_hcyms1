@@ -38,7 +38,7 @@ public class CementBrickModel extends BrickController {
     public CementBrickModel(Point point, Dimension size){
         super(point,size,BRICK_STRENGTH);
         Crack = new CrackController(this , DEF_CRACK_DEPTH, DEF_STEPS);
-        brickFace = super.getBrickFace();
+        brickFace = super.getBrickShape();
     }
 
     /**
@@ -108,7 +108,7 @@ public class CementBrickModel extends BrickController {
         if(!super.isBroken()){
             //Create the Crack on the Brick
             GeneralPath gp = Crack.draw();
-            gp.append(super.getBrickFace(),false);
+            gp.append(super.getBrickShape(),false);
             //Update the BrickFace to the Crack
             brickFace = gp;
         }
@@ -122,6 +122,6 @@ public class CementBrickModel extends BrickController {
         //reset the crack
         Crack.reset();
         //update the brickface
-        brickFace = super.getBrickFace();
+        brickFace = super.getBrickShape();
     }
 }

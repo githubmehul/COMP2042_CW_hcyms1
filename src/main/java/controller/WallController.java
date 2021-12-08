@@ -45,25 +45,7 @@ public class WallController {
      * @param brickDimensionRatio
      * @param ballPos
      */
-    /**
-     * private Object instance (apply Singleton pattern)
-     */
-    private static WallController instance;
-    /**
-     * private constructor(apply singleton)
-     */
-    private WallController() {}
-    /**
-     * other class can access to Object instance
-     * @return instance of Object
-     */
-    public static WallController getInstance(){
-        if(instance == null){
-            instance = new WallController();
 
-        }
-        return instance;
-    }
     public WallController(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
 
         //specifies the location of the ball position

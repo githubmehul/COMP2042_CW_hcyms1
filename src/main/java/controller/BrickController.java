@@ -6,27 +6,30 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 /**
- * The BrickController abstract class provides a template that allows different
- * types of Bricks to be created. It is responsible for defining its shape and
- * location , and the color is defined by the implementation class of the BrickController.
+ * The BrickController abstract class provides a template that allows different types of Bricks to be created.
+ * It is responsible for defining its shape and location
+ * The color is defined by the implementation class of the BrickController.
  * Implements simple behaviour regarding the strength of the brick.
  */
 abstract public class BrickController {
+    //Shape of Brick
+    private Shape brickShape;
 
+    //Sets the constants for impact in various directions
     public static final int UP_IMPACT = 100;
     public static final int DOWN_IMPACT = 200;
     public static final int LEFT_IMPACT = 300;
     public static final int RIGHT_IMPACT = 400;
 
-    private static Random rnd;
-    private Shape brickFace;
-
-    private Color Brick_Border_Color;
-    private Color Brick_Inner_Color;
+    //Brick Border Color and Brick Inner Color
+    private Color brickBorderColor;
+    private Color brickInnerColor;
 
     private int fullStrength;
     private int strength;
+
     private boolean broken;
+    private static Random rnd;
 
 
     /**
@@ -38,16 +41,16 @@ abstract public class BrickController {
         setRnd(new Random());
 
         //Define the Colors
-        this.Brick_Border_Color = setBrickBorderColor();
-        this.Brick_Inner_Color= setBrickInnerColor();
+        this.brickBorderColor = setBrickBorderColor();
+        this.brickInnerColor= setBrickInnerColor();
 
         //Define the Properties
         this.fullStrength = strength;
         this.strength = fullStrength;
         this.broken = false;
 
-        //Create the Brick
-        setBrickFace(makeBrickFace(pos,size));
+        //Create the brickShape
+        setBrickShape(makeBrickFace(pos,size));
 
     }
 
@@ -68,29 +71,31 @@ abstract public class BrickController {
      * Gets the shape of the parent Brick
      * @return brickFace
      */
-    public Shape getBrickFace() {
-        return brickFace;
+    public Shape getBrickShape() {
+        return brickShape;
     }
     /**
      * Sets the Shape of the Parent Brick
      * @param brickFace
      */
-    public void setBrickFace(Shape brickFace) {
-        this.brickFace = brickFace;
+    public void setBrickShape(Shape brickFace) {
+        this.brickShape= brickFace;
     }
 
 
     /**
      *Abstract Method for setting the Inner Color of the Brick
+     * @param red
      */
     protected abstract Color setBrickInnerColor();
     /**
      * Returns the Brick's Inner Color from Child Classes
      * @return Brick_Inner_Color - Inner Color of Brick
      */
-    public Color getBrick_Inner_Color() {
-        return Brick_Inner_Color;
+    public Color getBrickInnerColor() {
+        return brickInnerColor;
     }
+
 
     /**
      * Abstract Method for setting the Border Color of the Ball
@@ -102,7 +107,7 @@ abstract public class BrickController {
      * @return Brick_Border_Color - Border Color of Brick
      */
     public Color getBrickBorderColor(){
-        return  Brick_Border_Color;
+        return  brickBorderColor;
     }
 
 
@@ -116,16 +121,16 @@ abstract public class BrickController {
             return 0;
         int out  = 0;
         // If the right side of the ball impacts the left side of the brick
-        if(getBrickFace().contains(b.getRightLocation()))
+        if(getBrickShape().contains(b.getRightLocation()))
             out = LEFT_IMPACT;
         // If the left side of the ball impacts the right side of the brick
-        else if(getBrickFace().contains(b.getLeftLocation()))
+        else if(getBrickShape().contains(b.getLeftLocation()))
             out = RIGHT_IMPACT;
         // If the top side of the ball impacts the bottom side of the brick
-        else if(getBrickFace().contains(b.getUpLocation()))
+        else if(getBrickShape().contains(b.getUpLocation()))
             out = DOWN_IMPACT;
         // If the bottom side of the ball impacts the top side of the brick
-        else if(getBrickFace().contains(b.getDownLocation()))
+        else if(getBrickShape().contains(b.getDownLocation()))
             out = UP_IMPACT;
         return out;
     }
@@ -147,9 +152,10 @@ abstract public class BrickController {
     /**
      * Decrements the strength  of the Brick and updates the Brick's broken status.
      */
-    public void impact(){
+    public int impact(){
         strength--;
         broken = (strength == 0);
+        return 0;
     }
     /**
      * Get the broek status of the Brick.
@@ -181,11 +187,15 @@ abstract public class BrickController {
         BrickController.rnd = rnd;
     }
 
+    /**
+     * Renders the Brick Shape and Color, called in the wallController Class
+     * @param g
+     */
     public void render(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Set the interior colour
-        g2d.setColor(getBrick_Inner_Color());
+        g2d.setColor(getBrickInnerColor());
         g2d.fill(getBrick());
 
         // Set the border colour

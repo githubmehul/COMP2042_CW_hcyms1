@@ -4,6 +4,7 @@ import controller.BrickController;
 import controller.WallController;
 
 import java.awt.*;
+
 /**
  * The LevelModel class creates levels for the Game. I separated these
  * methods from the WallController class  the Game
@@ -12,15 +13,19 @@ import java.awt.*;
  */
 public class LevelModel {
 
-    private static final int LEVELS_COUNT = 4;
+    private static final int LEVELS_COUNT = 5;
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
+    private  static final int FAST = 4;
     private BrickController[][] levels;
     private int level = 0;
-    private WallController wall;
 
+    public static WallController getWall() {
+        return wall;
+    }
 
+    private static WallController wall;
     public LevelModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, WallController wall){
         levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
         this.wall = wall;
@@ -145,6 +150,7 @@ public class LevelModel {
         tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
         tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
+        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FAST , CLAY);
         return tmp;
     }
 
@@ -159,6 +165,9 @@ public class LevelModel {
                 break;
             case CEMENT:
                 out = new CementBrickModel(point, size);
+                break;
+            case FAST:
+                out  = new FireBrickModel(point, size);
                 break;
             default:
                 throw new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
@@ -185,4 +194,7 @@ public class LevelModel {
     public int getLevel() {
         return level;
     }
+
+
+
 }

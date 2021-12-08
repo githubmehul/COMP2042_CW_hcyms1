@@ -35,7 +35,7 @@ public class SteelBrickModel extends BrickController {
     public SteelBrickModel(Point point, Dimension size){
         super(point,size,BRICK_STRENGTH);
         random = new Random();
-        brickFace = super.getBrickFace();
+        brickFace = super.getBrickShape();
     }
 
     /**
@@ -95,9 +95,10 @@ public class SteelBrickModel extends BrickController {
     /**
      * Calls the parent's {@code impact()} method based on the probability.
      */
-    public void impact(){
+    public int impact(){
         if(random.nextDouble() < BRICK_BREAK_PROBABILITY){
             super.impact();
         }
+        return 0;
     }
 }

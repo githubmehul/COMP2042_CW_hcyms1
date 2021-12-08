@@ -7,28 +7,28 @@ import java.awt.geom.RectangularShape;
 
 /**
  * The BallController abstract class provides a template that allows different
- * types of Balls to be created. It is responsible for defining its shape and
- * location , and the color is defined by the implementation class of the BallController
- * Not responsible for defining its behaviour in the game.
- * It provides methods that allow the Game class to define its behaviour in the game.
+ * types of Balls to be created.
+ * It is responsible for defining its shape and location.
+ * The color is defined by the implementation class of the BallController.
+ * It provides methods that allow the WallController class to define its behaviour in the game.
  */
 abstract public class BallController {
 
     //Shape of the Ball
-    private Shape BallFace;
+    private Shape ballShape;
 
     //Coordinates of the Ball
-    private Point2D center;
-    private double centerX;
-    private double centerY;
+    private Point2D ballCenter;
+    private double ballCenterX;
+    private double ballCenterY;
     private Point2D up;
     private Point2D down;
     private Point2D left;
     private Point2D right;
 
-    //Border Color and Inner Color ofl
-    private Color Ball_Border_Color;
-    private Color Ball_Inner_Color;
+    //Border Color and Inner Color of the Ball
+    private Color ballBorderColor;
+    private Color ballInnerColor;
 
     //Speed of the Ball
     private int speedX;
@@ -44,30 +44,30 @@ abstract public class BallController {
      * 2. Sets shape of the ball
      * 3. Defines the colors of the ball
      * 4. Defines the speed of the ball
-     * @param center - The center position.
+     * @param BallCenter - The BallCenter position.
      * @param width  - The horizontal diameter.
      * @param height - The vertical diameter.
      */
-    public BallController(Point2D center, int width, int height){
+    public BallController(Point2D BallCenter, int width, int height){
 
         // Define location
-        this.center = (Point2D) center.clone();
-        this.centerX = center.getX();
-        this.centerY = center.getY();
+        this.ballCenter = (Point2D) BallCenter.clone();
+        this.ballCenterX = BallCenter.getX();
+        this.ballCenterY = BallCenter.getY();
 
         //Define the Points of the Ball
         setUpLocation(new Point2D.Double());
         setDownLocation(new Point2D.Double());
         setLeftLocation(new Point2D.Double());
         setRightLocation(new Point2D.Double());
-        setPoints(this.center);
+        setPoints(this.ballCenter);
 
         //Create The shape of the Ball
-        BallFace = makeBall(center,width,height);
+        ballShape = makeBallShape(BallCenter,width,height);
 
         // Define the Border Color and Inner Color of the Ball
-        this.Ball_Border_Color = setBallBorderColor();
-        this.Ball_Inner_Color  = setBallInnerColor();
+        this.ballBorderColor = setBallBorderColor();
+        this.ballInnerColor  = setBallInnerColor();
 
         // Initialise the Speed of the Ball
         speedX = 0;
@@ -80,43 +80,43 @@ abstract public class BallController {
 
     /**
      * An abstract method for creating the Ball's Shape.
-     * @param center - The center position.
+     * @param ballCenter - The BallCenter position.
      * @param width  - The horizontal diameter.
      * @param height - The vertical diameter.
      * @return The {@code Shape} of the ball.
      */
-    protected abstract Shape makeBall(Point2D center,int width,int height);
+    protected abstract Shape makeBallShape(Point2D ballCenter,int width,int height);
 
     /**
      * Increment the Ball's location by {@code speedX} and {@code speedY}.
      */
     public void move() {
         //Change the Location by adding the speed
-        centerX += speedX;
-        centerY += speedY;
+        ballCenterX += speedX;
+        ballCenterY += speedY;
 
-        // Change location by adding with speed
-        setLocation(centerX, centerY);
+        // Setting the Location
+        setLocation(ballCenterX, ballCenterY);
     }
 
     /**
-     * Set a new center location.
-     * @param x - The new center X coordinate.
-     * @param y - The new center Y coordinate.
+     * Set a new ballCenter location.
+     * @param x - The new BallCenter X coordinate.
+     * @param y - The new BallCenter Y coordinate.
      */
     public void setLocation(double x , double y){
-        //Set the Center Location
-        this.centerX = x;
-        this.centerY = y;
-        this.center.setLocation(centerX , centerY);
+        //Set the BallCenter Location
+        this.ballCenterX = x;
+        this.ballCenterY = y;
+        this.ballCenter.setLocation(ballCenterX , ballCenterY);
 
-        //Set BallFace Location
-        RectangularShape temp = (RectangularShape) BallFace;
-        double widthX = centerX - (width / 2);
-        double heightY = centerY - (height/2);
+        //Set BallShape Location
+        RectangularShape temp = (RectangularShape) ballShape;
+        double widthX = ballCenterX - (width / 2);
+        double heightY = ballCenterY - (height/2);
         temp.setFrame((widthX),(heightY),width,height);
-        setPoints(center);
-        BallFace = temp;
+        setPoints(ballCenter);
+        ballShape = temp;
     }
 
     /**
@@ -130,19 +130,20 @@ abstract public class BallController {
 
     /**
      * Set the Up , Down , Left and Right Points on the Ball
-     * @param center - The new center position.
+     * @param BallCenter - The new BallCenter position.
      */
-    private void setPoints(Point2D center){
-        int CenterX = (int) center.getX();
-        int CenterY = (int) center.getY();
+    private void setPoints(Point2D BallCenter){
+        int ballCenterX = (int) BallCenter.getX();
+        int ballCenterY = (int) BallCenter.getY();
 
-        getUpLocation().setLocation(CenterX, CenterY  - (height / 2));
-        getDownLocation().setLocation(CenterX, CenterY + (height / 2));
-        getLeftLocation().setLocation(CenterX - (width / 2), CenterY );
-        getRightLocation().setLocation(CenterX + (width / 2), CenterY );
+        getUpLocation().setLocation(ballCenterX, ballCenterY  - (height / 2));
+        getDownLocation().setLocation(ballCenterX, ballCenterY + (height / 2));
+        getLeftLocation().setLocation(ballCenterX - (width / 2), ballCenterY );
+        getRightLocation().setLocation(ballCenterX + (width / 2), ballCenterY );
     }
 
     //Setter and Getter Methods
+
     /**
      *Abstract Method for setting the Inner Color of the Ball
      * Implemented in the Child Class
@@ -150,9 +151,9 @@ abstract public class BallController {
     protected abstract Color setBallInnerColor();
     /**
      * Returns the Inner Color
-     * @return Ball_Inner_Color - Inner Color of the Ball
+     * @return ballInnerColor - Inner Color of the Ball
      */
-    public Color getInnerColor(){ return Ball_Inner_Color; }
+    public Color getBallInnerColor(){ return ballInnerColor; }
 
 
     /**
@@ -162,9 +163,9 @@ abstract public class BallController {
     protected abstract Color setBallBorderColor();
     /**
      * Returns the Border Color
-     * @return Ball_Border_Color - Border Color of the Ball
+     * @return ballBorderColor - Border Color of the Ball
      */
-    public Color getBorderColor(){ return Ball_Border_Color;}
+    public Color getBallBorderColor(){ return ballBorderColor;}
 
 
     /**
@@ -277,28 +278,35 @@ abstract public class BallController {
     }
     /**
      * Returns the Center Position
-     * @return center - The Center Position
+     * @return BallCenter - The ballCenter Position
      */
     public Point2D getPosition(){
-        return center;
-    }
-    /**
-     * Returns the BallFace
-     * @return BallFace - The Super BallFace
-     */
-    public Shape getBallFace(){
-        return BallFace;
+        return ballCenter;
     }
 
+
+    /**
+     * Returns the BallFace
+     * @return BallFace - The Super ballShape
+     */
+    public Shape getBallFace(){
+        return ballShape;
+    }
+
+
+    /**
+     * Renders the Ball Shape and Color, called in the wallController Class
+     * @param g
+     */
     public void render(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Set the interior colour
-        g2d.setColor(getInnerColor());
+        g2d.setColor(getBallInnerColor());
         g2d.fill(getBallFace());
 
         // Set the border colour
-        g2d.setColor(getBorderColor());
+        g2d.setColor(getBallBorderColor());
         g2d.draw(getBallFace());
     }
 

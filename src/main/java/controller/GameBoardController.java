@@ -26,7 +26,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
-    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,2,6/2, wall);
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
     private HighScoreView highScoreView = new HighScoreView();
     private Timer gameTimer;
@@ -194,7 +194,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         //Setting the color of the Message
         g2d.setColor(Color.BLUE);
         drawString(g, message, 200, 225);
-        g2d.drawString(message2,200,250);
+        g2d.drawString(message2,200,260);
         highScoreView.drawscore(g2d , wall);
         wall.render(g2d);
         //If the showPauseMenu is true , draw the drawMenu
@@ -378,12 +378,5 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         getTimeInstance().setGameRunning(false);
         message = "Focus Lost";
         repaint();
-    }
-    public void inputname(){
-        UIManager UI=new UIManager();
-        UI.put("OptionPane.background",new ColorUIResource(255,0,0));
-        UI.put("Panel.background",new ColorUIResource(255,0,0));
-        // Get the user's name.
-        name = JOptionPane.showInputDialog("What is your name?");
     }
 }

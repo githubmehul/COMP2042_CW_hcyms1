@@ -59,7 +59,7 @@ public class CrackController {
      * @param direction
      */
     public void makeCrack(Point2D point, int direction) {
-        Rectangle bounds = brick.getBrickFace().getBounds();
+        Rectangle bounds = brick.getBrickShape().getBounds();
 
         Point impact = new Point((int) point.getX(), (int) point.getY());
         Point start = new Point();

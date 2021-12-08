@@ -68,7 +68,7 @@ public class ClayBrickModel extends BrickController {
     @Override
     public Shape getBrick() {
 
-        return super.getBrickFace();
+        return super.getBrickShape();
     }
     @Override
     public boolean setImpact(Point2D point, int direction) {

@@ -35,7 +35,7 @@ public class RubberBallModel extends BallController {
      * @return
      */
     @Override
-    protected Shape makeBall(Point2D center, int width, int height) {
+    protected Shape makeBallShape(Point2D center, int width, int height) {
         double x = center.getX() - (width / 2);
         double y = center.getY() - (height / 2);
         return new Ellipse2D.Double(x,y,width,height);
