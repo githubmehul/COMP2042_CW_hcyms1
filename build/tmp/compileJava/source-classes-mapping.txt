@@ -1,13 +1,13 @@
-controller/DebugConsoleController.java
- controller.DebugConsoleController
+controller/CrackController.java
+ controller.CrackController
 view/ExitButtonView.java
  view.ExitButtonView
 game/Main.java
  game.Main
-controller/GameFrameController.java
- controller.GameFrameController
-controller/GameBoardController.java
- controller.GameBoardController
+model/FireBrickModel.java
+ model.FireBrickModel
+controller/BrickController.java
+ controller.BrickController
 view/PlayerView.java
  view.PlayerView
 controller/AudioController.java
@@ -21,13 +21,16 @@ view/StartButtonView.java
 view/HighScoreButtonView.java
  view.HighScoreButtonView
  view.HighScoreButtonView$1
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
 controller/BallController.java
  controller.BallController
 view/InstructionButtonView.java
  view.InstructionButtonView
  view.InstructionButtonView$1
-model/LevelModel.java
- model.LevelModel
+model/CementBrickModel.java
+ model.CementBrickModel
 model/RubberBallModel.java
  model.RubberBallModel
 view/PauseMenuView.java
@@ -36,20 +39,21 @@ controller/HighScoreController.java
  controller.HighScoreController
 controller/WallController.java
  controller.WallController
-view/DebugPanelView.java
- view.DebugPanelView
-view/HomeMenuView.java
- view.HomeMenuView
-model/CementBrickModel.java
- model.CementBrickModel
-controller/BrickController.java
- controller.BrickController
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-model/SteelBrickModel.java
- model.SteelBrickModel
 model/ClayBrickModel.java
  model.ClayBrickModel
-controller/CrackController.java
- controller.CrackController
+view/HomeMenuView.java
+ view.HomeMenuView
+model/SteelBrickModel.java
+ model.SteelBrickModel
+model/LevelModel.java
+ model.LevelModel
+model/IceBrickModel.java
+ model.IceBrickModel
+controller/DebugConsoleController.java
+ controller.DebugConsoleController
+view/DebugPanelView.java
+ view.DebugPanelView
+controller/GameFrameController.java
+ controller.GameFrameController
+controller/GameBoardController.java
+ controller.GameBoardController

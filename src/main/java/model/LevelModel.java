@@ -17,7 +17,8 @@ public class LevelModel {
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
-    private  static final int FAST = 4;
+    private  static final int FIRE = 4;
+    private  static final int ICE = 5;
     private BrickController[][] levels;
     private int level = 0;
 
@@ -150,7 +151,7 @@ public class LevelModel {
         tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
         tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
-        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FAST , CLAY);
+        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , ICE);
         return tmp;
     }
 
@@ -166,10 +167,13 @@ public class LevelModel {
             case CEMENT:
                 out = new CementBrickModel(point, size);
                 break;
-            case FAST:
+            case FIRE:
                 out  = new FireBrickModel(point, size);
                 break;
-            default:
+            case ICE:
+                out  = new IceBrickModel(point, size);
+                break;
+                default:
                 throw new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
         }
         return  out;

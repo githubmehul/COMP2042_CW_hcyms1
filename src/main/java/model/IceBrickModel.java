@@ -1,21 +1,15 @@
 package model;
-import controller.BallController;
 import controller.BrickController;
-import controller.CrackController;
-import controller.WallController;
-
-
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
 
-public class FireBrickModel extends BrickController {
-    private static Color INNER_COLOR = new Color(247, 55, 24);
-    private static Color BORDER_COLOR = new Color(255, 203, 0);
-    private static final int FAST_STRENGTH = 2;
+public class IceBrickModel extends BrickController {
+    private static Color INNER_COLOR = new Color(2, 28, 118);
+    private static Color BORDER_COLOR = new Color(5, 207, 255);
+    private static final int FAST_STRENGTH = 1;
 
-    public FireBrickModel(Point point, Dimension size){
+    public IceBrickModel(Point point, Dimension size){
         super(point,size,FAST_STRENGTH);
     }
 
@@ -24,7 +18,6 @@ public class FireBrickModel extends BrickController {
         if(super.isBroken())
             return false;
         else {
-            impact();
             brickimpact();
         }
         return super.isBroken();
@@ -41,9 +34,10 @@ public class FireBrickModel extends BrickController {
     }
 
     public void brickimpact() {
+        super.impact();
         if (super.isBroken()) {
-            LevelModel.getWall().setBallXSpeed(7);
-            LevelModel.getWall().setBallYSpeed(-7);
+            LevelModel.getWall().setBallXSpeed(2);
+            LevelModel.getWall().setBallYSpeed(-2);
         }
     }
     @Override
@@ -53,7 +47,6 @@ public class FireBrickModel extends BrickController {
 
     @Override
     protected Color setBrickBorderColor() {
-        return BORDER_COLOR;
-    }
+        return BORDER_COLOR;}
 
 }
