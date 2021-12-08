@@ -1,41 +1,37 @@
 package view;
 
 import controller.AudioController;
-import controller.GameFrameController;
+import model.GameFrameModel;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.net.URL;
-import javax.swing.border.LineBorder;
 
+/**
+ * StartButtonView is responsible for designing and rendering the StartButton.
+ * It is also responsible for the functionality of the start button by rendering the data
+ * received from the GameFrameModel
+ */
 public class StartButtonView extends JButton implements ActionListener {
 
-    private GameFrameController owner;
-    public StartButtonView(GameFrameController owner) {
+    private final GameFrameModel owner;
+
+    public StartButtonView(GameFrameModel owner) {
 
         this.owner = owner;
         this.setBounds(200, 600, 150, 35);
-        this.setText("PLAY");
+        this.setText("PLAY!");
         this.setBackground(Color.decode("#FF007F"));
         this.addActionListener(this);
         this.setFocusPainted(false);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this) {
-            AudioController audioController = new AudioController("Button Sound.wav");
+            new AudioController("Button Sound.wav");
             owner.enableGameBoard();
 
         }

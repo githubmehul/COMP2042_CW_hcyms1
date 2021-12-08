@@ -1,8 +1,6 @@
 package controller;
 import model.RubberBallModel;
 import view.PlayerView;
-import controller.HighScoreController;
-import static controller.HighScoreController.getInstance;
 
 
 import java.awt.*;
@@ -286,6 +284,7 @@ public class WallController {
     public void setPlayer(PlayerController player) {
         this.player = player;
     }
+
     public int getBrickCount() {
         return brickCount;
     }

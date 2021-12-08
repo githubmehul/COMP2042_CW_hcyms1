@@ -1,6 +1,6 @@
 package view;
 import controller.AudioController;
-import controller.GameFrameController;
+import model.GameFrameModel;
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -14,13 +14,13 @@ import java.io.*;
 
 public class HighScoreButtonView extends JButton implements ActionListener {
     static String lineSeparator = System.getProperty("line.separator"); //This variable use for displaying Leaderboard
-    private final GameFrameController owner;
+    private final GameFrameModel owner;
     JFrame frame = new JFrame("Frame");
     JLabel label = new JLabel("LEADERBOARD", JLabel.CENTER);
     JButton button = new JButton("Exit Instruction Page");
     JTextArea textArea=new JTextArea();
 
-    public HighScoreButtonView(GameFrameController owner) {
+    public HighScoreButtonView(GameFrameModel owner) {
         this.owner = owner;
         this.setBounds(150, 800, 150, 35);
         this.setText("HIGH SCORE");

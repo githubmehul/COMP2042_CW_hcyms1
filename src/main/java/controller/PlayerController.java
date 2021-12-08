@@ -1,9 +1,8 @@
 package controller;
 
-import controller.BallController;
+import model.PlayerModel;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 
 
 /**
@@ -11,9 +10,7 @@ import java.awt.geom.Point2D;
  * location and behaviour.
  */
 public class PlayerController {
-    //Final Color Declarations
-    private static final Color PLAYER_BORDER_COLOR = Color.GREEN.darker().darker();
-    private static final Color PLAYER_INNER_COLOR = Color.GREEN;
+
     private static final int PLAYER_MOVE_AMOUNT = 5;
 
     private Rectangle PlayerFace;
@@ -24,7 +21,25 @@ public class PlayerController {
     private int MoveAmount = 0;
     private int Min;
     private int Max;
+    /**
+     * private Object instance (apply Singleton pattern)
+     */
+    private static PlayerController  instance;
 
+    /**
+     * other class can access to Object instance
+     * @return instance of Object
+     */
+    public static  PlayerController getInstance(){
+        if(instance == null){
+            instance = new  PlayerController ();
+
+        }
+        return instance;
+    }
+
+    public  PlayerController (){
+    }
     /**
      * PlayerModel Constructor:
      * 1. Assigns the value of ballPoint to ballPoint
@@ -44,22 +59,12 @@ public class PlayerController {
         this.BallPoint = (Point) BallPoint.clone();
 
         // Create the Player's Shape
-        PlayerFace = makeRectangle(width, height);
+        PlayerFace = PlayerModel.getInstance().makeRectangle(width, height);
 
         Min = container.x + (width / 2);
         Max = Min + container.width - width;
     }
 
-    /**
-     * Create the Player's model, which is a Rectangle.
-     * @param width  - The width.
-     * @param height - The height.
-     * @return A {@code Rectangle} object.
-     */
-    private Rectangle makeRectangle(int width,int height){
-        Point p = new Point((BallPointX - (width / 2)),BallPointY);
-        return  new Rectangle(p,new Dimension(width,height));
-    }
 
     /**
      * Returns the boolean if the Ball has impacted the Platform
@@ -125,19 +130,11 @@ public class PlayerController {
         PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
     }
 
-    /**
-     * To Return the Border Color
-     * @return PLAYER_BORDER_COLOR
-     */
-    public static Color getBorderColor() {
-        return PLAYER_BORDER_COLOR;
+    public int getBallPointY() {
+        return BallPointY;
     }
 
-    /**
-     * To return the Inner Color
-     * @return PLAYER_INNER_COLOR
-     */
-    public static Color getInnerColor() {
-        return PLAYER_INNER_COLOR;
+    public int getBallPointX() {
+        return BallPointX;
     }
 }

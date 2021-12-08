@@ -1,6 +1,7 @@
 package view;
 
 import controller.PlayerController;
+import static model.PlayerModel.getInstance;
 
 import java.awt.*;
 
@@ -16,11 +17,11 @@ public class PlayerView {
         Graphics2D g2d = (Graphics2D) g.create();
 
         // Set the interior colour
-        g2d.setColor(playerController.getInnerColor());
+        g2d.setColor(getInstance().getInnerColor());
         g2d.fill(playerController.getPlayerFace());
 
         // Set the border colour
-        g2d.setColor(playerController.getBorderColor());
+        g2d.setColor(getInstance().getBorderColor());
         g2d.draw(playerController.getPlayerFace());
     }
 }

@@ -1,5 +1,7 @@
-package controller;
+package model;
 
+import controller.AudioController;
+import controller.GameBoardController;
 import view.*;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -15,7 +17,7 @@ import java.io.IOException;
  *GameFrameModel extends JFrame,which further implements WindowFocusListener,which takes care
  *of the implementation of the game
  */
-public class GameFrameController extends JFrame implements WindowFocusListener {
+public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     private static final String GAMEFRAME_TITLE_TEXT= "Brick Destroy";
 
@@ -35,7 +37,7 @@ public class GameFrameController extends JFrame implements WindowFocusListener {
      *2.Adds the homeMenu as a BorderLayout with Center Alignment<br>
      *3.Sets undecorated as true
      */
-    public GameFrameController(){
+    public GameFrameModel(){
         this.initialize();
          Gaming = false;
         HomeMenu = new HomeMenuView();

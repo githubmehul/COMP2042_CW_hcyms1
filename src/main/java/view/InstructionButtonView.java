@@ -1,6 +1,6 @@
 package view;
 import controller.AudioController;
-import controller.GameFrameController;
+import model.GameFrameModel;
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InstructionButtonView extends JButton implements ActionListener {
-    private final GameFrameController owner;
+    private final GameFrameModel owner;
     JFrame frame = new JFrame();
     JLabel label = new JLabel("<html><center><h3><b><div style='font-size: 30;'>GAME COMMANDS</div></b></center></h2>" +
             "<h4>Click <b>[SPACE]</b> To Play And Pause</h4>" +
@@ -24,7 +24,7 @@ public class InstructionButtonView extends JButton implements ActionListener {
             "</html>" , SwingConstants.CENTER);
     JButton button = new JButton("Exit Instruction Page");
 
-    public InstructionButtonView(GameFrameController owner){
+    public InstructionButtonView(GameFrameModel owner){
         this.owner = owner;
         this.setBounds(100,0, 600,480);
         this.setText("HELP");

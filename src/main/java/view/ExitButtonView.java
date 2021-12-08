@@ -1,7 +1,6 @@
 package view;
 
-import controller.AudioController;
-import controller.GameFrameController;
+import model.GameFrameModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ExitButtonView extends JButton implements ActionListener {
-    private final GameFrameController owner;
-    public ExitButtonView(GameFrameController owner){
+    private final GameFrameModel owner;
+    public ExitButtonView(GameFrameModel owner){
         this.owner =owner;
 
         this.setBounds(500 , 500, 150, 35);

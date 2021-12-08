@@ -1,4 +1,5 @@
 package controller;
+import model.GameFrameModel;
 import model.LevelModel;
 import view.HighScoreView;
 import view.PauseMenuView;
@@ -6,7 +7,6 @@ import static controller.HighScoreController.getInstance;
 import static controller.TimerController.getTimeInstance;
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -26,7 +26,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
-    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),5,2,6/2, wall);
+    private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     private PauseMenuView pauseMenuView = new PauseMenuView();
     private HighScoreView highScoreView = new HighScoreView();
     private Timer gameTimer;
@@ -112,7 +112,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     message2 = String.format("Score is %d Bricks at the time of %02dm %02ds",
                             getInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                     getTimeInstance().resetGame();
-                    GameFrameController gameFrameController = new GameFrameController();
+                    GameFrameModel gameFrameController = new GameFrameModel();
                 }
                 getTimeInstance().setGameRunning(false);
                 // If the Ball Is Lost , Reset Ball and the Player
