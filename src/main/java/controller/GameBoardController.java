@@ -28,7 +28,8 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     private DebugConsoleController DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     private HighScoreModel highScoreModel = new HighScoreModel();
-    private PauseMenuView pauseMenuView= new PauseMenuView(this ,wall );
+    private PauseMenuView pauseMenuView = new PauseMenuView();
+    private PauseMenuController pauseMenuController = new PauseMenuController(this , wall,pauseMenuView);
     GameboardView gameboardView = new GameboardView(wall, wall.getPlayer(), wall.getBall() , this , highScoreModel,pauseMenuView);
     private Timer gameTimer;
     //Game Timer Declaration
@@ -256,8 +257,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
      */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
-
+        pauseMenuController.mouseClicked(mouseEvent);
     }
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
@@ -291,6 +291,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
      */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
+        pauseMenuController.mouseMoved(mouseEvent);
 
     }
 

@@ -1,21 +1,22 @@
-controller/DebugConsoleController.java
- controller.DebugConsoleController
+controller/CrackController.java
+ controller.CrackController
 view/ExitButtonView.java
  view.ExitButtonView
 model/PlayerModel.java
  model.PlayerModel
 game/Main.java
  game.Main
-controller/GameBoardController.java
- controller.GameBoardController
-view/GameboardView.java
- view.GameboardView
+controller/BrickController.java
+ controller.BrickController
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
 controller/AudioController.java
  controller.AudioController
 controller/PlayerController.java
  controller.PlayerController
-model/GameFrameModel.java
- model.GameFrameModel
+model/ClayBrickModel.java
+ model.ClayBrickModel
 view/StartButtonView.java
  view.StartButtonView
 model/FireBrickModel.java
@@ -34,28 +35,29 @@ model/LevelModel.java
  model.LevelModel
 model/RubberBallModel.java
  model.RubberBallModel
-view/PauseMenuView.java
- view.PauseMenuView
+model/CementBrickModel.java
+ model.CementBrickModel
 controller/HighScoreController.java
  controller.HighScoreController
 controller/WallController.java
  controller.WallController
-view/DebugPanelView.java
- view.DebugPanelView
+model/SteelBrickModel.java
+ model.SteelBrickModel
 view/HomeMenuView.java
  view.HomeMenuView
 model/IceBrickModel.java
  model.IceBrickModel
-model/CementBrickModel.java
- model.CementBrickModel
-controller/BrickController.java
- controller.BrickController
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-model/SteelBrickModel.java
- model.SteelBrickModel
-model/ClayBrickModel.java
- model.ClayBrickModel
-controller/CrackController.java
- controller.CrackController
+view/PauseMenuView.java
+ view.PauseMenuView
+controller/DebugConsoleController.java
+ controller.DebugConsoleController
+model/GameFrameModel.java
+ model.GameFrameModel
+view/DebugPanelView.java
+ view.DebugPanelView
+view/GameboardView.java
+ view.GameboardView
+controller/PauseMenuController.java
+ controller.PauseMenuController
+controller/GameBoardController.java
+ controller.GameBoardController
