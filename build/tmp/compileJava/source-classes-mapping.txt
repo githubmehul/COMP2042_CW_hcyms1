@@ -19,8 +19,8 @@ model/ClayBrickModel.java
  model.ClayBrickModel
 view/StartButtonView.java
  view.StartButtonView
-model/FireBrickModel.java
- model.FireBrickModel
+model/GameFrameModel.java
+ model.GameFrameModel
 view/HighScoreButtonView.java
  view.HighScoreButtonView
  view.HighScoreButtonView$1
@@ -29,34 +29,34 @@ controller/BallController.java
 view/InstructionButtonView.java
  view.InstructionButtonView
  view.InstructionButtonView$1
-model/HighScoreModel.java
- model.HighScoreModel
-model/LevelModel.java
- model.LevelModel
-model/RubberBallModel.java
- model.RubberBallModel
-model/CementBrickModel.java
- model.CementBrickModel
-controller/HighScoreController.java
- controller.HighScoreController
-controller/WallController.java
- controller.WallController
-model/SteelBrickModel.java
- model.SteelBrickModel
 view/HomeMenuView.java
  view.HomeMenuView
-model/IceBrickModel.java
- model.IceBrickModel
+model/SteelBrickModel.java
+ model.SteelBrickModel
+model/RubberBallModel.java
+ model.RubberBallModel
 view/PauseMenuView.java
  view.PauseMenuView
+controller/HighScoreController.java
+ controller.HighScoreController
 controller/DebugConsoleController.java
  controller.DebugConsoleController
-model/GameFrameModel.java
- model.GameFrameModel
+controller/WallController.java
+ controller.WallController
 view/DebugPanelView.java
  view.DebugPanelView
+model/LevelModel.java
+ model.LevelModel
+model/IceBrickModel.java
+ model.IceBrickModel
 view/GameboardView.java
  view.GameboardView
+model/CementBrickModel.java
+ model.CementBrickModel
+model/FireBrickModel.java
+ model.FireBrickModel
+model/HighScoreModel.java
+ model.HighScoreModel
 controller/PauseMenuController.java
  controller.PauseMenuController
 controller/GameBoardController.java
