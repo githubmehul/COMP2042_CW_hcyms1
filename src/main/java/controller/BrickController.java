@@ -31,7 +31,6 @@ abstract public class BrickController {
     private boolean broken;
     private static Random rnd;
 
-
     /**
      * @param pos - The Point position
      * @param size - Encapsulates Width and Height of Brick
@@ -186,7 +185,6 @@ abstract public class BrickController {
     public static void setRnd(Random rnd) {
         BrickController.rnd = rnd;
     }
-
     /**
      * Renders the Brick Shape and Color, called in the wallController Class
      * @param g
@@ -202,6 +200,7 @@ abstract public class BrickController {
         g2d.setColor(getBrickBorderColor());
         g2d.draw(getBrick());
     }
+
 }
 
 

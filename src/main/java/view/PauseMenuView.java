@@ -1,12 +1,20 @@
 package view;
 
+import controller.GameBoardController;
+import controller.WallController;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.font.FontRenderContext;
+
+import static controller.HighScoreController.getInstance;
+import static controller.TimerController.getTimeInstance;
 
 /**
  *
  */
-public class PauseMenuView {
+public class PauseMenuView extends JComponent implements KeyListener, MouseListener, MouseMotionListener {
     //Final String Declarations
     private static final String PAUSE_MENU_TEXT = "Pause Menu";
     private static final String CONTINUE_TEXT = "Continue";
@@ -20,8 +28,16 @@ public class PauseMenuView {
     private Rectangle ContinueButtonRect;
     private Rectangle ExitButtonRect;
     private Rectangle RestartButtonRect;
+    private GameBoardController gameBoardController;
+    private WallController wallController;
 
     private int StrLen = 0;
+    private boolean ShowPauseMenu;
+
+    public PauseMenuView(GameBoardController gameBoardController , WallController wallController){
+        this.gameBoardController = gameBoardController;
+        this.wallController = wallController;
+    }
 
     /**
      * drawMenu Method:
@@ -116,5 +132,102 @@ public class PauseMenuView {
 
     public Rectangle getRestartButtonRect() {
         return RestartButtonRect;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
+        //the p object gets the mouse point
+        Point p = mouseEvent.getPoint();
+        if(!gameBoardController.isShowPauseMenu())
+            return;
+        //if clicked the continueButtonRect
+        if(ContinueButtonRect.contains(p)){
+            //remove the pause menu and repaint
+            ShowPauseMenu = false;
+            gameBoardController.setShowPauseMenu(false);
+            repaint();
+        }
+        //if clicked the restartButtonrect
+        else if(RestartButtonRect.contains(p)){
+            //show the message
+            gameBoardController.setMessage("Restarting Game...");
+            //restart the ball
+            wallController.ballReset();
+            //restart the wall
+            wallController.wallReset();
+            getTimeInstance().setSeconds(getTimeInstance().getTempSeconds());
+            getTimeInstance().setMinutes(getTimeInstance().getTempMinutes());
+            getInstance().setScore(wallController.getBrickCount());
+            //remove the pause menu
+            ShowPauseMenu = false;
+            repaint();
+        }
+        //if the exitButtonRect is clicked
+        else if(ExitButtonRect.contains(p)){
+            //exit the system
+            getTimeInstance().resetGame();
+            System.exit(0);
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent mouseEvent) {
+        //get the mouse point
+        Point p = mouseEvent.getPoint();
+        //if the exitButtonRect is not clicked and the Pause Menu is shown
+        if(ExitButtonRect != null && gameBoardController.isShowPauseMenu()) {
+            // if the cursor is on any of the Rect in the Pause Menu
+            if (ExitButtonRect.contains(p) || ContinueButtonRect.contains(p) || RestartButtonRect.contains(p))
+                //Change it to a hand cursor
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            else
+                this.setCursor(Cursor.getDefaultCursor());
+        }
+        else{
+            //else keep it as a default cursor
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+
     }
 }

@@ -1,7 +1,5 @@
 package controller;
 import model.RubberBallModel;
-import view.BallView;
-import view.PlayerView;
 
 
 import java.awt.*;
@@ -14,14 +12,6 @@ import java.util.Random;
  * Implements the Functionality Characteristics in the Wall , Impact and Ball Count.
  */
 public class WallController {
-    //Number of Levels
-    public static final int LEVELS_COUNT = 4;
-    // Strength to Break the Blocks
-    private static final int CLAY_BRICK = 1;
-    private static final int STEEL_BRICK = 2;
-    private static final int CEMENT_BRICK = 3;
-    private int totalBrickBroken = 0;
-
     private Random random;
     private Rectangle area;
 
@@ -33,8 +23,7 @@ public class WallController {
     private int brickCount;
     private int ballCount;
     private boolean BallLost;
-    private PlayerView playerView;
-    private BallView ballView;
+
     /**
      * WallModel Constructor:
      * Takes in the parameters , to make the level , specifiy the ball start point , the player model and
@@ -291,17 +280,11 @@ public class WallController {
         return brickCount;
     }
 
-    public void render(Graphics2D g) {
+    public void brickrender(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
         for(BrickController b : getBricks()) {
             if(!b.isBroken())
                 b.render(g2d);
         }
-
-        playerView = new PlayerView(g2d , player);
-        playerView.playerRender(g2d);
-        ballView = new BallView(g2d , ball);
-        ballView.ballRender(g2d);
     }
-
 }

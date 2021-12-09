@@ -1,11 +1,11 @@
-package view;
+package model;
 
 import static controller.HighScoreController.getInstance;
 import controller.WallController;
 
 import java.awt.*;
 
-public class HighScoreView {
+public class HighScoreModel {
     private WallController wall;
 
     public void drawscore(Graphics g , WallController wall ) {

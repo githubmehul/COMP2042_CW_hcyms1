@@ -1,6 +1,7 @@
 package view;
 import controller.AudioController;
 import model.GameFrameModel;
+import controller.HighScoreController;
 
 import javax.swing.*;
 import javax.swing.JFrame;

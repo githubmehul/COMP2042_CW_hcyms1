@@ -1,7 +1,8 @@
 package controller;
 import model.GameFrameModel;
 import model.LevelModel;
-import view.HighScoreView;
+import model.HighScoreModel;
+import view.GameboardView;
 import view.PauseMenuView;
 import static controller.HighScoreController.getInstance;
 import static controller.TimerController.getTimeInstance;
@@ -22,13 +23,13 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     private static final int GAMEBOARD_WIDTH = 600;
     private static final int GAMEBOARD_HEIGHT = 450;
 
-    //Final Object Declarations
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
     private DebugConsoleController DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
-    private PauseMenuView pauseMenuView = new PauseMenuView();
-    private HighScoreView highScoreView = new HighScoreView();
+    private HighScoreModel highScoreModel = new HighScoreModel();
+    private PauseMenuView pauseMenuView= new PauseMenuView(this ,wall );
+    GameboardView gameboardView = new GameboardView(wall, wall.getPlayer(), wall.getBall() , this , highScoreModel,pauseMenuView);
     private Timer gameTimer;
     //Game Timer Declaration
     private Timer GAMEBOARD_TIMER;
@@ -36,7 +37,6 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
     private boolean ShowPauseMenu = false;
     public String message = "";
     public String message2 = "";
-    private String name;
 
 
     /**
@@ -180,47 +180,18 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         this.addMouseMotionListener(this);
     }
 
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        gameboardView.render(g2d);
+    }
+
     /**
      * Paint method implements Graphics , inherited from JComponent
      * ,it is part of the draw system of the GUI.
      * It's invoked from Java Swing Framework to ask for a Component to draw itself on the screen
-     * @param g
      */
-    public void paint(Graphics g){
-        // Create Object g2d
-        Graphics2D g2d = (Graphics2D) g;
-        //Setting the Background Color
-        BackgroundColor(g2d);
-        //Setting the color of the Message
-        g2d.setColor(Color.BLUE);
-        drawString(g, message, 200, 225);
-        g2d.drawString(message2,200,260);
-        highScoreView.drawscore(g2d , wall);
-        wall.render(g2d);
-        //If the showPauseMenu is true , draw the drawMenu
-        if(ShowPauseMenu)
-            pauseMenuView.render(g2d);
-        //Binding various component implementations and synchronizes them.
-        Toolkit.getDefaultToolkit().sync();
-        if (getInstance().getHighScore() == ("")) {
-            getInstance().setHighScore(getInstance().GetHighScore());
-        }
-    }
-    private void drawString(Graphics g, String text, int x, int y) {
-        for (String line : text.split("\n"))
-            g.drawString(line, x, y += g.getFontMetrics().getHeight());
-    }
-    /**
-     * BackgroundColor method:
-     * Uses the Graphics2D Object to paint the Background Color of the GameBoard
-     * @param g2d
-     */
-    private void BackgroundColor(Graphics2D g2d){
-        Color tmp = g2d.getColor();
-        g2d.setColor(Color.BLACK);
-        g2d.fillRect(0,0,getWidth(),getHeight());
-        g2d.setColor(tmp);
-    }
+
     @Override
     public void keyTyped(KeyEvent keyEvent) {
     }
@@ -285,37 +256,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
      */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        //the p object gets the mouse point
-        Point p = mouseEvent.getPoint();
-        if(!ShowPauseMenu)
-            return;
-        //if clicked the continueButtonRect
-        if(pauseMenuView.getContinueButtonRect().contains(p)){
-            //remove the pause menu and repaint
-            ShowPauseMenu = false;
-            repaint();
-        }
-        //if clicked the restartButtonrect
-        else if(pauseMenuView.getRestartButtonRect().contains(p)){
-            //show the message
-            message = "Restarting Game...";
-            //restart the ball
-            wall.ballReset();
-            //restart the wall
-            wall.wallReset();
-            getTimeInstance().setSeconds(getTimeInstance().getTempSeconds());
-            getTimeInstance().setMinutes(getTimeInstance().getTempMinutes());
-            getInstance().setScore(wall.getBrickCount());
-            //remove the pause menu
-            ShowPauseMenu = false;
-            repaint();
-        }
-        //if the exitButtonRect is clicked
-        else if(pauseMenuView.getExitButtonRect().contains(p)){
-            //exit the system
-            getTimeInstance().resetGame();
-            System.exit(0);
-        }
+
 
     }
     @Override
@@ -350,21 +291,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
      */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
-        //get the mouse point
-        Point p = mouseEvent.getPoint();
-        //if the exitButtonRect is not clicked and the Pause Menu is shown
-        if(pauseMenuView.getExitButtonRect() != null && ShowPauseMenu) {
-            // if the cursor is on any of the Rect in the Pause Menu
-            if (pauseMenuView.getExitButtonRect().contains(p) || pauseMenuView.getContinueButtonRect().contains(p) || pauseMenuView.getRestartButtonRect().contains(p))
-                //Change it to a hand cursor
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-            else
-                this.setCursor(Cursor.getDefaultCursor());
-        }
-        else{
-            //else keep it as a default cursor
-            this.setCursor(Cursor.getDefaultCursor());
-        }
+
     }
 
     /**
@@ -379,4 +306,24 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         message = "Focus Lost";
         repaint();
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage2() {
+        return message2;
+    }
+
+    public boolean isShowPauseMenu() {
+        return ShowPauseMenu;
+    }
+    public void setShowPauseMenu(boolean ShowPauseMenu){
+        this.ShowPauseMenu = ShowPauseMenu;
+    }
+
 }
