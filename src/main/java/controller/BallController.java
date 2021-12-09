@@ -27,8 +27,8 @@ abstract public class BallController {
     private Point2D right;
 
     //Border Color and Inner Color of the Ball
-    private Color ballBorderColor;
-    private Color ballInnerColor;
+    private static Color ballBorderColor;
+    private static Color ballInnerColor;
 
     //Speed of the Ball
     private int speedX;
@@ -37,7 +37,6 @@ abstract public class BallController {
     //Width and Height of Ball
     private int width;
     private int height;
-
 
     /**
      * 1. Sets the Coordinates and Location of the Ball
@@ -153,7 +152,7 @@ abstract public class BallController {
      * Returns the Inner Color
      * @return ballInnerColor - Inner Color of the Ball
      */
-    public Color getBallInnerColor(){ return ballInnerColor; }
+    public static Color getBallInnerColor(){ return ballInnerColor; }
 
 
     /**
@@ -165,7 +164,7 @@ abstract public class BallController {
      * Returns the Border Color
      * @return ballBorderColor - Border Color of the Ball
      */
-    public Color getBallBorderColor(){ return ballBorderColor;}
+    public static Color getBallBorderColor(){ return ballBorderColor;}
 
 
     /**
@@ -293,21 +292,5 @@ abstract public class BallController {
         return ballShape;
     }
 
-
-    /**
-     * Renders the Ball Shape and Color, called in the wallController Class
-     * @param g
-     */
-    public void render(Graphics2D g) {
-        Graphics2D g2d = (Graphics2D) g.create();
-
-        // Set the interior colour
-        g2d.setColor(getBallInnerColor());
-        g2d.fill(getBallFace());
-
-        // Set the border colour
-        g2d.setColor(getBallBorderColor());
-        g2d.draw(getBallFace());
-    }
 
 }

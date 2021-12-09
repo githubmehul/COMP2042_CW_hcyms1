@@ -15,31 +15,13 @@ public class PlayerController {
 
     private Rectangle PlayerFace;
     private Point BallPoint;
-    private int BallPointX;
-    private int BallPointY;
+    private static int BallPointX;
+    private static int BallPointY;
     //The move Amount
     private int MoveAmount = 0;
     private int Min;
     private int Max;
-    /**
-     * private Object instance (apply Singleton pattern)
-     */
-    private static PlayerController  instance;
 
-    /**
-     * other class can access to Object instance
-     * @return instance of Object
-     */
-    public static  PlayerController getInstance(){
-        if(instance == null){
-            instance = new  PlayerController ();
-
-        }
-        return instance;
-    }
-
-    public  PlayerController (){
-    }
     /**
      * PlayerModel Constructor:
      * 1. Assigns the value of ballPoint to ballPoint
@@ -59,7 +41,7 @@ public class PlayerController {
         this.BallPoint = (Point) BallPoint.clone();
 
         // Create the Player's Shape
-        PlayerFace = PlayerModel.getInstance().makeRectangle(width, height);
+        PlayerFace = PlayerModel.makeRectangle(width, height);
 
         Min = container.x + (width / 2);
         Max = Min + container.width - width;
@@ -128,13 +110,5 @@ public class PlayerController {
         BallPoint.setLocation(p);
         // Set top left corner location of the Player Shape
         PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
-    }
-
-    public int getBallPointY() {
-        return BallPointY;
-    }
-
-    public int getBallPointX() {
-        return BallPointX;
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 import model.RubberBallModel;
+import view.BallView;
 import view.PlayerView;
 
 
@@ -33,6 +34,7 @@ public class WallController {
     private int ballCount;
     private boolean BallLost;
     private PlayerView playerView;
+    private BallView ballView;
     /**
      * WallModel Constructor:
      * Takes in the parameters , to make the level , specifiy the ball start point , the player model and
@@ -297,8 +299,9 @@ public class WallController {
         }
 
         playerView = new PlayerView(g2d , player);
-        playerView.render(g2d);
-        ball.render(g2d);
+        playerView.playerRender(g2d);
+        ballView = new BallView(g2d , ball);
+        ballView.ballRender(g2d);
     }
 
 }

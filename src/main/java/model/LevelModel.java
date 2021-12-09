@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class LevelModel {
 
-    private static final int LEVELS_COUNT = 5;
+    private static final int LEVELS_COUNT = 6;
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
@@ -136,6 +136,7 @@ public class LevelModel {
         return tmp;
     }
 
+
     /**
      * makeLevels Method:
      * Uses the array to call the assigned methods to create the Level Layout
@@ -151,7 +152,8 @@ public class LevelModel {
         tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
         tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
         tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
-        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , ICE);
+        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , CLAY);
+        tmp[5] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , ICE);
         return tmp;
     }
 
@@ -184,7 +186,7 @@ public class LevelModel {
      */
     public void nextLevel(){
         wall.setBricks(levels[level++]);
-        wall.setBrickCount(wall.getBricks().length);
+        wall.setBrickCount(getWall().getBricks().length);
     }
 
     /**

@@ -1,23 +1,28 @@
 package view;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 
-public class PauseMenuView{
-    //PauseMenu Button Declaration Button
-    private Rectangle ContinueButtonRect;
-    private Rectangle ExitButtonRect;
-    private Rectangle RestartButtonRect;
-    private static final String PAUSE_MENU_TEXT = "Pause Menu";
+/**
+ *
+ */
+public class PauseMenuView {
     //Final String Declarations
-    private static final int TEXT_SIZE = 30;
-    private static final Color MENU_COLOR = new Color(0,255,0);
+    private static final String PAUSE_MENU_TEXT = "Pause Menu";
     private static final String CONTINUE_TEXT = "Continue";
     private static final String RESTART_TEXT = "Restart";
     private static final String EXIT_TEXT = "Exit";
+
+    private static final Color MENU_COLOR = new Color(0, 255, 0);
+    private static final Font PAUSE_MENU_FONT = new Font("Monospaced", Font.PLAIN, 30);
+
+    //PauseMenu Button Declaration
+    private Rectangle ContinueButtonRect;
+    private Rectangle ExitButtonRect;
+    private Rectangle RestartButtonRect;
+
     private int StrLen = 0;
 
-
-    private static final Font PAUSE_MENU_FONT = new Font("Monospaced",Font.PLAIN,30);
     /**
      * drawMenu Method:
      * Method that contains the function call to ObscureGameBoard and drawPauseMen
@@ -63,18 +68,18 @@ public class PauseMenuView{
         g2d.setColor(MENU_COLOR);
         //so they can position it where they want it
         //what this is doing is it's checking the text's width based on its font
-        if(StrLen == 0){
+        if (StrLen == 0) {
             FontRenderContext frc = g2d.getFontRenderContext();
-            StrLen = PAUSE_MENU_FONT.getStringBounds(PAUSE_MENU_TEXT,frc).getBounds().width;
+            StrLen = PAUSE_MENU_FONT.getStringBounds(PAUSE_MENU_TEXT, frc).getBounds().width;
         }
         int x = 202;
         int y = 55;
         g2d.drawString(PAUSE_MENU_TEXT, x, y);
 
-        x = 300/ 8;
+        x = 300 / 8;
         y = 400 / 4;
         //Setting the Location and Drawing the continueButtonRect
-        if ( ContinueButtonRect== null) {
+        if (ContinueButtonRect == null) {
             FontRenderContext frc = g2d.getFontRenderContext();
             ContinueButtonRect = PAUSE_MENU_FONT.getStringBounds(CONTINUE_TEXT, frc).getBounds();
             ContinueButtonRect.setLocation(x, y - ContinueButtonRect.height);
@@ -104,9 +109,11 @@ public class PauseMenuView{
     public Rectangle getContinueButtonRect() {
         return ContinueButtonRect;
     }
+
     public Rectangle getExitButtonRect() {
         return ExitButtonRect;
     }
+
     public Rectangle getRestartButtonRect() {
         return RestartButtonRect;
     }
