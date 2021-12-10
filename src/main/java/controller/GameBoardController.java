@@ -1,6 +1,6 @@
 package controller;
 
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 import static controller.TimerController.getTimeInstance;
 
 import model.GameFrameModel;
@@ -263,14 +263,14 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
                 wallController.wallReset();
                 wallController.ballReset();
 
-                getInstance().CheckScore();
-                getInstance().setScore(0);
-                getInstance().sortHighScore();
+                getHighScoreInstance().checkScore();
+                getHighScoreInstance().setScore(0);
+                getHighScoreInstance().sortHighScore();
 
                 //Display Message Game Over
                 message = "GAME OVER!";
                 message2 = String.format("Score is %d Bricks at the time of %02dm %02ds",
-                        getInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
+                        getHighScoreInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
 
                 getTimeInstance().resetGame();
                 new GameFrameModel();
@@ -296,10 +296,9 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
             } else {
                 //If the Player reaches end of game , Display this message
                 message = "ALL WALLS DESTROYED";
-                message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",
-                        getInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
-                getInstance().CheckScore();
-                getInstance().sortHighScore();
+                message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",getHighScoreInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
+                getHighScoreInstance().checkScore();
+                getHighScoreInstance().sortHighScore();
                 getTimeInstance().resetGame();
                 GAMEBOARD_TIMER.stop();
             }
@@ -311,27 +310,27 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     public void LevelMessage(int level) {
         switch (level) {
             case 2 -> {
-                message = "Welcome to Level 2! Score is" + getInstance().getScore();
+                message = "Welcome to Level 2! Score is" + getHighScoreInstance().getScore();
                 message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();
             }
             case 3 -> {
-                message = "Welcome to Level 3! Score is " + getInstance().getScore();
+                message = "Welcome to Level 3! Score is " + getHighScoreInstance().getScore();
                 message2 = "You finished the second level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();
             }
             case 4 -> {
-                message = "Welcome to the Level 4! Score is " + getInstance().getScore();
+                message = "Welcome to the Level 4! Score is " + getHighScoreInstance().getScore();
                 message2 = "You finished the third level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();
             }
             case 5 -> {
-                message = "Welcome to the Level 5! Score is " + getInstance().getScore();
+                message = "Welcome to the Level 5! Score is " + getHighScoreInstance().getScore();
                 message2 = "You finished the fourth level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();
             }
             case 6 -> {
-                message = "Welcome to the Last Level! Score is %d" + getInstance().getScore();
+                message = "Welcome to the Last Level! Score is %d" + getHighScoreInstance().getScore();
                 message2 = "You finished the 5th level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();
             }

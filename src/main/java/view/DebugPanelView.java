@@ -3,7 +3,7 @@ package view;
 import controller.GameBoardController;
 import controller.TimerController;
 import controller.WallController;
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 import static controller.TimerController.getTimeInstance;
 import model.LevelModel;
 
@@ -64,18 +64,18 @@ public class DebugPanelView extends JPanel {
     private void skipLevel(){
         if (level.hasLevel()) {
             level.nextLevel();
-            getInstance().getScore();
+            getHighScoreInstance().getScore();
             getTimeInstance().setTempSeconds(getTimeInstance().getSeconds());
             getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
         }
         if(level.getLevel() == 2){
-            gameBoardController.message = "Welcome to Level 2 Score is" + getInstance().getScore();
+            gameBoardController.message = "Welcome to Level 2 Score is" + getHighScoreInstance().getScore();
         }
         else if(level.getLevel() == 3){
-            gameBoardController.message = "Welcome to Level 3 Score is" + getInstance().getScore();
+            gameBoardController.message = "Welcome to Level 3 Score is" + getHighScoreInstance().getScore();
         }
         else if(level.getLevel() == 4){
-            gameBoardController.message = "Welcome to Level 4 Score is" + getInstance().getScore();
+            gameBoardController.message = "Welcome to Level 4 Score is" + getHighScoreInstance().getScore();
         }
     }
     private void resetBalls(){

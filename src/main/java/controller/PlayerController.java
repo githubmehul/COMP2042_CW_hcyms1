@@ -6,42 +6,37 @@ import java.awt.*;
 
 
 /**
- * The PlayerModel class is responsible for defining the Player's shape, looks,
- * location and behaviour.
+ * The PlayerController class is responsible for defining the Player's behaviour.
  */
 public class PlayerController {
 
     private static final int PLAYER_MOVE_AMOUNT = 5;
 
-    private Rectangle PlayerFace;
-    private Point BallPoint;
-    private static int BallPointX;
-    private static int BallPointY;
+    private final Rectangle playerShape;
+    private final Point ballPoint;
+    private final int Min;
+    private final int Max;
     //The move Amount
-    private int MoveAmount = 0;
-    private int Min;
-    private int Max;
+    private int moveAmount = 0;
 
     /**
-     * PlayerModel Constructor:
      * 1. Assigns the value of ballPoint to ballPoint
      * 2. moveAmount is set to 0
      * 3. Create the Platform Shape with the width and height parameter
-     * 4. min and max
-     * @param BallPoint
-     * @param width
-     * @param height
-     * @param container
+     * 4. Sets the Min and Max Values
+     *
+     * @param ballPoint - Position of Player
+     * @param width     - Width of Player
+     * @param height    - Height of Player
+     * @param container - The Player Container Shape
      */
-    public PlayerController(Point BallPoint, int width, int height, Rectangle container) {
+    public PlayerController(Point ballPoint, int width, int height, Rectangle container) {
 
         // Define location (center)
-        this.BallPointX = (int) BallPoint.getX();
-        this.BallPointY = (int) BallPoint.getY();
-        this.BallPoint = (Point) BallPoint.clone();
+        this.ballPoint = (Point) ballPoint.clone();
 
         // Create the Player's Shape
-        PlayerFace = PlayerModel.makeRectangle(width, height);
+        playerShape = PlayerModel.makeRectangle(width, height);
 
         Min = container.x + (width / 2);
         Max = Min + container.width - width;
@@ -50,65 +45,64 @@ public class PlayerController {
 
     /**
      * Returns the boolean if the Ball has impacted the Platform
-     * @param b
-     * @return
+     *
+     * @param b - BallController Instance
+     * @return A Boolean on the impact of the Ball on the Platform
      */
-    public boolean impact(BallController b){
-        return PlayerFace.contains(b.getPosition()) && PlayerFace.contains(b.getDownLocation()) ;
+    public boolean impact(BallController b) {
+        return playerShape.contains(b.getPosition()) && playerShape.contains(b.getDownLocation());
     }
 
     /**
      * Implements the Platform's position by the Move Amount
      */
-    public void move(){
-        double x = BallPoint.getX() + MoveAmount;
-        if(x < Min || x > Max)
+    public void move() {
+        double x = ballPoint.getX() + moveAmount;
+        if (x < Min || x > Max)
             return;
-        BallPoint.setLocation(x,BallPoint.getY());
-        PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
+        ballPoint.setLocation(x, ballPoint.getY());
+        playerShape.setLocation(ballPoint.x - (int) playerShape.getWidth() / 2, ballPoint.y);
     }
 
     /**
-     * moveLeft method:
-     * when moved left , reduces the move amount
+     * When Player moves left , method is responsible to reduce the move amount
      */
-    public void moveLeft(){
-        MoveAmount = -PLAYER_MOVE_AMOUNT;
+    public void moveLeft() {
+        moveAmount = -PLAYER_MOVE_AMOUNT;
     }
 
     /**
-     * moveLeft method:
-     * when moved right , reduces the move amount
+     * When Player moves right , method is responsible to reduce the move amount
      */
-    public void moveRight(){
-        MoveAmount = PLAYER_MOVE_AMOUNT;
+    public void moveRight() {
+        moveAmount = PLAYER_MOVE_AMOUNT;
     }
 
     /**
-     * stop method:
      * stops the move amount so that the platform does not move
      */
-    public void stop(){
-        MoveAmount = 0;
+    public void stop() {
+        moveAmount = 0;
     }
 
     /**
-     * getPlayerFace method:
-     * returns the playerface
-     * @return
+     * returns the playerShape
+     *
+     * @return playerShape - Shape of the Player
      */
-    public Shape getPlayerFace(){
-        return  PlayerFace;
+    public Shape getPlayerShape() {
+        return playerShape;
     }
 
     /**
      * Set a new center location.
+     *
      * @param p - The new center location.
      */
-    public void moveTo(Point p){
+    public void moveTo(Point p) {
         //Set the Center Location
-        BallPoint.setLocation(p);
+        ballPoint.setLocation(p);
         // Set top left corner location of the Player Shape
-        PlayerFace.setLocation(BallPoint.x - (int)PlayerFace.getWidth()/2,BallPoint.y);
+        playerShape.setLocation(ballPoint.x - (int) playerShape.getWidth() / 2, ballPoint.y);
     }
 }

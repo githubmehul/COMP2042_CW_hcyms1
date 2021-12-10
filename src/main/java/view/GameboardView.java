@@ -7,7 +7,7 @@ import model.HighScoreModel;
 
 import java.awt.*;
 
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 
 public class GameboardView {
     private final WallController wallController;
@@ -15,7 +15,7 @@ public class GameboardView {
     private final HighScoreModel highScoreModel;
     private final PlayerController player;
     private final BallController ball;
-    private PauseMenuView pauseMenuView;
+    private final PauseMenuView pauseMenuView;
 
 
     public GameboardView(WallController wallController, PlayerController player, BallController ball, GameBoardController gameBoardController, HighScoreModel highScoreModel, PauseMenuView pauseMenuView) {
@@ -51,8 +51,8 @@ public class GameboardView {
             pauseMenuView.render(g2d);
         //Binding various component implementations and synchronizes them.
         Toolkit.getDefaultToolkit().sync();
-        if (getInstance().getHighScore() == ("")) {
-            getInstance().setHighScore(getInstance().GetHighScore());
+        if (getHighScoreInstance().getHighScore().equals("")) {
+            getHighScoreInstance().setHighScore(getHighScoreInstance().acquireHighScore());
         }
     }
     /**
@@ -72,11 +72,11 @@ public class GameboardView {
 
             // Set the interior colour
             g2d.setColor(PlayerModel.getInnerColor());
-            g2d.fill(player.getPlayerFace());
+            g2d.fill(player.getPlayerShape());
 
             // Set the border colour
             g2d.setColor(PlayerModel.getBorderColor());
-            g2d.draw(player.getPlayerFace());
+            g2d.draw(player.getPlayerShape());
         }
 
         /**

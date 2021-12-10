@@ -1,7 +1,7 @@
 package model;
 
 import controller.BrickController;
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -89,7 +89,7 @@ public class SteelBrickModel extends BrickController {
             //return false
             return false;
         }
-        getInstance().setScore(getInstance().getScore()+3);
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore()+3);
         return true;
     }
     /**

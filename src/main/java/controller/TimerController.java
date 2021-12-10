@@ -1,6 +1,5 @@
 package controller;
 
-import model.LevelModel;
 
 import java.util.TimerTask;
 import java.util.Timer;
@@ -11,23 +10,24 @@ public class TimerController {
     private int minutes;
     private int tempSeconds;
     private int tempMinutes;
-    private int levelNumber;
     private boolean gameRunning = false;
     /**
-     * private Object instance (apply Singleton pattern)
+     * Use the Singleton pattern when a class has a single instance available to all.
      */
-    private static TimerController timeinstance;
+    private static TimerController timeInstance;
+
 
     /**
-     * other class can access to Object instance
-     * @return instance of Object
+     * Classes can access object instance
+     *
+     * @return instance - Object instance
      */
     public static TimerController getTimeInstance(){
-        if(timeinstance == null){
-            timeinstance = new TimerController();
+        if(timeInstance == null){
+            timeInstance = new TimerController();
 
         }
-        return timeinstance;
+        return timeInstance;
     }
 
 

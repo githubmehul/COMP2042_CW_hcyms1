@@ -1,6 +1,6 @@
 package model;
 
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 import controller.WallController;
 
 import java.awt.*;
@@ -12,6 +12,6 @@ public class HighScoreModel {
         this.wall = wall;
         g.setColor(Color.yellow);
         g.setFont(new Font("serif",Font.BOLD,15));
-        g.drawString("Score: "+getInstance().getScore(), 0, 100);
+        g.drawString("Score: "+getHighScoreInstance().getScore(), 0, 100);
     }
 }

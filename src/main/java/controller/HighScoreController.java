@@ -4,53 +4,48 @@ import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import static controller.TimerController.getTimeInstance;
+/**
+ * HighScoreController is responsible for Getting the HighScores , Checking the HighScore and Sorting the
+ * High Scores in the game
+ */
 public class HighScoreController {
-    private int score;
-    private String last=null, line;
-    private String highScore = "Name:0";
     /**
-     * private Object instance (apply Singleton pattern)
+     * Use the Singleton pattern when a class has a single instance available to all.
      */
     private static HighScoreController instance;
+    private int score;
+    private String highScore = "Name:0";
 
     /**
-     * other class can access to Object instance
-     * @return instance of Object
+     * Classes can access object instance
+     *
+     * @return instance - Object instance
      */
-    public static HighScoreController getInstance(){
-        if(instance == null){
-            instance = new HighScoreController();
-
-        }
+    public static HighScoreController getHighScoreInstance() {
+        if (instance == null) instance = new HighScoreController();
         return instance;
     }
 
-    public HighScoreController(){
-    }
-
-    public String GetHighScore()  {
-        FileReader readFile = null;
+    /**
+     * Reads the HighScores from the highScore.dat file
+     *
+     * @return HighScore - The HighScores from the file
+     */
+    public String acquireHighScore() {
+        FileReader readScoreFile;
         BufferedReader reader = null;
         try {
-            readFile = new FileReader("highscore.dat");
-            reader = new BufferedReader(readFile);
+            readScoreFile = new FileReader("highScore.dat");
+            reader = new BufferedReader(readScoreFile);
+            String line;
             while ((line = reader.readLine()) != null) {
-                if (line != null) {
-                    last = line;
-                    highScore=last;
-                }
+                highScore = line;
             }
-            return  highScore; //return the last line
-        }
-        catch (Exception e)
-        {
-            return  highScore="Nobody:0";
-        }
-        finally
-        {
+            return highScore; //return the last line
+        } catch (Exception e) {
+            return highScore = "Name:0";
+        } finally {
             try {
                 if (reader != null)
                     reader.close();
@@ -59,14 +54,18 @@ public class HighScoreController {
             }
         }
     }
-    public void CheckScore() {
-        GetHighScore();
+
+    /**
+     * Checks the score to see if the recently updated highScore is lower than the new highScore
+     */
+    public void checkScore() {
+        acquireHighScore();
         if (score > Integer.parseInt((highScore.split(":")[1]))) {
 
-            String name = JOptionPane.showInputDialog("You set a new highScore. What 's your name?");
+            String name = JOptionPane.showInputDialog("You Set A New HighScore. What's your name?");
             highScore = name + ":" + score;
 
-            File scoreFile = new File("highscore.dat");
+            File scoreFile = new File("highScore.dat");
             if (!scoreFile.exists()) {
                 try {
                     scoreFile.createNewFile();
@@ -74,72 +73,92 @@ public class HighScoreController {
                     e.printStackTrace();
                 }
             }
-            FileWriter writeFile = null;
+            FileWriter writeScoreFile;
             BufferedWriter writer = null;
             try {
-                writeFile = new FileWriter(scoreFile,true);
-                writer = new BufferedWriter(writeFile);
+                writeScoreFile = new FileWriter(scoreFile, true);
+                writer = new BufferedWriter(writeScoreFile);
                 writer.write(this.highScore);
                 writer.newLine();
-            }
-            catch (Exception e) {
-                System.out.println("Some Error happened");
-            }
-            finally {
+            } catch (Exception e) {
+                System.out.println("Error");
+            } finally {
                 try {
                     if (writer != null)
                         writer.close();
+                } catch (Exception e) {
+                    System.out.println("ERROR");
                 }
-                catch (Exception e) { System.out.println("Some Error happend");}
             }
         }
     }
+
+    /**
+     * Sorts the High Scores in the highScore.dat to present it in the High Score Button View
+     */
     public void sortHighScore() {
         ArrayList<String> str = new ArrayList<>();
-        String line = "";
+        String line;
         //Try to read the high score file
-        try{
-            BufferedReader reader = new BufferedReader(new FileReader("highscore.dat"));
-            while((line=reader.readLine())!=null){
+        try {
+            BufferedReader scoreReader = new BufferedReader(new FileReader("highScore.dat"));
+            while ((line = scoreReader.readLine()) != null) {
                 str.add(line);
             }
-            reader.close();
-        }
-        catch (Exception e){
+            scoreReader.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        //Sort the high score file and store it in leaderboard.dat
+        //Sort the high score file
         Collections.sort(str);
-        str.sort((o1, o2) -> Integer.compare( //Sort the score not the name
+        str.sort((o1, o2) -> Integer.compare(
+                //Sort the score
                 Integer.parseInt(o2.substring(o2.indexOf(":") + 1)),
-                Integer.parseInt(o1.substring(o1.indexOf(":") + 1))));
-        try{
-            FileWriter writer = new FileWriter("leaderboard.dat"); //Creating or Overwriting the file
-            for(String s: str){
-                writer.write(s);
-                writer.write("\r\n");
+                Integer.parseInt(o1.substring(o1.indexOf(":") + 1)))
+        );
+        try {
+            FileWriter leaderBoardWriter = new FileWriter("leaderboard.dat");
+            for (String s : str) {
+                leaderBoardWriter.write(s);
+                leaderBoardWriter.write("\r\n");
             }
-
-            writer.close();
-        }catch (Exception e){
+            leaderBoardWriter.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+
+    /**
+     * Returns the HighScore
+     * @return highScore - Returns the High Score
+     */
     public String getHighScore() {
         return highScore;
     }
 
+    /**
+     * Sets the High Score
+     * @param highScore - The HighScore
+     */
+    public void setHighScore(String highScore) {
+        this.highScore = highScore;
+    }
+
+    /**
+     * Returns the score
+     * @return score - The score of the user during the game
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Sets the score
+     * @param score - The Score
+     */
     public void setScore(int score) {
         this.score = score;
-    }
-
-    public void setHighScore(String highScore) {
-        this.highScore = highScore;
     }
 
 }

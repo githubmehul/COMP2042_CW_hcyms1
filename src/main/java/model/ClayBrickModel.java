@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 
 
 /***
@@ -83,7 +83,7 @@ public class ClayBrickModel extends BrickController {
             //return false
             return false;
         }
-        getInstance().setScore(getInstance().getScore()+1);
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore()+1);
         return true;
     }
 }

@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
 import controller.BrickController;
 import controller.CrackController;
 import controller.WallController;
-import static controller.HighScoreController.getInstance;
+import static controller.HighScoreController.getHighScoreInstance;
 
 /***
  * The CementBrickModel class is a child class of BrickController class.
@@ -88,7 +88,7 @@ public class CementBrickModel extends BrickController {
             //return false
             return false;
         }
-        getInstance().setScore(getInstance().getScore()+2);
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore()+2);
         return true;
     }
 
