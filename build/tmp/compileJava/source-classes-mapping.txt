@@ -1,23 +1,22 @@
-controller/DebugConsoleController.java
- controller.DebugConsoleController
 view/ExitButtonView.java
  view.ExitButtonView
 model/PlayerModel.java
  model.PlayerModel
 game/Main.java
  game.Main
-controller/GameBoardController.java
- controller.GameBoardController
-controller/PauseMenuController.java
- controller.PauseMenuController
-view/GameboardView.java
- view.GameboardView
+model/CementBrickModel.java
+ model.CementBrickModel
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
+controller/BrickController.java
+ controller.BrickController
 controller/AudioController.java
  controller.AudioController
 controller/PlayerController.java
  controller.PlayerController
-model/GameFrameModel.java
- model.GameFrameModel
+controller/CrackController.java
+ controller.CrackController
 view/StartButtonView.java
  view.StartButtonView
 model/FireBrickModel.java
@@ -42,22 +41,23 @@ controller/HighScoreController.java
  controller.HighScoreController
 controller/WallController.java
  controller.WallController
-view/DebugPanelView.java
- view.DebugPanelView
+model/ClayBrickModel.java
+ model.ClayBrickModel
+model/SteelBrickModel.java
+ model.SteelBrickModel
 view/HomeMenuView.java
  view.HomeMenuView
 model/IceBrickModel.java
  model.IceBrickModel
-model/CementBrickModel.java
- model.CementBrickModel
-controller/BrickController.java
- controller.BrickController
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-model/SteelBrickModel.java
- model.SteelBrickModel
-model/ClayBrickModel.java
- model.ClayBrickModel
-controller/CrackController.java
- controller.CrackController
+model/GameFrameModel.java
+ model.GameFrameModel
+view/GameboardView.java
+ view.GameboardView
+view/DebugPanelView.java
+ view.DebugPanelView
+controller/PauseMenuController.java
+ controller.PauseMenuController
+controller/DebugPanelController.java
+ controller.DebugPanelController
+controller/GameBoardController.java
+ controller.GameBoardController

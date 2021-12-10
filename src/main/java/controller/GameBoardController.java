@@ -25,7 +25,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
 
     //parameter area of wall,brick count,line count,brick dimension,platform starting point
     private WallController wall = new WallController(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT), 30,3,6/2,new Point(300,430));
-    private DebugConsoleController DebugConsole;
+    private DebugPanelController DebugConsole;
     private LevelModel level = new LevelModel(new Rectangle(0,0,GAMEBOARD_WIDTH,GAMEBOARD_HEIGHT),30,3,6/2, wall);
     private HighScoreModel highScoreModel = new HighScoreModel();
     private PauseMenuView pauseMenuView = new PauseMenuView();
@@ -48,7 +48,7 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
         // Create the View of the GameBoard
         this.initialize();
         //initialize the first level
-        DebugConsole = new DebugConsoleController(owner,wall ,this , level);;
+        DebugConsole = new DebugPanelController(owner , wall ,this , level);;
         level.nextLevel();
 //        inputname();
 //        message = " Welcome to the Game "  + name;
