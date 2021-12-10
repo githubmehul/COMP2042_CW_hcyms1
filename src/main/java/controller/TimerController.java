@@ -6,31 +6,20 @@ import java.util.Timer;
 
 public class TimerController {
 
+    /**
+     * Use the Singleton pattern when a class has a single instance available to all.
+     */
+    private static TimerController timeInstance;
     private int seconds;
     private int minutes;
     private int tempSeconds;
     private int tempMinutes;
     private boolean gameRunning = false;
-    /**
-     * Use the Singleton pattern when a class has a single instance available to all.
-     */
-    private static TimerController timeInstance;
 
 
     /**
-     * Classes can access object instance
-     *
-     * @return instance - Object instance
+     * TimerController is responsible for the Timer Functionality
      */
-    public static TimerController getTimeInstance(){
-        if(timeInstance == null){
-            timeInstance = new TimerController();
-
-        }
-        return timeInstance;
-    }
-
-
     public TimerController() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -38,7 +27,7 @@ public class TimerController {
             public void run() {
                 if (isGameRunning()) {
                     setSeconds(getSeconds() + 1);
-                    if(getSeconds() > 59) {
+                    if (getSeconds() > 59) {
                         setSeconds(0);
                         setMinutes(getMinutes() + 1);
                     }
@@ -47,7 +36,23 @@ public class TimerController {
         }, 0, 1000);
     }
 
-    public void resetGame(){
+    /**
+     * Classes can access object instance
+     *
+     * @return instance - Object instance
+     */
+    public static TimerController getTimeInstance() {
+        if (timeInstance == null) {
+            timeInstance = new TimerController();
+
+        }
+        return timeInstance;
+    }
+
+    /**
+     * Called when to reset the game
+     */
+    public void resetGame() {
         setTempSeconds(0);
         setSeconds(0);
         setMinutes(0);
@@ -55,41 +60,92 @@ public class TimerController {
         setGameRunning(false);
     }
 
-    public int getTempSeconds(){
+    /**
+     * Returns the Temporary Seconds
+     *
+     * @return tempSeconds
+     */
+    public int getTempSeconds() {
         return tempSeconds;
     }
 
-    public void setTempSeconds(int seconds){
+    /**
+     * Sets the Temporary Seconds
+     *
+     * @param seconds - seconds
+     */
+    public void setTempSeconds(int seconds) {
         this.tempSeconds = seconds;
     }
+
+    /**
+     * Returns the final seconds
+     *
+     * @return seconds
+     */
     public int getSeconds() {
         return seconds;
     }
 
+    /**
+     * Sets the seconds
+     *
+     * @param seconds - Seconds
+     */
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
 
+    /**
+     * Returns boolean of when the Timer is running
+     *
+     * @return gameRunning
+     */
     public boolean isGameRunning() {
         return gameRunning;
     }
 
+    /**
+     * Sets the GameRunning Flag.
+     *
+     * @param gameRunning -
+     */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
     }
 
+    /**
+     * Returns the Minutes in the game
+     *
+     * @return minutes - Minutes in the game
+     */
     public int getMinutes() {
         return minutes;
     }
 
+    /**
+     * Sets the minutes in the game
+     *
+     * @param minutes - Minutes in the game
+     */
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 
+    /**
+     * Gets the Temporary Minutes in the Game
+     *
+     * @return tempMinutes
+     */
     public int getTempMinutes() {
         return tempMinutes;
     }
 
+    /**
+     * Sets the Temporary Minutes in the Game
+     *
+     * @param tempMinutes -
+     */
     public void setTempMinutes(int tempMinutes) {
         this.tempMinutes = tempMinutes;
     }

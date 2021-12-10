@@ -1,6 +1,6 @@
 package controller;
-import model.RubberBallModel;
 
+import model.RubberBallModel;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
@@ -8,52 +8,37 @@ import java.util.Random;
 
 
 /**
- * WallModel Class:
- * Implements the Functionality Characteristics in the Wall , Impact and Ball Count.
+ * Implements the Functionality Characteristics in the Wall of the Game
  */
 public class WallController {
-    private Random random;
-    private Rectangle area;
 
+    private final Rectangle area;
     private BallController ball;
     private PlayerController player;
     private BrickController[] bricks;
-    private AudioController audioController;
-    private Point StartPoint;
+    private final Point StartPoint;
     private int brickCount;
-    private int ballCount;
-    private boolean BallLost;
+    private int ballCount = 3;
+    private boolean BallLost = false;
 
     /**
-     * WallModel Constructor:
-     * Takes in the parameters , to make the level , specifiy the ball start point , the player model and
-     * the initial speed.
-     * @param drawArea
-     * @param brickCount
-     * @param lineCount
-     * @param brickDimensionRatio
-     * @param ballPos
+     * Responsible for specifying the StartPoint of the Ball Position, Speed, Parameters of Player Model,
+     * And Wall Area Definition.
+     * @param drawArea - Area of Level Wall
+     * @param ballPos - Position of Ball
      */
 
     public WallController(Rectangle drawArea,Point ballPos){
 
         //specifies the location of the ball position
         this.StartPoint = new Point(ballPos);
-        ballCount = 3;
-        BallLost = false;
-
         //create random object
-        random = new Random();
+        new Random();
         //adding ball position in the make ball function
         makeBall(ballPos);
 
-        int speedX,speedY;
-        do{
-            speedX = 3;
-        }while(speedX == 0);
-        do{
-            speedY = -3;
-        }while(speedY == 0);
+        int speedX = 3;
+        int speedY = -3;
 
         // sets the ball speed x and speed y
         getBall().setSpeedX(speedX);
@@ -61,25 +46,21 @@ public class WallController {
 
         //Adds in the Parameters for the player model
         setPlayer(new PlayerController((Point) ballPos.clone(),150,10, drawArea));
+
         //Define the Area of the wall
         area = drawArea;
-
-
     }
 
     /**
-     * makeBall Method:
      * Assigns the ball position in the RubberBallModel
-     * @param ballPos
+     * @param ballPos - Position of Ball
      */
     private void makeBall(Point2D ballPos){
         setBall(new RubberBallModel(ballPos));
     }
 
     /**
-     * move Method:
-     * When this method is called , it calls the methods to implement the movement of the player and the
-     * width . height and movement of ball
+     * Calls the methods to implement the movement of the player and the movement of ball
      */
     public void move(){
         getPlayer().move();
@@ -87,13 +68,12 @@ public class WallController {
     }
 
     /**
-     * findImpacts Method:
-     * implements the impact of the ball on the various layout of the wall , and the outcome of it
+     * Implements the impact of the ball on the various layout of the wall ,
+     * and the outcome of it
      */
     public void findImpacts(){
-        //if the player impacts the ball , then reverse y
         if(getPlayer().impact(getBall())){
-            AudioController audioController = new AudioController("Bounce Sound.wav");
+            new AudioController("Bounce Sound.wav");
             getBall().reverseY();
         }
         // if the player impacts the wall , then reduce the brick count
@@ -106,15 +86,16 @@ public class WallController {
         }
         //if the ball hits the border of the wall , reverse x
         else if(impactBorder()) {
-            AudioController audioController = new AudioController("Bounce Sound.wav");
+            new AudioController("Bounce Sound.wav");
             getBall().reverseX();
         }
 
         else if(getBall().getPosition().getY() < area.getY()){
             getBall().reverseY();
         }
-        //if the ball goes out of frame , reduce the ball count , and balllost = true
+        //if the ball goes out of frame , reduce the ball count , and ballLost = true
         else if(getBall().getPosition().getY() > area.getY() + area.getHeight()){
+            new AudioController("Ball Lose.wav");
             ballCount--;
             BallLost = true;
         }
@@ -123,25 +104,29 @@ public class WallController {
     /**
      * impactWall Method:
      * Provides the implementation of when the ball hits the wall
-     * @return
+     * @return the impact of the ball on the wall
      */
     private boolean impactWall(){
         for(BrickController b : getBricks()){
-            switch(b.findImpact(getBall())) {
-                //Vertical Impact
-                case BrickController.UP_IMPACT:
+            //Vertical Impact
+            //Horizontal Impact
+            switch (b.findImpact(getBall())) {
+                case BrickController.UP_IMPACT -> {
                     getBall().reverseY();
                     return b.setImpact(getBall().getDownLocation(), CrackController.UP);
-                case BrickController.DOWN_IMPACT:
+                }
+                case BrickController.DOWN_IMPACT -> {
                     getBall().reverseY();
                     return b.setImpact(getBall().getUpLocation(), CrackController.DOWN);
-                //Horizontal Impact
-                case BrickController.LEFT_IMPACT:
+                }
+                case BrickController.LEFT_IMPACT -> {
                     getBall().reverseX();
                     return b.setImpact(getBall().getRightLocation(), CrackController.RIGHT);
-                case BrickController.RIGHT_IMPACT:
+                }
+                case BrickController.RIGHT_IMPACT -> {
                     getBall().reverseX();
                     return b.setImpact(getBall().getLeftLocation(), CrackController.LEFT);
+                }
             }
         }
         return false;
@@ -150,7 +135,7 @@ public class WallController {
     /**
      * impactBorder Method:
      * Provides the implementation when the ball hits the border
-     * @return
+     * @return The movement when the ball hits the border
      */
     private boolean impactBorder(){
         Point2D p = getBall().getPosition();
@@ -177,12 +162,8 @@ public class WallController {
         getPlayer().moveTo(StartPoint);
         getBall().moveTo(StartPoint);
         int speedX,speedY;
-        do{
-            speedX = 3;
-        }while(speedX == 0);
-        do{
-            speedY = -3;
-        }while(speedY == 0);
+        speedX = 3;
+        speedY = -3;
 
         getBall().setSpeedX(speedX);
         getBall().setSpeedY(speedY);
@@ -201,7 +182,7 @@ public class WallController {
     }
     /**
      * ballEnd Method:
-     * If the ball's have ended , then set the ballcount to 0
+     * If the ball's have ended , then set the ballCount to 0
      * @return ballCount
      */
     public boolean ballEnd(){
@@ -220,7 +201,7 @@ public class WallController {
     /**
      * setBallXSpeed Method:
      * Sets the ball's Speed for X Coordinates
-     * @param s
+     * @param s - Speed in X Direction of Ball
      */
     public void setBallXSpeed(int s){
         ball.setSpeedX(s);
@@ -229,7 +210,7 @@ public class WallController {
     /**
      * setBallYSpeed Method:
      * Sets the ball's Speed for Y Coordinates
-     * @param s
+     * @param s - Speed in Y Direction of ball
      */
     public void setBallYSpeed(int s){
         ball.setSpeedY(s);
