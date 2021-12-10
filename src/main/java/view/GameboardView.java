@@ -45,7 +45,7 @@ public class GameboardView {
         highScoreModel.drawscore(g2d , wallController);
         playerRender(g2d);
         ballRender(g2d);
-        wallController.brickrender(g2d);
+        wallController.brickRender(g2d);
         //If the showPauseMenu is true , draw the drawMenu
         if(gameBoardController.isShowPauseMenu())
             pauseMenuView.render(g2d);

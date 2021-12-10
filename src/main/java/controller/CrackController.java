@@ -6,7 +6,8 @@ import java.awt.geom.Point2D;
 
 
 /**
- * Crack Controller is responsible for providing the Crack Implementation
+ * Crack Controller is responsible for providing the Bricks the 'Crack' Feature
+ * This is used by Cement Brick as they require the crack feature.
  */
 public class CrackController {
 
@@ -20,23 +21,22 @@ public class CrackController {
     public static final int VERTICAL = 100;
     public static final int HORIZONTAL = 200;
 
-    private BrickController brick;
-    private GeneralPath crack;
+    private final BrickController brickController;
+    private final GeneralPath crackPath;
 
-    private int crackDepth;
-    private int steps;
+    private final int crackDepth;
+    private final int crackNoise;
 
-
-    /**
-     * Sets the General Path , with the crackDepth and steps
+    /**Sets the General Path , with the crackDepth and crackNoise
+     * @param brickController - Calls in Brick Controller Object
      * @param crackDepth - Crack Depth
-     * @param steps - The steps in each crack (sort of like the noise)
+     * @param crackNoise - The Steps in the Crack (sort of like graph noise)
      */
-    public CrackController( BrickController brick , int crackDepth, int steps) {
-        this.brick = brick;
-        crack = new GeneralPath();
+    public CrackController( BrickController brickController , int crackDepth, int crackNoise) {
+        this.brickController = brickController;
+        crackPath = new GeneralPath();
         this.crackDepth = crackDepth;
-        this.steps = steps;
+        this.crackNoise = crackNoise;
     }
 
     /**
@@ -44,114 +44,133 @@ public class CrackController {
      * @return crack
      */
     public GeneralPath draw() {
-        return crack;
+        return crackPath;
     }
+
     /**
      * Method to reset the crack
      */
     public void reset() {
-        crack.reset();
+        crackPath.reset();
     }
 
     /**
      *Sets the Start and End Location of the Crack
-     * @param point
-     * @param direction
+     * @param impactPoint - The Point of Impact
+     * @param direction - The direction of the crack
      */
-    public void makeCrack(Point2D point, int direction) {
-        Rectangle bounds = brick.getBrickShape().getBounds();
+    public void makeCrack(Point2D impactPoint, int direction) {
+        Rectangle bounds = brickController.getParentBrickShape().getBounds();
 
-        Point impact = new Point((int) point.getX(), (int) point.getY());
-        Point start = new Point();
-        Point end = new Point();
+        Point impactCrack = new Point((int) impactPoint.getX(), (int) impactPoint.getY());
+        Point startPoint = new Point();
+        Point endPoint = new Point();
 
         switch (direction) {
             case LEFT:
-                start.setLocation(bounds.x + bounds.width, bounds.y);
-                end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
-                Point tmp = makeRandomPoint(start, end, VERTICAL);
-                makeCrack(impact, tmp);
+                startPoint.setLocation(bounds.x + bounds.width, bounds.y);
+                endPoint.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
+                Point tmp = makeRandomPoint(startPoint, endPoint, VERTICAL);
+                makeCrack(impactCrack, tmp);
 
                 break;
             case RIGHT:
-                start.setLocation(bounds.getLocation());
-                end.setLocation(bounds.x, bounds.y + bounds.height);
-                tmp = makeRandomPoint(start, end, VERTICAL);
-                makeCrack(impact, tmp);
-
+                startPoint.setLocation(bounds.getLocation());
+                endPoint.setLocation(bounds.x, bounds.y + bounds.height);
+                tmp = makeRandomPoint(startPoint, endPoint, VERTICAL);
+                makeCrack(impactCrack, tmp);
                 break;
             case UP:
-                start.setLocation(bounds.x, bounds.y + bounds.height);
-                end.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
-                tmp = makeRandomPoint(start, end, HORIZONTAL);
-                makeCrack(impact, tmp);
+                startPoint.setLocation(bounds.x, bounds.y + bounds.height);
+                endPoint.setLocation(bounds.x + bounds.width, bounds.y + bounds.height);
+                tmp = makeRandomPoint(startPoint, endPoint, HORIZONTAL);
+                makeCrack(impactCrack, tmp);
                 break;
             case DOWN:
-                start.setLocation(bounds.getLocation());
-                end.setLocation(bounds.x + bounds.width, bounds.y);
-                tmp = makeRandomPoint(start, end, HORIZONTAL);
-                makeCrack(impact, tmp);
-
+                startPoint.setLocation(bounds.getLocation());
+                endPoint.setLocation(bounds.x + bounds.width, bounds.y);
+                tmp = makeRandomPoint(startPoint, endPoint, HORIZONTAL);
+                makeCrack(impactCrack, tmp);
                 break;
-
         }
     }
 
     /**
-     * Crack Path Implementation
-     * @param start
-     * @param end
+     * Method is responsible for drawing the Crack Model from the Start till the end.
+     * @param startCrack - Start Location of Crack
+     * @param endCrack - End Location of Crack
      */
-    protected void makeCrack(Point start, Point end) {
+    protected void makeCrack(Point startCrack, Point endCrack) {
         GeneralPath path = new GeneralPath();
-        path.moveTo(start.x, start.y);
-        double w = (end.x - start.x) / (double) steps;
-        double h = (end.y - start.y) / (double) steps;
+        path.moveTo(startCrack.x, startCrack.y);
+        double w = (endCrack.x - startCrack.x) / (double) crackNoise;
+        double h = (endCrack.y - startCrack.y) / (double) crackNoise;
         int bound = crackDepth;
         int jump = bound * 5;
         double x, y;
-        for (int i = 1; i < steps; i++) {
-            x = (i * w) + start.x;
-            y = (i * h) + start.y + randomInBounds(bound);
-            if (inMiddle(i, CRACK_SECTIONS, steps))
-                y += jumps(jump, JUMP_PROBABILITY);
+        for (int i = 1; i < crackNoise; i++) {
+            x = (i * w) + startCrack.x;
+            y = (i * h) + startCrack.y + randomInBounds(bound);
+            if (inMiddle(i, crackNoise))
+                y += jumps(jump);
             path.lineTo(x, y);
         }
-        path.lineTo(end.x, end.y);
-        crack.append(path, true);
+        path.lineTo(endCrack.x, endCrack.y);
+        crackPath.append(path, true);
     }
 
+    /**
+     * Shapes the Crack Bounds
+     * @param bound  - the crackDepth
+     * @return A random value to create the crack depth
+     */
     private int randomInBounds(int bound) {
         int n = (bound * 2) + 1;
         return BrickController.getRnd().nextInt(n) - bound;
     }
 
-    private boolean inMiddle(int i, int steps, int divisions) {
-        int low = (steps / divisions);
+    /**
+     *Responsible for the alignment of the crack
+     * @param i - an iterated value
+     * @param divisions - The crackNoise
+     * @return if i>low and i< up - used in the if statement in makeCrack.
+     */
+    private boolean inMiddle(int i, int divisions) {
+        int low = (CrackController.CRACK_SECTIONS / divisions);
         int up = low * (divisions - 1);
-
         return (i > low) && (i < up);
     }
 
-    private int jumps(int bound, double probability) {
-
-        if (BrickController.getRnd().nextDouble() > probability)
+    /**Jump Method
+     * @param bound -
+     * @return - Calls the randomInBounds Method
+     */
+    private int jumps(int bound) {
+        if (BrickController.getRnd().nextDouble() > CrackController.JUMP_PROBABILITY)
             return randomInBounds(bound);
         return 0;
 
     }
+
+    /**
+     * Makes a Random Point from and to the end of the Crack in the specified Direction
+     * @param from - From the point of impact
+     * @param to - To the end of impact
+     * @param direction - Either Horizontal or Vertical
+     * @return out
+     */
     private Point makeRandomPoint(Point from, Point to, int direction) {
         Point out = new Point();
         int pos;
         switch (direction) {
-            case HORIZONTAL:
+            case HORIZONTAL -> {
                 pos = BrickController.getRnd().nextInt(to.x - from.x) + from.x;
                 out.setLocation(pos, to.y);
-                break;
-            case VERTICAL:
+            }
+            case VERTICAL -> {
                 pos = BrickController.getRnd().nextInt(to.y - from.y) + from.y;
                 out.setLocation(to.x, pos);
-                break;
+            }
         }
         return out;
     }

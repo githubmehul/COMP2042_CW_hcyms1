@@ -101,7 +101,7 @@ public class WallController {
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
-            AudioController audioController = new AudioController("Bounce Sound.wav");
+            new AudioController("Bounce Sound.wav");
             brickCount--;
         }
         //if the ball hits the border of the wall , reverse x
@@ -135,7 +135,6 @@ public class WallController {
                 case BrickController.DOWN_IMPACT:
                     getBall().reverseY();
                     return b.setImpact(getBall().getUpLocation(), CrackController.DOWN);
-
                 //Horizontal Impact
                 case BrickController.LEFT_IMPACT:
                     getBall().reverseX();
@@ -281,7 +280,7 @@ public class WallController {
         return brickCount;
     }
 
-    public void brickrender(Graphics2D g) {
+    public void brickRender(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
         for(BrickController b : getBricks()) {
             if(!b.isBroken())

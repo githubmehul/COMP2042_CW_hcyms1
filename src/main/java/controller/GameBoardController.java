@@ -74,14 +74,14 @@ public class GameBoardController extends JComponent implements KeyListener,Mouse
                     getTimeInstance().resetGame();
                 }
             }
-            else if(level.getLevel() == 2){
-                if(getTimeInstance().getSeconds() == 10){
-                    GAMEBOARD_TIMER.stop();
-                    wall.wallReset();
-                    wall.ballReset();
-                    getTimeInstance().resetGame();
-                }
-            }
+//            else if(level.getLevel() == 2){
+//                if(getTimeInstance().getSeconds() == null){
+//                    GAMEBOARD_TIMER.stop();
+//                    wall.wallReset();
+//                    wall.ballReset();
+//                    getTimeInstance().resetGame();
+//                }
+//            }
             else if (level.getLevel() == 3){
                 if(getTimeInstance().getSeconds() == 10){
                     GAMEBOARD_TIMER.stop();

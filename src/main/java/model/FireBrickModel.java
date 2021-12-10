@@ -1,12 +1,8 @@
 package model;
-import controller.BallController;
 import controller.BrickController;
-import controller.CrackController;
-import controller.WallController;
 
 
 import java.awt.*;
-import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 
 
@@ -31,13 +27,13 @@ public class FireBrickModel extends BrickController {
     }
 
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makeBrickShape(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
     @Override
-    public Shape getBrick() {
-        return super.getBrickShape();
+    public Shape getChildBrickShape() {
+        return super.getParentBrickShape();
     }
 
     public void brickimpact() {

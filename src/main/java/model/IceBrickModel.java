@@ -24,13 +24,13 @@ public class IceBrickModel extends BrickController {
     }
 
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makeBrickShape(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
     @Override
-    public Shape getBrick() {
-        return super.getBrickShape();
+    public Shape getChildBrickShape() {
+        return super.getParentBrickShape();
     }
 
     public void brickimpact() {

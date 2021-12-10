@@ -38,7 +38,7 @@ public class CementBrickModel extends BrickController {
     public CementBrickModel(Point point, Dimension size){
         super(point,size,BRICK_STRENGTH);
         Crack = new CrackController(this , DEF_CRACK_DEPTH, DEF_STEPS);
-        brickFace = super.getBrickShape();
+        brickFace = super.getParentBrickShape();
     }
 
     /**
@@ -48,7 +48,7 @@ public class CementBrickModel extends BrickController {
      * @return
      */
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makeBrickShape(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
@@ -96,7 +96,7 @@ public class CementBrickModel extends BrickController {
      * {@inheritDoc}
      */
     @Override
-    public Shape getBrick() {
+    public Shape getChildBrickShape() {
         return brickFace;
     }
 
@@ -108,7 +108,7 @@ public class CementBrickModel extends BrickController {
         if(!super.isBroken()){
             //Create the Crack on the Brick
             GeneralPath gp = Crack.draw();
-            gp.append(super.getBrickShape(),false);
+            gp.append(super.getParentBrickShape(),false);
             //Update the BrickFace to the Crack
             brickFace = gp;
         }
@@ -122,6 +122,6 @@ public class CementBrickModel extends BrickController {
         //reset the crack
         Crack.reset();
         //update the brickface
-        brickFace = super.getBrickShape();
+        brickFace = super.getParentBrickShape();
     }
 }

@@ -14,32 +14,29 @@ public class AudioController {
     /**
      * AudioController Constructor is responsible for implementing the functionality to play
      * the audio.
-     * @param filename
+     *
+     * @param filename - The name of the audio file.
      */
-    public AudioController(String filename){
+    public AudioController(String filename) {
 
-        AudioInputStream input= null;
+        AudioInputStream input = null;
         try {
             //Input the Audio based on the filename
             input = AudioSystem.getAudioInputStream(new File("src/main/resources/" + filename));
-        } catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+        } catch (UnsupportedAudioFileException | IOException unsupportedAudioFileException) {
             unsupportedAudioFileException.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
 
         try {
-            clip=AudioSystem.getClip();
+            clip = AudioSystem.getClip();
         } catch (LineUnavailableException lineUnavailableException) {
             lineUnavailableException.printStackTrace();
         }
 
         try {
             clip.open(input);
-        } catch (LineUnavailableException lineUnavailableException) {
+        } catch (LineUnavailableException | IOException lineUnavailableException) {
             lineUnavailableException.printStackTrace();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
         }
 
         //Start playing the audio

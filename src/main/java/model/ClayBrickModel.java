@@ -39,7 +39,7 @@ public class ClayBrickModel extends BrickController {
      * @return
      */
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size)
+    protected Shape makeBrickShape(Point pos, Dimension size)
     {
         return new Rectangle(pos,size);
     }
@@ -66,9 +66,9 @@ public class ClayBrickModel extends BrickController {
      * {@inheritDoc}
      */
     @Override
-    public Shape getBrick() {
+    public Shape getChildBrickShape() {
 
-        return super.getBrickShape();
+        return super.getParentBrickShape();
     }
     @Override
     public boolean setImpact(Point2D point, int direction) {

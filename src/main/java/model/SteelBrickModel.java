@@ -35,7 +35,7 @@ public class SteelBrickModel extends BrickController {
     public SteelBrickModel(Point point, Dimension size){
         super(point,size,BRICK_STRENGTH);
         random = new Random();
-        brickFace = super.getBrickShape();
+        brickFace = super.getParentBrickShape();
     }
 
     /**
@@ -45,7 +45,7 @@ public class SteelBrickModel extends BrickController {
      * @return
      */
     @Override
-    protected Shape makeBrickFace(Point pos, Dimension size) {
+    protected Shape makeBrickShape(Point pos, Dimension size) {
         return new Rectangle(pos,size);
     }
 
@@ -71,7 +71,7 @@ public class SteelBrickModel extends BrickController {
      * {@inheritDoc}
      */
     @Override
-    public Shape getBrick() {
+    public Shape getChildBrickShape() {
         return brickFace;
     }
 
