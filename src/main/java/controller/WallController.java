@@ -35,7 +35,7 @@ public class WallController {
      * @param ballPos
      */
 
-    public WallController(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, Point ballPos){
+    public WallController(Rectangle drawArea,Point ballPos){
 
         //specifies the location of the ball position
         this.StartPoint = new Point(ballPos);

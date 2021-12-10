@@ -1,5 +1,7 @@
 package controller;
 
+import model.LevelModel;
+
 import java.util.TimerTask;
 import java.util.Timer;
 
@@ -9,6 +11,7 @@ public class TimerController {
     private int minutes;
     private int tempSeconds;
     private int tempMinutes;
+    private int levelNumber;
     private boolean gameRunning = false;
     /**
      * private Object instance (apply Singleton pattern)
@@ -51,6 +54,7 @@ public class TimerController {
         setTempMinutes(0);
         setGameRunning(false);
     }
+
     public int getTempSeconds(){
         return tempSeconds;
     }
