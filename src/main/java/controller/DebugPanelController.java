@@ -16,7 +16,7 @@ import java.awt.event.WindowListener;
 public class DebugPanelController extends JDialog implements WindowListener {
 
     //The title of the Debug Console Window
-    private static final String DEBUG_CONSOLE_TITLE = "Dialog Panel";
+    private static final String DEBUG_CONSOLE_TITLE = "Debug Panel";
 
     private final JFrame JFrameOwner;
     private final GameBoardController gameBoardController;
