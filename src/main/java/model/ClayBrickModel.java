@@ -17,49 +17,52 @@ import static controller.HighScoreController.getHighScoreInstance;
  */
 public class ClayBrickModel extends BrickController {
     //Inner Color and Border Color
-    private static final Color BRICK_INNER_COLOR = new Color(178, 34, 34).darker();
-    private static final Color BRICK_BORDER_COLOR = Color.GRAY;
+    private static final Color brickInnerColor = new Color(178, 34, 34).darker();
+    private static final Color brickBorderColor = Color.GRAY;
     //Strength of Brick
     private static final int BRICK_STRENGTH = 1;
 
     /**
      * Implement the super BrickController Class
+     *
      * @param point - The point position of the brick (left)
-     * @param size - Encapsulates the Width and Height of Brick
+     * @param size  - Encapsulates the Width and Height of Brick
      */
-    public ClayBrickModel(Point point, Dimension size){
+    public ClayBrickModel(Point point, Dimension size) {
 
-        super(point,size,BRICK_STRENGTH);
+        super(point, size, BRICK_STRENGTH);
     }
 
     /**
      * Implements the makeBall Method from the BrickController Class
+     *
      * @param pos- The position coordinate of the Brick
-     * @param size  - Encapsulates the Width and Height of Brick
+     * @param size - Encapsulates the Width and Height of Brick
      * @return
      */
     @Override
-    protected Shape makeBrickShape(Point pos, Dimension size)
-    {
-        return new Rectangle(pos,size);
+    protected Shape makeBrickShape(Point pos, Dimension size) {
+        return new Rectangle(pos, size);
     }
 
     /**
      * Sets the Inner Color of the Ball
-     * @return BRICK_INNER_COLOR - Inner Color of the Brick
+     *
+     * @return brickInnerColor - Inner Color of the Brick
      */
     @Override
     protected Color setBrickInnerColor() {
-        return BRICK_INNER_COLOR;
+        return brickInnerColor;
     }
 
     /**
      * Sets the Border Color of the Ball
-     * @return BRICK_BORDER_COLOR - Border Color of the Brick
+     *
+     * @return brickBorderColor - Border Color of the Brick
      */
     @Override
     protected Color setBrickBorderColor() {
-        return BRICK_BORDER_COLOR;
+        return brickBorderColor;
     }
 
     /**
@@ -70,20 +73,21 @@ public class ClayBrickModel extends BrickController {
 
         return super.getParentBrickShape();
     }
+
     @Override
     public boolean setImpact(Point2D point, int direction) {
         //if the cement is not broken
-        if(super.isBroken())
+        if (super.isBroken())
             return false;
         //Reduce the strength
         super.impact();
         //if the cement is broken
-        if(!super.isBroken()){
+        if (!super.isBroken()) {
 
             //return false
             return false;
         }
-        getHighScoreInstance().setScore(getHighScoreInstance().getScore()+1);
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore() + 1);
         return true;
     }
 }

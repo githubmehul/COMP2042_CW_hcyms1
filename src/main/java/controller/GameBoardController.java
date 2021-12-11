@@ -29,7 +29,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     private final PauseMenuView pauseMenuView = new PauseMenuView();
 
     private final PauseMenuController pauseMenuController = new PauseMenuController(this, wallController, pauseMenuView);
-    private final LevelModel levelModel = new LevelModel(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), 30, 6 / 2, 3, wallController);
+    private final LevelModel levelModel = new LevelModel(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), 5, 3 / 2, 3, wallController);
     private final GameboardView gameboardView = new GameboardView(wallController, wallController.getPlayer(), wallController.getBall(), this, highScoreModel, pauseMenuView);
     private final Timer GAMEBOARD_TIMER;
     public String message = "";
@@ -289,6 +289,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
                 wallController.wallReset();
                 //Go to the Next Level
                 levelModel.nextLevel();
+                new AudioController("Game Next Level.wav");
 
                 getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
                 getTimeInstance().setTempSeconds(getTimeInstance().getSeconds());
@@ -296,6 +297,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
             } else {
                 //If the Player reaches end of game , Display this message
                 message = "ALL WALLS DESTROYED";
+                new AudioController("Game Win.wav");
                 message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",getHighScoreInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getHighScoreInstance().checkScore();
                 getHighScoreInstance().sortHighScore();
@@ -310,6 +312,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     public void LevelMessage(int level) {
         switch (level) {
             case 2 -> {
+
                 message = "Welcome to Level 2! Score is" + getHighScoreInstance().getScore();
                 message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
                 getTimeInstance().resetGame();

@@ -13,10 +13,11 @@ import java.util.Random;
 public class WallController {
 
     private final Rectangle area;
-    private BallController ball;
-    private PlayerController player;
-    private BrickController[] bricks;
     private final Point StartPoint;
+    private BallController ballController;
+    private PlayerController playerController;
+    private BrickController[] brickController;
+    private int bricks;
     private int brickCount;
     private int ballCount = 3;
     private boolean BallLost = false;
@@ -24,11 +25,12 @@ public class WallController {
     /**
      * Responsible for specifying the StartPoint of the Ball Position, Speed, Parameters of Player Model,
      * And Wall Area Definition.
+     *
      * @param drawArea - Area of Level Wall
-     * @param ballPos - Position of Ball
+     * @param ballPos  - Position of Ball
      */
 
-    public WallController(Rectangle drawArea,Point ballPos){
+    public WallController(Rectangle drawArea, Point ballPos) {
 
         //specifies the location of the ball position
         this.StartPoint = new Point(ballPos);
@@ -45,7 +47,7 @@ public class WallController {
         getBall().setSpeedY(speedY);
 
         //Adds in the Parameters for the player model
-        setPlayer(new PlayerController((Point) ballPos.clone(),150,10, drawArea));
+        setPlayer(new PlayerController((Point) ballPos.clone(), 150, 10, drawArea));
 
         //Define the Area of the wall
         area = drawArea;
@@ -53,16 +55,17 @@ public class WallController {
 
     /**
      * Assigns the ball position in the RubberBallModel
+     *
      * @param ballPos - Position of Ball
      */
-    private void makeBall(Point2D ballPos){
+    private void makeBall(Point2D ballPos) {
         setBall(new RubberBallModel(ballPos));
     }
 
     /**
      * Calls the methods to implement the movement of the player and the movement of ball
      */
-    public void move(){
+    public void move() {
         getPlayer().move();
         getBall().move();
     }
@@ -71,30 +74,26 @@ public class WallController {
      * Implements the impact of the ball on the various layout of the wall ,
      * and the outcome of it
      */
-    public void findImpacts(){
-        if(getPlayer().impact(getBall())){
+    public void findImpacts() {
+        if (getPlayer().impact(getBall())) {
             new AudioController("Bounce Sound.wav");
             getBall().reverseY();
         }
         // if the player impacts the wall , then reduce the brick count
-        else if(impactWall()){
+        else if (impactWall()) {
             /*for efficiency reverse is done into method impactWall
              * because for every brick program checks for horizontal and vertical impacts
              */
             new AudioController("Bounce Sound.wav");
             brickCount--;
-        }
-        //if the ball hits the border of the wall , reverse x
-        else if(impactBorder()) {
+        } else if (impactBorder()) {
             new AudioController("Bounce Sound.wav");
             getBall().reverseX();
-        }
-
-        else if(getBall().getPosition().getY() < area.getY()){
+        } else if (getBall().getPosition().getY() < area.getY()) {
             getBall().reverseY();
         }
         //if the ball goes out of frame , reduce the ball count , and ballLost = true
-        else if(getBall().getPosition().getY() > area.getY() + area.getHeight()){
+        else if (getBall().getPosition().getY() > area.getY() + area.getHeight()) {
             new AudioController("Ball Lose.wav");
             ballCount--;
             BallLost = true;
@@ -102,14 +101,12 @@ public class WallController {
     }
 
     /**
-     * impactWall Method:
      * Provides the implementation of when the ball hits the wall
+     *
      * @return the impact of the ball on the wall
      */
-    private boolean impactWall(){
-        for(BrickController b : getBricks()){
-            //Vertical Impact
-            //Horizontal Impact
+    private boolean impactWall() {
+        for (BrickController b : getBricks()) {
             switch (b.findImpact(getBall())) {
                 case BrickController.UP_IMPACT -> {
                     getBall().reverseY();
@@ -133,35 +130,33 @@ public class WallController {
     }
 
     /**
-     * impactBorder Method:
      * Provides the implementation when the ball hits the border
-     * @return The movement when the ball hits the border
+     *
+     * @return A Boolean of when the ball hits the border
      */
-    private boolean impactBorder(){
+    private boolean impactBorder() {
         Point2D p = getBall().getPosition();
-        return ((p.getX() < area.getX()) ||(p.getX() > (area.getX() + area.getWidth())));
+        return ((p.getX() < area.getX()) || (p.getX() > (area.getX() + area.getWidth())));
     }
 
     /**
-     * isBallLost Method:
-     * Returns if the ball is lost or not
+     * Returns if the ball is lost
+     *
      * @return ballLost
      */
-    public boolean isBallLost(){
+    public boolean isBallLost() {
         return BallLost;
     }
 
 
-
     /**
-     * ballReset Method:
      * When the ball is lost , this method provides the implementation for ball reset
      */
-    public void ballReset(){
+    public void ballReset() {
 
         getPlayer().moveTo(StartPoint);
         getBall().moveTo(StartPoint);
-        int speedX,speedY;
+        int speedX, speedY;
         speedX = 3;
         speedY = -3;
 
@@ -171,100 +166,104 @@ public class WallController {
     }
 
     /**
-     * wallReset Method:
      * Provides implementation for when the wall Resets
      */
-    public void wallReset(){
-        for(BrickController b : getBricks())
+    public void wallReset() {
+        for (BrickController b : getBricks())
             b.repair();
         brickCount = getBricks().length;
         ballCount = 3;
     }
+
     /**
-     * ballEnd Method:
      * If the ball's have ended , then set the ballCount to 0
+     *
      * @return ballCount
      */
-    public boolean ballEnd(){
+    public boolean ballEnd() {
         return ballCount == 0;
     }
 
     /**
-     * isDone Method:
      * If the all the bricks have been broken , then set the brickCount to 0
+     *
      * @return brickCount
      */
-    public boolean isDone(){
+    public boolean isDone() {
         return brickCount == 0;
     }
 
     /**
-     * setBallXSpeed Method:
      * Sets the ball's Speed for X Coordinates
+     *
      * @param s - Speed in X Direction of Ball
      */
-    public void setBallXSpeed(int s){
-        ball.setSpeedX(s);
+    public void setBallXSpeed(int s) {
+        ballController.setSpeedX(s);
     }
 
     /**
-     * setBallYSpeed Method:
      * Sets the ball's Speed for Y Coordinates
+     *
      * @param s - Speed in Y Direction of ball
      */
-    public void setBallYSpeed(int s){
-        ball.setSpeedY(s);
+    public void setBallYSpeed(int s) {
+        ballController.setSpeedY(s);
     }
 
     /**
      * resetBallCount Method:
      * Provides Implementation to reset the BallCount
      */
-    public void resetBallCount(){
+    public void resetBallCount() {
         ballCount = 3;
     }
 
     public BrickController[] getBricks() {
-        return bricks;
+        return brickController;
     }
 
     public void setBricks(BrickController[] bricks) {
-        this.bricks = bricks;
+        this.brickController = bricks;
     }
 
     public int getBallCount() {
         return ballCount;
     }
 
-
-    public void setBrickCount(int brickCount){
-        this.brickCount = brickCount;
-    }
-
     public BallController getBall() {
-        return ball;
+        return ballController;
     }
 
     public void setBall(BallController ball) {
-        this.ball = ball;
+        this.ballController = ball;
     }
 
     public PlayerController getPlayer() {
-        return player;
+        return playerController;
     }
 
     public void setPlayer(PlayerController player) {
-        this.player = player;
+        this.playerController = player;
     }
 
     public int getBrickCount() {
         return brickCount;
     }
 
+    public void setBrickCount(int brickCount) {
+        this.brickCount = brickCount;
+    }
+
+    /**
+     * Renders the brick Graphics
+     *
+     * @param g - Graphic Instance
+     */
     public void brickRender(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) g.create();
-        for(BrickController b : getBricks()) {
-            if(!b.isBroken())
+        for (BrickController b : getBricks()) {
+            if (!b.isBroken())
                 b.render(g2d);
         }
     }
