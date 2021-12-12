@@ -1,15 +1,12 @@
 package view;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.font.FontRenderContext;
 
 /**
- *
+ * PauseMenuView is responsible for the view of the PauseMenu Screen
  */
-public class PauseMenuView  {
-    //Final String Declarations
+public class PauseMenuView {
     private static final String PAUSE_MENU_TEXT = "Pause Menu";
     private static final String CONTINUE_TEXT = "Continue";
     private static final String RESTART_TEXT = "Restart";
@@ -27,9 +24,9 @@ public class PauseMenuView  {
 
 
     /**
-     * drawMenu Method:
-     * Method that contains the function call to ObscureGameBoard and drawPauseMen
-     * @param g2d
+     * Method that contains the function call to ObscureGameBoard and drawPauseMenu
+     *
+     * @param g2d - Graphics
      */
     public void render(Graphics2D g2d) {
         GameBoardWhenPauseMenu(g2d);
@@ -37,10 +34,9 @@ public class PauseMenuView  {
     }
 
     /**
-     * obscureGameBoard Method:
      * To Paint the Look of the GameBoard when the Pause Menu is called
      *
-     * @param g2d
+     * @param g2d - Graphics
      */
     private void GameBoardWhenPauseMenu(Graphics2D g2d) {
         Composite tmp = g2d.getComposite();
@@ -57,20 +53,15 @@ public class PauseMenuView  {
     }
 
     /**
-     * drawPauseMenu Method:
      * To draw the Pause Menu , after obscuring the GameBoard
      *
-     * @param g2d
+     * @param g2d - Graphics
      */
     private void DrawPauseMenu(Graphics2D g2d) {
-        //Getting the methods getFont and getColor
         Font tmpFont = g2d.getFont();
         Color tmpColor = g2d.getColor();
-        // Setting the Font and Color of the Menu Screen
         g2d.setFont(PAUSE_MENU_FONT);
         g2d.setColor(MENU_COLOR);
-        //so they can position it where they want it
-        //what this is doing is it's checking the text's width based on its font
         if (StrLen == 0) {
             FontRenderContext frc = g2d.getFontRenderContext();
             StrLen = PAUSE_MENU_FONT.getStringBounds(PAUSE_MENU_TEXT, frc).getBounds().width;

@@ -2,8 +2,10 @@ package view;
 
 import controller.GameBoardController;
 import controller.WallController;
+
 import static controller.HighScoreController.getHighScoreInstance;
 import static controller.TimerController.getTimeInstance;
+
 import model.LevelModel;
 
 import javax.swing.*;
@@ -22,11 +24,12 @@ public class DebugPanelView extends JPanel {
 
     /**
      * To implement the Debug Panel View
-     * @param wallController - WallController object instance
+     *
+     * @param wallController      - WallController object instance
      * @param gameBoardController - gameBoardController object instance
-     * @param levelModel - levelModel object instance
+     * @param levelModel          - levelModel object instance
      */
-    public DebugPanelView(WallController wallController , LevelModel levelModel , GameBoardController gameBoardController){
+    public DebugPanelView(WallController wallController, LevelModel levelModel, GameBoardController gameBoardController) {
 
         this.wallController = wallController;
         this.levelModel = levelModel;
@@ -45,8 +48,8 @@ public class DebugPanelView extends JPanel {
     /**
      * Responsible to implement the functionality when the Level is Skipped
      */
-    private void skipLevel(){
-        if(levelModel.hasLevel()){
+    private void skipLevel() {
+        if (levelModel.hasLevel()) {
             levelModel.nextLevel();
             gameBoardController.LevelMessage(levelModel.getLevel());
             getHighScoreInstance().acquireHighScore();
@@ -59,7 +62,7 @@ public class DebugPanelView extends JPanel {
     /**
      * Called to Reset the Ball Count
      */
-    private void resetBalls(){
+    private void resetBalls() {
         wallController.resetBallCount();
     }
 
@@ -67,22 +70,23 @@ public class DebugPanelView extends JPanel {
     /**
      * Provide implementation to initialize the layout of the Debug Panel
      */
-    private void initialize(){
-        this.setPreferredSize(new Dimension(240,50));
-        this.setLayout(new GridLayout(1,2));
+    private void initialize() {
+        this.setPreferredSize(new Dimension(240, 50));
+        this.setLayout(new GridLayout(1, 2));
     }
 
     /**
      * Creates the Button Implementation
+     *
      * @param title - Title of Button
-     * @param e - Instance of Action
+     * @param e     - Instance of Action
      * @return button - The Button
      */
-    private JButton makeButton(String title, ActionListener e){
+    private JButton makeButton(String title, ActionListener e) {
         JButton button = new JButton(title);
         button.setBackground(Color.decode("#FF007F"));
         button.addActionListener(e);
-        return  button;
+        return button;
     }
 
 }

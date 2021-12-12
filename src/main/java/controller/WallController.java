@@ -251,8 +251,9 @@ public class WallController {
         return brickCount;
     }
 
-    public void setBrickCount(int brickCount) {
+    public int setBrickCount(int brickCount) {
         this.brickCount = brickCount;
+        return brickCount;
     }
 
     /**

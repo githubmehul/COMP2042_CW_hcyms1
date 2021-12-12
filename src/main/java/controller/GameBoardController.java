@@ -313,28 +313,28 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
         switch (level) {
             case 2 -> {
 
-                message = "Welcome to Level 2! Score is" + getHighScoreInstance().getScore();
-                message2 = "You finished the first level in : " + getTimeInstance().getSeconds();
+                message = "Welcome to Level 2! Score:  " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the first level in %02dm %02ds: " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 3 -> {
-                message = "Welcome to Level 3! Score is " + getHighScoreInstance().getScore();
-                message2 = "You finished the second level in : " + getTimeInstance().getSeconds();
+                message = "Welcome to Level 3! Score: " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the second level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 4 -> {
-                message = "Welcome to the Level 4! Score is " + getHighScoreInstance().getScore();
-                message2 = "You finished the third level in : " + getTimeInstance().getSeconds();
+                message = "Welcome to the Level 4! Score: " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the third level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 5 -> {
-                message = "Welcome to the Level 5! Score is " + getHighScoreInstance().getScore();
-                message2 = "You finished the fourth level in : " + getTimeInstance().getSeconds();
+                message = "Welcome to the Level 5! Score: " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the fourth level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 6 -> {
-                message = "Welcome to the Last Level! Score is %d" + getHighScoreInstance().getScore();
-                message2 = "You finished the 5th level in : " + getTimeInstance().getSeconds();
+                message = "Welcome to the Last Level! Score: %d " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the fifth level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             default -> throw new IllegalStateException("Unexpected value: " + levelModel.getLevel());

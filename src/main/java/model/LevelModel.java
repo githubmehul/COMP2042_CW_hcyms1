@@ -17,31 +17,31 @@ public class LevelModel {
     private static final int CLAY = 1;
     private static final int STEEL = 2;
     private static final int CEMENT = 3;
-    private  static final int FIRE = 4;
-    private  static final int ICE = 5;
-    private BrickController[][] levels;
+    private static final int FIRE = 4;
+    private static final int ICE = 5;
+    private static WallController wall;
+    private final BrickController[][] levels;
     private int level = 0;
+
+    public LevelModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, WallController wall) {
+        levels = makeLevels(drawArea, brickCount, lineCount, brickDimensionRatio);
+        LevelModel.wall = wall;
+    }
 
     public static WallController getWall() {
         return wall;
     }
 
-    private static WallController wall;
-    public LevelModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, WallController wall){
-        levels = makeLevels(drawArea,brickCount,lineCount,brickDimensionRatio);
-        this.wall = wall;
-    }
-
     /**
      * Creates the 1st Level for The ClayBrickModel
-     * @param drawArea
-     * @param brickCnt
-     * @param lineCnt
-     * @param brickSizeRatio
-     * @param type
-     * @return
+     *
+     * @param drawArea       - Area of Wall
+     * @param brickCnt       - Brick Count
+     * @param lineCnt        - Line Count
+     * @param brickSizeRatio - Ratio of Brick
+     * @return tmp
      */
-    private BrickController[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int type){
+    private BrickController[] makeSingleTypeLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio) {
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
@@ -55,43 +55,45 @@ public class LevelModel {
 
         brickCnt += lineCnt / 2;
 
-        BrickController[] tmp  = new BrickController[brickCnt];
+        BrickController[] tmp = new BrickController[brickCnt];
 
-        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
+        Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
         Point p = new Point();
 
         int i;
-        for(i = 0; i < tmp.length; i++){
+        for (i = 0; i < tmp.length; i++) {
             int line = i / brickOnLine;
-            if(line == lineCnt)
+            if (line == lineCnt)
                 break;
             double x = (i % brickOnLine) * brickLen;
-            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
+            x = (line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
-            p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,type);
+            p.setLocation(x, y);
+            tmp[i] = makeBrick(p, brickSize, LevelModel.CLAY);
         }
 
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
+        for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
             double x = (brickOnLine * brickLen) - (brickLen / 2);
-            p.setLocation(x,y);
-            tmp[i] = new ClayBrickModel(p,brickSize);
+            p.setLocation(x, y);
+            tmp[i] = new ClayBrickModel(p, brickSize);
         }
         return tmp;
 
     }
+
     /**
      * Implement the Chessboard Pattern for the levels after the 1st level
-     * @param drawArea
-     * @param brickCnt
-     * @param lineCnt
-     * @param brickSizeRatio
-     * @param typeA
-     * @param typeB
-     * @return
+     *
+     * @param drawArea       - Area of Wall
+     * @param brickCnt       - Brick Count
+     * @param lineCnt        - Line Count
+     * @param brickSizeRatio - Ratio of Brick
+     * @param typeA          - Brick Type A
+     * @param typeB          - Brick Type B
+     * @return tmp
      */
 
-    private BrickController[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB){
+    private BrickController[] makeChessboardLevel(Rectangle drawArea, int brickCnt, int lineCnt, double brickSizeRatio, int typeA, int typeB) {
         /*
           if brickCount is not divisible by line count,brickCount is adjusted to the biggest
           multiple of lineCount smaller then brickCount
@@ -108,99 +110,99 @@ public class LevelModel {
 
         brickCnt += lineCnt / 2;
 
-        BrickController[] tmp  = new BrickController[brickCnt];
+        BrickController[] tmp = new BrickController[brickCnt];
 
-        Dimension brickSize = new Dimension((int) brickLen,(int) brickHgt);
+        Dimension brickSize = new Dimension((int) brickLen, (int) brickHgt);
         Point p = new Point();
 
         int i;
-        for(i = 0; i < tmp.length; i++){
+        for (i = 0; i < tmp.length; i++) {
             int line = i / brickOnLine;
-            if(line == lineCnt)
+            if (line == lineCnt)
                 break;
             int posX = i % brickOnLine;
             double x = posX * brickLen;
-            x =(line % 2 == 0) ? x : (x - (brickLen / 2));
+            x = (line % 2 == 0) ? x : (x - (brickLen / 2));
             double y = (line) * brickHgt;
-            p.setLocation(x,y);
+            p.setLocation(x, y);
 
             boolean b = ((line % 2 == 0 && i % 2 == 0) || (line % 2 != 0 && posX > centerLeft && posX <= centerRight));
-            tmp[i] = b ?  makeBrick(p,brickSize,typeA) : makeBrick(p,brickSize,typeB);
+            tmp[i] = b ? makeBrick(p, brickSize, typeA) : makeBrick(p, brickSize, typeB);
         }
 
-        for(double y = brickHgt;i < tmp.length;i++, y += 2*brickHgt){
+        for (double y = brickHgt; i < tmp.length; i++, y += 2 * brickHgt) {
             double x = (brickOnLine * brickLen) - (brickLen / 2);
-            p.setLocation(x,y);
-            tmp[i] = makeBrick(p,brickSize,typeA);
+            p.setLocation(x, y);
+            tmp[i] = makeBrick(p, brickSize, typeA);
         }
         return tmp;
     }
 
 
     /**
-     * makeLevels Method:
      * Uses the array to call the assigned methods to create the Level Layout
-     * @param drawArea
-     * @param brickCount
-     * @param lineCount
-     * @param brickDimensionRatio
-     * @return
+     *
+     * @param drawArea            - Area of Wall
+     * @param brickCount          - Brick Count
+     * @param lineCount           - Line Count
+     * @param brickDimensionRatio - Ratio of Brick
+     * @return levels
      */
-    private BrickController[][] makeLevels(Rectangle drawArea,int brickCount,int lineCount,double brickDimensionRatio){
+    private BrickController[][] makeLevels(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio) {
         BrickController[][] tmp = new BrickController[LEVELS_COUNT][];
-        tmp[0] = makeSingleTypeLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY);
-        tmp[1] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,CLAY,STEEL);
-        tmp[3] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,STEEL,CEMENT);
-        tmp[4] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , CLAY);
-        tmp[5] = makeChessboardLevel(drawArea,brickCount,lineCount,brickDimensionRatio,FIRE , ICE);
+        tmp[0] = makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio);
+        tmp[1] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, CLAY, CEMENT);
+        tmp[2] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, CLAY, STEEL);
+        tmp[3] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, STEEL, CEMENT);
+        tmp[4] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, FIRE, CLAY);
+        tmp[5] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, FIRE, ICE);
         return tmp;
     }
 
-    private BrickController makeBrick(Point point, Dimension size, int type){
-        BrickController out;
-        switch(type){
-            case CLAY:
-                out = new ClayBrickModel(point,size);
-                break;
-            case STEEL:
-                out = new SteelBrickModel(point,size);
-                break;
-            case CEMENT:
-                out = new CementBrickModel(point, size);
-                break;
-            case FIRE:
-                out  = new FireBrickModel(point, size);
-                break;
-            case ICE:
-                out  = new IceBrickModel(point, size);
-                break;
-                default:
-                throw new IllegalArgumentException(String.format("Unknown Type:%d\n",type));
-        }
-        return  out;
+    /**
+     * Calls the Make Brick when the Brick Type is called.
+     *
+     * @param point - Coordinate of Brick
+     * @param size  - Size of Brick
+     * @param type  - Type of Brick
+     * @return out - Shape of Brick
+     */
+    private BrickController makeBrick(Point point, Dimension size, int type) {
+        return switch (type) {
+            case CLAY -> new ClayBrickModel(point, size);
+            case STEEL -> new SteelBrickModel(point, size);
+            case CEMENT -> new CementBrickModel(point, size);
+            case FIRE -> new FireBrickModel(point, size);
+            case ICE -> new IceBrickModel(point, size);
+            default -> throw new IllegalArgumentException(String.format("Unknown Type:%d\n", type));
+        };
     }
 
     /**
      * Sets the next level
      */
-    public void nextLevel(){
+    public void nextLevel() {
         wall.setBricks(levels[level++]);
         wall.setBrickCount(getWall().getBricks().length);
     }
 
     /**
      * Checks if there is a next level
+     *
      * @return boolean
      */
-    public boolean hasLevel(){
+    public boolean hasLevel() {
         return level < levels.length;
     }
 
+    /**
+     * Returns the next level
+     *
+     * @return level number
+     */
     public int getLevel() {
         return level;
     }
-
 
 
 }

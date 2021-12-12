@@ -105,4 +105,10 @@ public class PlayerController {
         // Set top left corner location of the Player Shape
         playerShape.setLocation(ballPoint.x - (int) playerShape.getWidth() / 2, ballPoint.y);
     }
+    public void setMoveAmount(int moveAmount) {
+        this.moveAmount = moveAmount;
+    }
+    public int getMoveAmount() {
+        return moveAmount;
+    }
 }

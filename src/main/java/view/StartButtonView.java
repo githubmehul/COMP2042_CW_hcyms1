@@ -21,7 +21,7 @@ public class StartButtonView extends JButton implements ActionListener {
     /**
      * StartButtonView Constructor creates the Start Button appearance
      *
-     * @param owner
+     * @param owner - GameFrameModel owner
      */
     public StartButtonView(GameFrameModel owner) {
 
@@ -37,7 +37,7 @@ public class StartButtonView extends JButton implements ActionListener {
      * actionPerformed is an action listener that plays the audio and enables the gameboard
      * when the button is clicked.
      *
-     * @param e
+     * @param e - Action Instance
      */
     @Override
     public void actionPerformed(ActionEvent e) {

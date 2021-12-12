@@ -1,17 +1,22 @@
 package model;
 
 import static controller.HighScoreController.getHighScoreInstance;
-import controller.WallController;
 
 import java.awt.*;
 
+/**
+ * Sets the HighScore Model
+ */
 public class HighScoreModel {
-    private WallController wall;
 
-    public void drawscore(Graphics g , WallController wall ) {
-        this.wall = wall;
+    /**
+     * Shows the Score in the GameBoard
+     *
+     * @param g - Graphics
+     */
+    public void drawScore(Graphics g) {
         g.setColor(Color.yellow);
-        g.setFont(new Font("serif",Font.BOLD,15));
-        g.drawString("Score: "+getHighScoreInstance().getScore(), 0, 100);
+        g.setFont(new Font("serif", Font.BOLD, 15));
+        g.drawString("Score: " + getHighScoreInstance().getScore(), 0, 100);
     }
 }

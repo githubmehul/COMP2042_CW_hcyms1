@@ -20,37 +20,41 @@ public class RubberBallModel extends BallController {
 
     /**
      * Calls the BallController Constructor
+     *
      * @param center - The center position
      */
-    public RubberBallModel(Point2D center){
-        super(center,BALL_RADIUS,BALL_RADIUS);
+    public RubberBallModel(Point2D center) {
+        super(center, BALL_RADIUS, BALL_RADIUS);
     }
 
 
     /**
      * Implements the makeBall Method from the BallController Class
+     *
      * @param center - The center position.
      * @param width  - The horizontal diameter.
      * @param height - The vertical diameter.
-     * @return
+     * @return The Shape of the Ball
      */
     public Shape makeBallShape(Point2D center, int width, int height) {
-        double x = center.getX() - (width / 2);
-        double y = center.getY() - (height / 2);
-        return new Ellipse2D.Double(x,y,width,height);
+        double x = center.getX() - (width >> 2);
+        double y = center.getY() - (height >> 2);
+        return new Ellipse2D.Double(x, y, width, height);
     }
 
     /**
      * Sets the Inner Color of the Ball
+     *
      * @return BALL_INNER_COLOR - Inner Color of the Ball
      */
     @Override
     protected Color setBallInnerColor() {
-        return BALL_INNER_COLOR ;
+        return BALL_INNER_COLOR;
     }
 
     /**
      * Sets the Border Color of the Ball
+     *
      * @return BALL_BORDER_COLOR - Border Color of the Ball
      */
     @Override

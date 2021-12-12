@@ -38,7 +38,7 @@ public class ClayBrickModel extends BrickController {
      *
      * @param pos- The position coordinate of the Brick
      * @param size - Encapsulates the Width and Height of Brick
-     * @return
+     * @return - Brick Shape
      */
     @Override
     protected Shape makeBrickShape(Point pos, Dimension size) {
@@ -74,6 +74,9 @@ public class ClayBrickModel extends BrickController {
         return super.getParentBrickShape();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean setImpact(Point2D point, int direction) {
         //if the cement is not broken
@@ -83,7 +86,6 @@ public class ClayBrickModel extends BrickController {
         super.impact();
         //if the cement is broken
         if (!super.isBroken()) {
-
             //return false
             return false;
         }

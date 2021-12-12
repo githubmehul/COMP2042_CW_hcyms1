@@ -1,18 +1,28 @@
-controller/GameBoardControllerTest.java
- controller.GameBoardControllerTest
-controller/BallControllerTest.java
- controller.BallControllerTest
-controller/BrickControllerTest.java
- controller.BrickControllerTest
-controller/CrackControllerTest.java
- controller.CrackControllerTest
-controller/DebugConsoleControllerTest.java
- controller.DebugConsoleControllerTest
-controller/GameFrameControllerTest.java
- controller.GameFrameControllerTest
-controller/PlayerControllerTest.java
- controller.PlayerControllerTest
-view/DebugPanelViewTest.java
- view.DebugPanelViewTest
+model/PlayerModelTest.java
+ model.PlayerModelTest
+controller/TimerControllerTest.java
+ controller.TimerControllerTest
+model/RubberBallModelTest.java
+ model.RubberBallModelTest
+model/CementBrickModelTest.java
+ model.CementBrickModelTest
+model/SteelBrickModelTest.java
+ model.SteelBrickModelTest
+model/ClayBrickModelTest.java
+ model.ClayBrickModelTest
+model/GameFrameModelTest.java
+ model.GameFrameModelTest
+model/IceBrickModelTest.java
+ model.IceBrickModelTest
+model/FireBrickModelTest.java
+ model.FireBrickModelTest
 controller/WallControllerTest.java
  controller.WallControllerTest
+model/LevelModelTest.java
+ model.LevelModelTest
+controller/PlayerControllerTest.java
+ controller.PlayerControllerTest
+controller/HighScoreControllerTest.java
+ controller.HighScoreControllerTest
+controller/GameBoardControllerTest.java
+ controller.GameBoardControllerTest
