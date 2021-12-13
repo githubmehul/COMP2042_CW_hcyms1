@@ -17,7 +17,7 @@ A build file is added as it automatically downloads and configures the dependenc
 <br>Classes that were previously all in one package have been arranged using the MVC pattern. The resources used have also been arranged into a resources folder. The JUnit Test Cases have been also divided. It Allows easy identification of the numerous resources and easily set the path.<br>
 
 <b>2. MVC Pattern</b>
-<br> The MVC pattern has been used to arrange the classes. Considering changes have been made to the code in this aspect. The Model handles data and represents the game objects. It also allows us to update the controller of the data changes. The Controller controls the data flow into model object and update the view whenever data changes. The view is responsible for rendering the data received from the model.<br><br>
+<br> The MVC pattern has been used to arrange the classes. Considering changes have been made to the code in this aspect. The Model handles data and represents the game objects. It also allows us to update the controller of the data changes. The Controller controls the data flow into model object and update the view whenever data changes. The view is responsible for rendering the data received from the model.<br>
 
 <b>3. Insertion of Javadocs</b>
 <br>JavaDoc tool is a document generator tool in Java programming language for generating standard documentation in HTML format. It generates API documentation. It parses the declarations and documentation in a set of source file describing classes, methods, constructors, and fields. The purpose of the API is to provide information about code so other programmers can use it without needing a thorough knowledge of its inner workings. I had also added inline comments to enhance readability ,for the user.<br><br>
@@ -47,6 +47,28 @@ Considerable changes have been made to the WallController Class and BallControll
 <b>9. Removal of Dead Code (Code Smell)</b>
 <br>A variable, parameter, field, method or class is no longer used (usually because it’s obsolete). After considerable changes to the code, dead code and unnecessary parameters were removed. 
 
-# MajorExtensions and Additions
+# Major Extensions and Additions
+
+<b>1. Build File Creation</b><br>
+Gradle is an advanced general-purpose build management tool that is based on Groovy and Kotlin.The build system allows you to define flexible custom build configurations, where one can build, deploy and test. Gradle was used as an extension to enhance the runnability of the project and easy access by the user.<br>
+
+<b>2. Major Edits to HomeMenu Screen</b><br>
+Major changes and extentions have been made to the HomeMenuScreen to support MVC and various additions. There is a change the background looks of it as well. Seperate Button have been added in the HomeMenuScreen. The <b>StartButtonView</b> is responsible for the looks and functionality of the start button that calles the enableGameboard(). The <b>InstructionButtonView</b> is created for a help screen for the user with an included exit button from it that disposes the frame. The <b>HighScoreButtonView</b> is responsible for displaying the sorted highscores by reading the leaderboard.dat file, with an included exit button as well.Lastly, <b>ExitButtonView</b> is responsible for the looks and functionality ot the exit button. All the buttons have been added audio functionality when clicked.<br>
+
+<b>3. Game Timer System - Penalty System</b>
+<b>Considerable changes have been made to the Game by adding a Timer Function. The timer is responsible to track the time the user took at every level. If the user exceeds the time limit for that particular level, the user is made to restart the level that they are on. If they manage to pass the level before the time ends, they proceed to the next level, where a Score and Time text arises to remind the user of how much they scored in what time in the previous level. The changes here have also been added in the PauseMenuController as well, to regulate the timer if the user wishes to continue (continue the timer) or restart the game(restart the timer). When the user Pauses or loses focus, the timer is paused as well.<br>
+  
+<b>4. Brick based score - Reward System</b>
+<br>Each brick has been alotted a specific score. For instance, if the ball impacts the ClayBrick, the user gets 1 point, if the ball impacts the CementBrick, the user gets 2 points and so on.<br>
+  
+<b>5. Added Playable Levels</b><br>
+There are a total of 6 levels that the user has to play. 6 levels have been added to comply with the user retention when playing the game. Additional Bricks have been created, the IceBrickModel and the FireBrickModel.<br>
+
+ 
+  
+  
+  
+  
+  
 
 
