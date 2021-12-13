@@ -24,9 +24,10 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
 
     private final WallController wallController = new WallController(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), new Point(300, 430));
     private final DebugPanelController debugPanelController;
-    private final PauseMenuController pauseMenuController = new PauseMenuController(this, wallController, new PauseMenuView());
+    private final PauseMenuView pauseMenuView = new PauseMenuView();
+    private final PauseMenuController pauseMenuController = new PauseMenuController(this, wallController, pauseMenuView);
     private final LevelModel levelModel = new LevelModel(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), 30, 6 / 2, 3, wallController);
-    private final GameboardView gameboardView = new GameboardView(wallController, wallController.getPlayer(), wallController.getBall(), this, new HighScoreModel(), new PauseMenuView());
+    private final GameboardView gameboardView = new GameboardView(wallController, wallController.getPlayer(), wallController.getBall(), this, new HighScoreModel(), pauseMenuView);
     private final Timer GAMEBOARD_TIMER;
     public String message = "";
     public String message2 = "";

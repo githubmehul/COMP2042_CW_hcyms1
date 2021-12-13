@@ -33,8 +33,6 @@ public class PauseMenuController extends JComponent implements KeyListener, Mous
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
         Point p = mouseEvent.getPoint();
-        if (!gameBoardController.isShowPauseMenu())
-            return;
         if (pauseMenuView.getContinueButtonRect().contains(p)) {
             gameBoardController.setShowPauseMenu(false);
             gameBoardController.repaint();

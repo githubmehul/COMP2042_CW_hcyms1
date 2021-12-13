@@ -4,58 +4,58 @@ view/ExitButtonView.java
  view.ExitButtonView
 game/Main.java
  game.Main
-controller/GameBoardController.java
- controller.GameBoardController
-controller/PauseMenuController.java
- controller.PauseMenuController
-view/GameboardView.java
- view.GameboardView
+model/CementBrickModel.java
+ model.CementBrickModel
+controller/WallController.java
+ controller.WallController
+controller/BrickController.java
+ controller.BrickController
 controller/AudioController.java
  controller.AudioController
 controller/PlayerController.java
  controller.PlayerController
-model/GameFrameModel.java
- model.GameFrameModel
+view/PauseMenuView.java
+ view.PauseMenuView
 view/StartButtonView.java
  view.StartButtonView
-model/FireBrickModel.java
- model.FireBrickModel
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
 view/HighScoreButtonView.java
  view.HighScoreButtonView
 controller/BallController.java
  controller.BallController
 view/InstructionButtonView.java
  view.InstructionButtonView
-model/HighScoreModel.java
- model.HighScoreModel
+view/HomeMenuView.java
+ view.HomeMenuView
 model/LevelModel.java
  model.LevelModel
 model/RubberBallModel.java
  model.RubberBallModel
-view/PauseMenuView.java
- view.PauseMenuView
+model/HighScoreModel.java
+ model.HighScoreModel
+controller/CrackController.java
+ controller.CrackController
 controller/HighScoreController.java
  controller.HighScoreController
-controller/WallController.java
- controller.WallController
+model/FireBrickModel.java
+ model.FireBrickModel
+model/ClayBrickModel.java
+ model.ClayBrickModel
+model/IceBrickModel.java
+ model.IceBrickModel
+model/SteelBrickModel.java
+ model.SteelBrickModel
+model/GameFrameModel.java
+ model.GameFrameModel
 controller/DebugPanelController.java
  controller.DebugPanelController
 view/DebugPanelView.java
  view.DebugPanelView
-view/HomeMenuView.java
- view.HomeMenuView
-model/IceBrickModel.java
- model.IceBrickModel
-model/CementBrickModel.java
- model.CementBrickModel
-controller/BrickController.java
- controller.BrickController
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-model/SteelBrickModel.java
- model.SteelBrickModel
-model/ClayBrickModel.java
- model.ClayBrickModel
-controller/CrackController.java
- controller.CrackController
+controller/PauseMenuController.java
+ controller.PauseMenuController
+view/GameboardView.java
+ view.GameboardView
+controller/GameBoardController.java
+ controller.GameBoardController
