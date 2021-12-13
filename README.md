@@ -146,4 +146,10 @@ src
 <img width="500" alt="LeaderBoardScreen" src="https://user-images.githubusercontent.com/53290160/145739177-43e19038-28e9-4358-9098-7cf10968d183.png"><br>
 <b>HighScore Dialog Entry</b><br>
 <img width="394" alt="HighScoreDialog" src="https://user-images.githubusercontent.com/53290160/145739207-50023d64-8ea7-4034-a567-52b0977190fa.png"><br>
+<b>Test Case For Controller Class</b>
+<img width="848" alt="controllertest" src="https://user-images.githubusercontent.com/53290160/145748452-da7a733c-829d-4d62-b567-b693ba57720e.png"><br>
+<b>Test Case For Model Class</b>
+<img width="850" alt="model test" src="https://user-images.githubusercontent.com/53290160/145748477-64e569f5-ed33-41c5-8a8e-b1ca3d2f4bee.png"><br>
+
+
 
