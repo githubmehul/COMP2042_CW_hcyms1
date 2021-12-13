@@ -50,25 +50,37 @@ Considerable changes have been made to the WallController Class and BallControll
 # Major Extensions and Additions
 
 <b>1. Build File Creation</b><br>
-Gradle is an advanced general-purpose build management tool that is based on Groovy and Kotlin.The build system allows you to define flexible custom build configurations, where one can build, deploy and test. Gradle was used as an extension to enhance the runnability of the project and easy access by the user.<br>
+Gradle is an advanced general-purpose build management tool that is based on Groovy and Kotlin.The build system allows you to define flexible custom build configurations, where one can build, deploy and test. Gradle was used as an extension to enhance the runnability of the project and easy access by the user.</br>
 
 <b>2. Major Edits to HomeMenu Screen</b><br>
-Major changes and extentions have been made to the HomeMenuScreen to support MVC and various additions. There is a change the background looks of it as well. Seperate Button have been added in the HomeMenuScreen. The <b>StartButtonView</b> is responsible for the looks and functionality of the start button that calles the enableGameboard(). The <b>InstructionButtonView</b> is created for a help screen for the user with an included exit button from it that disposes the frame. The <b>HighScoreButtonView</b> is responsible for displaying the sorted highscores by reading the leaderboard.dat file, with an included exit button as well.Lastly, <b>ExitButtonView</b> is responsible for the looks and functionality ot the exit button. All the buttons have been added audio functionality when clicked.<br>
+Major changes and extentions have been made to the HomeMenuScreen to support MVC and various additions. There is a change the background looks of it as well. Seperate Button have been added in the HomeMenuScreen. The <b>StartButtonView</b> is responsible for the looks and functionality of the start button that calles the enableGameboard(). The <b>InstructionButtonView</b> is created for a help screen for the user with an included exit button from it that disposes the frame. The <b>HighScoreButtonView</b> is responsible for displaying the sorted highscores by reading the leaderboard.dat file, with an included exit button as well.Lastly, <b>ExitButtonView</b> is responsible for the looks and functionality ot the exit button. All the buttons have been added audio functionality when clicked.</br>
 
 <b>3. Game Timer System - Penalty System</b>
-<b>Considerable changes have been made to the Game by adding a Timer Function. The timer is responsible to track the time the user took at every level. If the user exceeds the time limit for that particular level, the user is made to restart the level that they are on. If they manage to pass the level before the time ends, they proceed to the next level, where a Score and Time text arises to remind the user of how much they scored in what time in the previous level. The changes here have also been added in the PauseMenuController as well, to regulate the timer if the user wishes to continue (continue the timer) or restart the game(restart the timer). When the user Pauses or loses focus, the timer is paused as well.<br>
+<bR>Considerable changes have been made to the Game by adding a Timer Function. The timer is responsible to track the time the user took at every level. If the user exceeds the time limit for that particular level, the user is made to restart the level that they are on. If they manage to pass the level before the time ends, they proceed to the next level, where a Score and Time text arises to remind the user of how much they scored in what time in the previous level. The changes here have also been added in the PauseMenuController as well, to regulate the timer if the user wishes to continue (continue the timer) or restart the game(restart the timer). When the user Pauses or loses focus, the timer is paused as well.</br>
   
 <b>4. Brick based score - Reward System</b>
-<br>Each brick has been alotted a specific score. For instance, if the ball impacts the ClayBrick, the user gets 1 point, if the ball impacts the CementBrick, the user gets 2 points and so on.<br>
+<br>Each brick has been alotted a specific score. For instance, if the ball impacts the ClayBrick, the user gets 1 point, if the ball impacts the CementBrick, the user gets 2 points and so on.</br>
   
 <b>5. Added Playable Levels</b><br>
-There are a total of 6 levels that the user has to play. 6 levels have been added to comply with the user retention when playing the game. Additional Bricks have been created, the IceBrickModel and the FireBrickModel.<br>
+There are a total of 6 levels that the user has to play. 6 levels have been added to comply with the user retention when playing the game. Additional Bricks have been created, the IceBrickModel and the FireBrickModel.</br>
 
+<b>6. Brick Based Speed - Penalty System</b>
+As for the additionally created bricks, the IceBrickModel has a strength of 2 impacts, and when the ball finally manages to break the brick, the speed reduces drastically. The FireBrickModel has a strength of 2 as well, and when the ball manages to break the brick, the speed increases drastically. So the user would have to be very attentive and plan their next move of impact.</br>
  
+<b>7. Audio Implementation</b>
+Audio features have been added when the user presses the homescreen buttons, finally wins the game, progresses to the next level and when the ball impacts the wall,bricks, player as well as when the ball is lost.</br>
   
-  
-  
-  
-  
+<b>8. HighScore Implementation</b>
+The score of the user is tracked in every level, considering the score of each brick. After each level is completed, the user sees their accumulated score and timer taken. The HighScore of the player is checked against the highScore.dat file . The highscore is checked when the number of balls are all lost, or when the user completes all the levels and wins the game. If the score attained by the user is greater than the previous user's score, a dialog appears which asks their name and saves the scores. Which is then further sorted in the leaderboard.dat to preview in the HighScoreButton View.
+
+<b>9. Level Indicator</b>
+<br> Once a user progresses, a level indicator is shown telling the user what level they are currently in, a feature that was not present in the original version of the game.</br>
+
+<b>10. DebugPanel</b>
+<br>The Ball speed has been kept constant, as the randomized ball speed at each play would reduce the retention of the player. The bricks additionally created changes the speeds as well.</br>
+
+# Reflections
+<br>After making the changes, it can be deduced that it is now better to manage the classes as well as the relationships between them while also improving encapsulation. The classes have been made more maintainable and we can easily add more game obstacles or levels. The game has also been made more interesting with the varying audio and different levels. There are also test classes that have been implemented to check the proper functionality of several elements.</br>
+
 
 
