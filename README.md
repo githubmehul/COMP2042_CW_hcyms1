@@ -58,7 +58,7 @@ Gradle is an advanced general-purpose build management tool that is based on Gro
 Major changes and extentions have been made to the HomeMenuScreen to support MVC and various additions. There is a change the background looks of it as well. Seperate Button have been added in the HomeMenuScreen. The <b>StartButtonView</b> is responsible for the looks and functionality of the start button that calles the enableGameboard(). The <b>InstructionButtonView</b> is created for a help screen for the user with an included exit button from it that disposes the frame. The <b>HighScoreButtonView</b> is responsible for displaying the sorted highscores by reading the leaderboard.dat file, with an included exit button as well. Lastly, <b>ExitButtonView</b> is responsible for the looks and functionality ot the exit button. All the buttons have been added audio functionality when clicked.</br>
 
 <b>3. Game Timer System - Penalty System</b>
-<bR>Considerable changes have been made to the Game by adding a Timer Function. The timer is responsible to track the time the user took at every level. If the user exceeds the time limit for that particular level, the user is made to restart the level that they are on. If they manage to pass the level before the time ends, they proceed to the next level, where a Score and Time text arises to remind the user of how much they scored, in what time in the previous level. The changes here have also been added in the PauseMenuController as well, to regulate the timer if the user wishes to continue (continue the timer) or restart the game(restart the timer). When the user Pauses or loses focus, the timer is paused as well.</br>
+<br>Considerable changes have been made to the Game by adding a Timer Function. The timer is responsible to track the time the user took at every level. If the user exceeds the time limit for that particular level, the user is made to restart the level that they are on. If they manage to pass the level before the time ends, they proceed to the next level, where a Score and Time text arises to remind the user of how much they scored, in what time in the previous level. The changes here have also been added in the PauseMenuController as well, to regulate the timer if the user wishes to continue (continue the timer) or restart the game(restart the timer). When the user Pauses or loses focus, the timer is paused as well.</br>
   
 <b>4. Brick based score - Reward System</b>
 <br>Each brick has been alotted a specific score. For instance, if the ball impacts the ClayBrick, the user gets 1 point, if the ball impacts the CementBrick, the user gets 2 points and so on.</br>
@@ -66,13 +66,13 @@ Major changes and extentions have been made to the HomeMenuScreen to support MVC
 <b>5. Added Playable Levels</b><br>
 There are a total of 6 levels that the user has to play. 6 levels have been added to comply with the user retention when playing the game. Additional Bricks have been created, the IceBrickModel and the FireBrickModel.</br>
 
-<b>6. Brick Based Speed - Penalty System</b>
+<b>6. Brick Based Speed - Penalty System</b><br>
 As for the additionally created bricks, the IceBrickModel has a strength of 1 impacts, and when the ball finally manages to break the brick, the speed reduces drastically. The FireBrickModel has a strength of 2 as well, and when the ball manages to break the brick, the speed increases drastically. So the user would have to be very attentive and plan their next move of impact.</br>
  
-<b>7. Audio Implementation</b>
+<b>7. Audio Implementation</b><br>
 Audio features have been added when the user presses the homescreen buttons, finally wins the game, progresses to the next level and when the ball impacts the wall,bricks, player as well as when the ball is lost.</br>
   
-<b>8. HighScore Implementation</b>
+<b>8. HighScore Implementation</b><br>
 The score of the user is tracked in every level, considering the score of each brick. After each level is completed, the user sees their accumulated score and time taken in the previous level. The HighScore of the player is checked against the highScore.dat file . The highscore is checked when the number of balls are all lost(progresses the user to the homescreen after inputting name), or when the user completes all the levels and wins the game. If the score attained by the user is greater than the previous user's score, a dialog appears which asks their name and saves the scores, which is then further sorted in the leaderboard.dat to preview in the HighScoreButton View.
 
 <b>9. Level Indicator</b>
