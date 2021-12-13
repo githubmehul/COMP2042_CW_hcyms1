@@ -29,6 +29,8 @@ abstract public class BrickController {
     private boolean broken;
 
     /**
+     * Responsible for defining the strength, color and Dimension of Brick
+     *
      * @param brickPos - The Point position
      * @param size     - Encapsulates Width and Height of Brick
      * @param strength - The Strength of the Brick
@@ -168,7 +170,7 @@ abstract public class BrickController {
     }
 
     /**
-     * Decrements the strength  of the Brick and updates the Brick's broken status.
+     * Decrements the strength of the Brick and updates the Brick's broken status.
      */
     public int impact() {
         strength--;

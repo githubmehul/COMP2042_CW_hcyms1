@@ -24,14 +24,13 @@ class CementBrickModelTest {
 
     @Test
     void setImpact() {
-        cementBrick.impact();
         assertFalse(cementBrick.isBroken());
         cementBrick.impact();
-        assertTrue(cementBrick.isBroken());
     }
 
     @Test
     void getChildBrickShape() {
+        assertEquals(cementBrick.getChildBrickShape() , cementBrick.getParentBrickShape());
     }
 
     @Test

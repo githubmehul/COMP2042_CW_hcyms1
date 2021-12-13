@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * The LevelModel class creates levels for the Game. I separated these
- * methods from the WallController class  the Game
+ * methods from the WallController class as the Game
  * should not be responsible for creating the levels.
  * This class contains simple implementations of next level as well.
  */
@@ -25,7 +25,7 @@ public class LevelModel {
 
     public LevelModel(Rectangle drawArea, int brickCount, int lineCount, double brickDimensionRatio, WallController wall) {
         levels = makeLevels(drawArea, brickCount, lineCount, brickDimensionRatio);
-        LevelModel.wall = wall;
+        this.wall = wall;
     }
 
     public static WallController getWall() {
@@ -152,8 +152,8 @@ public class LevelModel {
         BrickController[][] tmp = new BrickController[LEVELS_COUNT][];
         tmp[0] = makeSingleTypeLevel(drawArea, brickCount, lineCount, brickDimensionRatio);
         tmp[1] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, CLAY, CEMENT);
-        tmp[2] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, CLAY, STEEL);
-        tmp[3] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, STEEL, CEMENT);
+        tmp[2] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, ICE, STEEL);
+        tmp[3] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, STEEL, ICE);
         tmp[4] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, FIRE, CLAY);
         tmp[5] = makeChessboardLevel(drawArea, brickCount, lineCount, brickDimensionRatio, FIRE, ICE);
         return tmp;

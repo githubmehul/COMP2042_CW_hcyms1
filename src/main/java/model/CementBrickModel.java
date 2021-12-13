@@ -10,10 +10,8 @@ import controller.CrackController;
 import static controller.HighScoreController.getHighScoreInstance;
 
 /***
- * The CementBrickModel class is a child class of BrickController class.
  * CementBrickModel Class extends BrickControllerClass to create the implementation of
- * the CementBrickModel.
- * It is responsible for defining its colours, strength and crack properties.
+ * the CementBrickModel. It is responsible for defining its colours, strength and crack properties.
  */
 public class CementBrickModel extends BrickController {
 

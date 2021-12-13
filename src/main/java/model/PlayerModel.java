@@ -2,6 +2,9 @@ package model;
 
 import java.awt.*;
 
+/**
+ * Responsible for defining the Player Model
+ */
 public class PlayerModel {
 
     //Final Color Declarations

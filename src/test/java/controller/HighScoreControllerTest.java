@@ -11,7 +11,7 @@ class HighScoreControllerTest {
     void checkScore() {
         highScoreController.setScore(10);
         highScoreController.checkScore();
-        assertEquals("mehul:10" , highScoreController.getHighScore());
+        assertEquals("Mehul:10" , highScoreController.getHighScore());
     }
 
     @Test
@@ -19,15 +19,14 @@ class HighScoreControllerTest {
         highScoreController.setScore(20);
         highScoreController.checkScore();
         highScoreController.sortHighScore();
-        assertEquals("mehul:20" , highScoreController.getHighScore());
-
+        assertEquals("Mehul:20" , highScoreController.getHighScore());
     }
 
     @Test
     void getHighScore() {
-        highScoreController.setScore(5);
-        highScoreController.checkScore();
-        assertEquals("mehul:20" , highScoreController.getHighScore());
+        highScoreController.setHighScore("Mehul:10");
+        assertEquals("Mehul:10" , highScoreController.getHighScore());
+
     }
 
     @Test

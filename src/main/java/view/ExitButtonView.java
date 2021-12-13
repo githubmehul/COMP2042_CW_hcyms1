@@ -14,7 +14,7 @@ public class ExitButtonView extends JButton implements ActionListener {
 
     private final GameFrameModel owner;
 
-    /**Implement the Exitbutton View Model
+    /**Implement the ExitButton View Model
      * @param owner - GameFrameModel Owner
      */
     public ExitButtonView(GameFrameModel owner){

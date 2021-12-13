@@ -8,7 +8,7 @@ import java.util.Random;
 
 
 /**
- * Implements the Functionality Characteristics in the Wall of the Game
+ * Responsible for implementing the Wall Functionality in the Game, with it's interaction with the ball, brick, player and the wall.
  */
 public class WallController {
 
@@ -17,7 +17,6 @@ public class WallController {
     private BallController ballController;
     private PlayerController playerController;
     private BrickController[] brickController;
-    private int bricks;
     private int brickCount;
     private int ballCount = 3;
     private boolean BallLost = false;
@@ -212,45 +211,81 @@ public class WallController {
     }
 
     /**
-     * resetBallCount Method:
      * Provides Implementation to reset the BallCount
      */
     public void resetBallCount() {
         ballCount = 3;
     }
 
+    /**
+     * Returns the Brick Object
+     * @return brickController - The Brick Object
+     */
     public BrickController[] getBricks() {
         return brickController;
     }
 
+    /**
+     * Sets the Brick Object
+     * @param bricks - The Brick Object of BrickController
+     */
     public void setBricks(BrickController[] bricks) {
         this.brickController = bricks;
     }
 
+    /**
+     * Returns the ball count.
+     * @return ballCount - Count of the number of balls
+     */
     public int getBallCount() {
         return ballCount;
     }
 
+    /**
+     * Returns the Ball Object
+     * @return ballController - The Ball object
+     */
     public BallController getBall() {
         return ballController;
     }
 
+    /**
+     * Sets the Ball Object
+     * @param ball - The Ball
+     */
     public void setBall(BallController ball) {
         this.ballController = ball;
     }
 
+    /**
+     * Returns the Player Object
+     * @return playerController
+     */
     public PlayerController getPlayer() {
         return playerController;
     }
 
+    /**
+     * Sets the Player Object
+     * @param player - The Player Object
+     */
     public void setPlayer(PlayerController player) {
         this.playerController = player;
     }
 
+    /**
+     * Returns the count of the bricks
+     * @return brickCount
+     */
     public int getBrickCount() {
         return brickCount;
     }
 
+    /**
+     * Sets the Brick Count
+     * @param brickCount -
+     * @return The Brick Count
+     */
     public int setBrickCount(int brickCount) {
         this.brickCount = brickCount;
         return brickCount;

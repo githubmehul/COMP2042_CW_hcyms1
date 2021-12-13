@@ -5,12 +5,13 @@ import controller.BrickController;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
+import static controller.HighScoreController.getHighScoreInstance;
+
 
 /***
- * The FireBrickModel class is a child class of BrickController class.
- * FireBrickModel Class extends BrickController Class to create the implementation of
+ * FireBrickModel Class extends BrickController Class creates the implementation of
  * the FireBrickModel.
- * It is responsible for defining its colours, strength properties
+ * It is responsible for defining its colours, strength properties.
  */
 public class FireBrickModel extends BrickController {
     private static final Color BRICK_INNER_COLOR = new Color(247, 55, 24);
@@ -36,7 +37,13 @@ public class FireBrickModel extends BrickController {
         else {
             brickImpact();
         }
-        return super.isBroken();
+        if (!super.isBroken()) {
+            //return false
+            return false;
+        }
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore() + 4);
+        return true;
+
     }
 
     /**
@@ -65,8 +72,8 @@ public class FireBrickModel extends BrickController {
     public void brickImpact() {
         super.impact();
         if (super.isBroken()) {
-            LevelModel.getWall().setBallXSpeed(2);
-            LevelModel.getWall().setBallYSpeed(-2);
+            LevelModel.getWall().setBallXSpeed(7);
+            LevelModel.getWall().setBallYSpeed(-7);
         }
     }
 

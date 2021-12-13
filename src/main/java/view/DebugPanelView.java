@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * DebugPanelController extends the JPanel to provide implementation for the Debug Panel
+ * DebugPanelView extends the JPanel to provide view of the Debug Panel
  */
 public class DebugPanelView extends JPanel {
 
@@ -46,7 +46,7 @@ public class DebugPanelView extends JPanel {
     }
 
     /**
-     * Responsible to implement the functionality when the Level is Skipped
+     * Responsible to implement the view when the Level is Skipped
      */
     private void skipLevel() {
         if (levelModel.hasLevel()) {
@@ -57,15 +57,6 @@ public class DebugPanelView extends JPanel {
             getTimeInstance().setTempMinutes(getTimeInstance().getMinutes());
         }
     }
-
-
-    /**
-     * Called to Reset the Ball Count
-     */
-    private void resetBalls() {
-        wallController.resetBallCount();
-    }
-
 
     /**
      * Provide implementation to initialize the layout of the Debug Panel
@@ -87,6 +78,14 @@ public class DebugPanelView extends JPanel {
         button.setBackground(Color.decode("#FF007F"));
         button.addActionListener(e);
         return button;
+    }
+
+
+    /**
+     * Called to Reset the Ball Count
+     */
+    private void resetBalls() {
+        wallController.resetBallCount();
     }
 
 }

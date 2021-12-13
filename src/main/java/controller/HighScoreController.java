@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * HighScoreController is responsible for Getting the HighScores , Checking the HighScore and Sorting the
- * High Scores in the game
+ * HighScoreController is responsible the Score Functionality. For Getting the HighScores , Checking the HighScore and Sorting the
+ * High Scores in the game.
  */
 public class HighScoreController {
+
     /**
      * Use the Singleton pattern when a class has a single instance available to all.
      */
@@ -56,10 +57,10 @@ public class HighScoreController {
     }
 
     /**
-     * Checks the score to see if the recently updated highScore is lower than the new highScore
+     * Checks the score to see if the recently updated highScore is lower than the new highScore , and updates the highScore.dat file
      */
     public void checkScore() {
-        acquireHighScore();
+        getScore();
         if (score > Integer.parseInt((highScore.split(":")[1]))) {
 
             String name = JOptionPane.showInputDialog("You Set A New HighScore. What's your name?");
@@ -100,33 +101,32 @@ public class HighScoreController {
         ArrayList<String> str = new ArrayList<>();
         String line;
         //Try to read the high score file
-        try {
-            BufferedReader scoreReader = new BufferedReader(new FileReader("highScore.dat"));
-            while ((line = scoreReader.readLine()) != null) {
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader("highScore.dat"));
+            while((line=reader.readLine())!=null){
                 str.add(line);
             }
-            scoreReader.close();
-        } catch (Exception e) {
+            reader.close();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
-        //Sort the high score file
+        //Sort the high score file and store it in leaderboard.dat
         Collections.sort(str);
-        str.sort((o1, o2) -> Integer.compare(
-                //Sort the score
+        str.sort((o1, o2) -> Integer.compare( //Sort the score not the name
                 Integer.parseInt(o2.substring(o2.indexOf(":") + 1)),
-                Integer.parseInt(o1.substring(o1.indexOf(":") + 1)))
-        );
-        try {
-            FileWriter leaderBoardWriter = new FileWriter("leaderboard.dat");
-            for (String s : str) {
-                leaderBoardWriter.write(s);
-                leaderBoardWriter.write("\r\n");
+                Integer.parseInt(o1.substring(o1.indexOf(":") + 1))));
+        try{
+            FileWriter writer = new FileWriter("leaderboard.dat"); //Creating or Overwriting the file
+            for(String s: str){
+                writer.write(s);
+                writer.write("\r\n");
             }
-            leaderBoardWriter.close();
-        } catch (Exception e) {
+
+            writer.close();
+        }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -155,7 +155,7 @@ public class HighScoreController {
 
     /**
      * Sets the score
-     * @param score - The Score
+     * @param score - The Score during the game
      */
     public void setScore(int score) {
         this.score = score;

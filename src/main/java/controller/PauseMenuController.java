@@ -59,7 +59,7 @@ public class PauseMenuController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * To implement the functionality when the Mouse is Moved on the PauseMenu
+     * To implement the functionality when the Mouse is hovering on the PauseMenu Functionality
      *
      * @param mouseEvent - Mouse moved Instance
      */

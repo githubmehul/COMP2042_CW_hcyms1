@@ -10,8 +10,7 @@ import static controller.HighScoreController.getHighScoreInstance;
 
 
 /***
- * The ClayBrickModel class is a child class of BrickController class.
- * ClayBrickModel Class extends BrickControllerClass to create the implementation of
+ * ClayBrickModel Class extends BrickControllerClass creates the  implementation of
  * the ClayBrickModel.
  * It is responsible for defining its colours, strength and crack properties.
  */

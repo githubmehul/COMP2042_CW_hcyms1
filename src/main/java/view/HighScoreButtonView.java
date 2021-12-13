@@ -15,6 +15,7 @@ import java.io.*;
 
 /**
  * Presents the View of the HighScore Button
+ * Updates Audio from the Audio Controller.
  */
 public class HighScoreButtonView extends JButton implements ActionListener {
 
@@ -41,8 +42,9 @@ public class HighScoreButtonView extends JButton implements ActionListener {
     }
 
     /**
-     * Implements the functionality of the High Score Button
-     * @param e  - Action Instance
+     * Implements the functionality of the High Score Button with the Implementation of Audio
+     *
+     * @param e - Action Instance
      */
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -24,13 +24,9 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
 
     private final WallController wallController = new WallController(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), new Point(300, 430));
     private final DebugPanelController debugPanelController;
-
-    private final HighScoreModel highScoreModel = new HighScoreModel();
-    private final PauseMenuView pauseMenuView = new PauseMenuView();
-
-    private final PauseMenuController pauseMenuController = new PauseMenuController(this, wallController, pauseMenuView);
-    private final LevelModel levelModel = new LevelModel(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), 5, 3 / 2, 3, wallController);
-    private final GameboardView gameboardView = new GameboardView(wallController, wallController.getPlayer(), wallController.getBall(), this, highScoreModel, pauseMenuView);
+    private final PauseMenuController pauseMenuController = new PauseMenuController(this, wallController, new PauseMenuView());
+    private final LevelModel levelModel = new LevelModel(new Rectangle(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT), 30, 6 / 2, 3, wallController);
+    private final GameboardView gameboardView = new GameboardView(wallController, wallController.getPlayer(), wallController.getBall(), this, new HighScoreModel(), new PauseMenuView());
     private final Timer GAMEBOARD_TIMER;
     public String message = "";
     public String message2 = "";
@@ -44,19 +40,15 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
      */
     public GameBoardController(JFrame JFrameOwner) {
         debugPanelController = new DebugPanelController(JFrameOwner, wallController, this, levelModel);
-
         // Create the View of the GameBoard
         this.initialize();
-
         //initialize the first level
         levelModel.nextLevel();
-
         // Timer setting the delay between the initial delay and and event firing (the ball speed)
         GAMEBOARD_TIMER = new Timer(0, this::actionPerformed);
     }
 
     /**
-     * initialize Method:
      * Method to initialize the KeyListener , MouseListener , Focusable
      */
     private void initialize() {
@@ -69,9 +61,8 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * Paint method implements Graphics , inherited from JComponent
-     * ,it is part of the draw system of the GUI.
-     * It's invoked from Java Swing Framework to ask for a Component to draw itself on the screen.
+     * Paint method implements Graphics , inherited from JComponent,it is part of the draw system of the GUI.
+     * Calls GameBoardView to render the game graphics.
      */
     @Override
     public void paint(Graphics g) {
@@ -80,7 +71,6 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * keyPressed Method:
      * To assign the Key of the KeyBoard to the corresponding action.
      *
      * @param keyEvent - A Key Instance
@@ -122,7 +112,6 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * keyReleased Method:
      * To mention the Function when the key is released
      *
      * @param keyEvent - A Key Instance
@@ -136,7 +125,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     /**
      * To mention the function corresponding to the click of the mouse in Pause Menu Screen
      *
-     * @param mouseEvent - A Key Instance
+     * @param mouseEvent - A Mouse Instance
      */
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
@@ -144,10 +133,9 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * mouseMoved method:
      * To mention the cursor shape when it's hovered on the Pause Menu Screen
      *
-     * @param mouseEvent - A Key Instance
+     * @param mouseEvent - A Mouse Instance
      */
     @Override
     public void mouseMoved(MouseEvent mouseEvent) {
@@ -170,7 +158,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     //Getter and Setter Methods
 
     /**
-     * Return the Message
+     * Return the Message 1
      *
      * @return message - The message on line 1
      */
@@ -179,7 +167,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     }
 
     /**
-     * Set the Message
+     * Set the Message 1
      */
     public void setMessage(String message) {
         this.message = message;
@@ -197,7 +185,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
     /**
      * Show the Pause Menu Flag
      *
-     * @return ShowPauseMenu - A Boolean value to show if the Pause Men is shown or not
+     * @return ShowPauseMenu - A Boolean value to show if the Pause Menu is shown or not
      */
     public boolean isShowPauseMenu() {
         return ShowPauseMenu;
@@ -298,7 +286,7 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
                 //If the Player reaches end of game , Display this message
                 message = "ALL WALLS DESTROYED";
                 new AudioController("Game Win.wav");
-                message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds",getHighScoreInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
+                message2 = String.format("Your Score is %d Bricks at the time of %02dm %02ds", getHighScoreInstance().getScore(), getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getHighScoreInstance().checkScore();
                 getHighScoreInstance().sortHighScore();
                 getTimeInstance().resetGame();
@@ -309,32 +297,37 @@ public class GameBoardController extends JComponent implements KeyListener, Mous
         repaint();
     }
 
+    /**
+     * Responsible for implementing the Level indicator , with the score attained and time taken in the previous level.
+     *
+     * @param level - The Level number
+     */
     public void LevelMessage(int level) {
         switch (level) {
             case 2 -> {
 
                 message = "Welcome to Level 2! Score:  " + getHighScoreInstance().getScore();
-                message2 = String.format("You finished the first level in %02dm %02ds: " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
+                message2 = String.format("You finished the first level in %02dm %02ds: ", getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 3 -> {
                 message = "Welcome to Level 3! Score: " + getHighScoreInstance().getScore();
-                message2 = String.format("You finished the second level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
+                message2 = String.format("You finished the second level in %02dm %02ds ", getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 4 -> {
                 message = "Welcome to the Level 4! Score: " + getHighScoreInstance().getScore();
-                message2 = String.format("You finished the third level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
+                message2 = String.format("You finished the third level in %02dm %02ds ", getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 5 -> {
                 message = "Welcome to the Level 5! Score: " + getHighScoreInstance().getScore();
-                message2 = String.format("You finished the fourth level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
+                message2 = String.format("You finished the fourth level in %02dm %02ds ", getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             case 6 -> {
-                message = "Welcome to the Last Level! Score: %d " + getHighScoreInstance().getScore();
-                message2 = String.format("You finished the fifth level in %02dm %02ds " , getTimeInstance().getMinutes() , getTimeInstance().getSeconds());
+                message = "Welcome to the Last Level! Score:  " + getHighScoreInstance().getScore();
+                message2 = String.format("You finished the fifth level in %02dm %02ds ", getTimeInstance().getMinutes(), getTimeInstance().getSeconds());
                 getTimeInstance().resetGame();
             }
             default -> throw new IllegalStateException("Unexpected value: " + levelModel.getLevel());

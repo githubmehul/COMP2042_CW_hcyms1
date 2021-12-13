@@ -4,6 +4,9 @@ package controller;
 import java.util.TimerTask;
 import java.util.Timer;
 
+/**
+ * TimerController is responsible for controlling the timer functionality in the game
+ */
 public class TimerController {
 
     /**
@@ -99,7 +102,7 @@ public class TimerController {
     /**
      * Returns boolean of when the Timer is running
      *
-     * @return gameRunning
+     * @return gameRunning - Boolean to check if the game is running
      */
     public boolean isGameRunning() {
         return gameRunning;
@@ -108,7 +111,7 @@ public class TimerController {
     /**
      * Sets the GameRunning Flag.
      *
-     * @param gameRunning -
+     * @param gameRunning - Boolean to check if the game is running
      */
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning = gameRunning;
@@ -135,7 +138,7 @@ public class TimerController {
     /**
      * Gets the Temporary Minutes in the Game
      *
-     * @return tempMinutes
+     * @return tempMinutes - Temp minutes in the game
      */
     public int getTempMinutes() {
         return tempMinutes;
@@ -144,7 +147,7 @@ public class TimerController {
     /**
      * Sets the Temporary Minutes in the Game
      *
-     * @param tempMinutes -
+     * @param tempMinutes - Temp minutes in the game
      */
     public void setTempMinutes(int tempMinutes) {
         this.tempMinutes = tempMinutes;

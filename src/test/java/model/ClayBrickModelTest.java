@@ -31,9 +31,8 @@ class ClayBrickModelTest {
 
     @Test
     void setImpact() {
+        assertFalse(clayBrickModel.isBroken());
         clayBrickModel.impact();
         assertTrue(clayBrickModel.isBroken());
-        clayBrickModel.impact();
-        assertFalse(clayBrickModel.isBroken());
     }
 }

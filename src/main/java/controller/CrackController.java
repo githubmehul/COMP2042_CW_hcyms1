@@ -6,13 +6,10 @@ import java.awt.geom.Point2D;
 
 
 /**
- * Crack Controller is responsible for providing the Bricks the 'Crack' Feature
- * This is used by Cement Brick as they require the crack feature.
+ * Crack Controller is responsible for providing the Bricks the 'Crack' Feature.
+ * Required by Cement Brick.
  */
 public class CrackController {
-
-    private static final int CRACK_SECTIONS = 3;
-    private static final double JUMP_PROBABILITY = 0.7;
 
     public static final int LEFT = 10;
     public static final int RIGHT = 20;
@@ -20,19 +17,22 @@ public class CrackController {
     public static final int DOWN = 40;
     public static final int VERTICAL = 100;
     public static final int HORIZONTAL = 200;
-
+    private static final int CRACK_SECTIONS = 3;
+    private static final double JUMP_PROBABILITY = 0.7;
     private final BrickController brickController;
     private final GeneralPath crackPath;
 
     private final int crackDepth;
     private final int crackNoise;
 
-    /**Sets the General Path , with the crackDepth and crackNoise
+    /**
+     * Sets the General Path , with the crackDepth and crackNoise
+     *
      * @param brickController - Calls in Brick Controller Object
-     * @param crackDepth - Crack Depth
-     * @param crackNoise - The Steps in the Crack (sort of like graph noise)
+     * @param crackDepth      - Crack Depth
+     * @param crackNoise      - The Steps in the Crack (sort of like graph noise)
      */
-    public CrackController( BrickController brickController , int crackDepth, int crackNoise) {
+    public CrackController(BrickController brickController, int crackDepth, int crackNoise) {
         this.brickController = brickController;
         crackPath = new GeneralPath();
         this.crackDepth = crackDepth;
@@ -41,6 +41,7 @@ public class CrackController {
 
     /**
      * Method to draw the Crack
+     *
      * @return crack
      */
     public GeneralPath draw() {
@@ -55,9 +56,10 @@ public class CrackController {
     }
 
     /**
-     *Sets the Start and End Location of the Crack
+     * Sets the Start and End Location of the Crack
+     *
      * @param impactPoint - The Point of Impact
-     * @param direction - The direction of the crack
+     * @param direction   - The direction of the crack
      */
     public void makeCrack(Point2D impactPoint, int direction) {
         Rectangle bounds = brickController.getParentBrickShape().getBounds();
@@ -97,8 +99,9 @@ public class CrackController {
 
     /**
      * Method is responsible for drawing the Crack Model from the Start till the end.
+     *
      * @param startCrack - Start Location of Crack
-     * @param endCrack - End Location of Crack
+     * @param endCrack   - End Location of Crack
      */
     protected void makeCrack(Point startCrack, Point endCrack) {
         GeneralPath path = new GeneralPath();
@@ -121,7 +124,8 @@ public class CrackController {
 
     /**
      * Shapes the Crack Bounds
-     * @param bound  - the crackDepth
+     *
+     * @param bound - the crackDepth
      * @return A random value to create the crack depth
      */
     private int randomInBounds(int bound) {
@@ -130,8 +134,9 @@ public class CrackController {
     }
 
     /**
-     *Responsible for the alignment of the crack
-     * @param i - an iterated value
+     * Responsible for the alignment of the crack
+     *
+     * @param i         - an iterated value
      * @param divisions - The crackNoise
      * @return if i>low and i< up - used in the if statement in makeCrack.
      */
@@ -141,8 +146,10 @@ public class CrackController {
         return (i > low) && (i < up);
     }
 
-    /**Jump Method
-     * @param bound -
+    /**
+     * Jump Method is responsible for returning the randomInBounds based on the jump probability
+     *
+     * @param bound  - The CrackDepth
      * @return - Calls the randomInBounds Method
      */
     private int jumps(int bound) {
@@ -154,8 +161,9 @@ public class CrackController {
 
     /**
      * Makes a Random Point from and to the end of the Crack in the specified Direction
-     * @param from - From the point of impact
-     * @param to - To the end of impact
+     *
+     * @param from      - From the point of impact
+     * @param to        - To the end of impact
      * @param direction - Either Horizontal or Vertical
      * @return out
      */

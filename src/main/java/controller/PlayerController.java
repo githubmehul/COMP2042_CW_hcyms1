@@ -6,7 +6,7 @@ import java.awt.*;
 
 
 /**
- * The PlayerController class is responsible for defining the Player's behaviour.
+ * The PlayerController class is responsible for defining the Player's functionality.
  */
 public class PlayerController {
 
@@ -105,9 +105,19 @@ public class PlayerController {
         // Set top left corner location of the Player Shape
         playerShape.setLocation(ballPoint.x - (int) playerShape.getWidth() / 2, ballPoint.y);
     }
+
+    /**
+     * Sets the Amount moved by the player
+     * @param moveAmount - Amount moved by player
+     */
     public void setMoveAmount(int moveAmount) {
         this.moveAmount = moveAmount;
     }
+
+    /**
+     * Returns the Amount moved by the player
+     * @return moveamount - Amount moved by player
+     */
     public int getMoveAmount() {
         return moveAmount;
     }

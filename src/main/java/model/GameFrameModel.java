@@ -11,7 +11,7 @@ import java.awt.event.WindowFocusListener;
 
 /***
  *GameFrameModel extends JFrame,which further implements WindowFocusListener,which takes care
- *of the implementation of the game
+ *of the model of the game initialization.
  */
 public class GameFrameModel extends JFrame implements WindowFocusListener {
 
@@ -22,9 +22,7 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
     private boolean gaming;
 
     /**
-     * 1.Sets the default BorderLayout using the setLayoutMethod<br>
-     * 2.Adds the homeMenu as a BorderLayout with Center Alignment<br>
-     * 3.Sets undecorated as true
+     * Responsible for attaching all the components as a model in the HomeMenu Screen
      */
     public GameFrameModel() {
         this.initialize();
@@ -126,6 +124,10 @@ public class GameFrameModel extends JFrame implements WindowFocusListener {
 
     }
 
+    /**
+     * Returns the flag of if the user is still on screen or not.
+     * @return gaming
+     */
     public boolean isGaming() {
         return gaming;
     }

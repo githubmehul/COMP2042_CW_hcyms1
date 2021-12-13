@@ -11,10 +11,8 @@ class IceBrickModelTest {
 
     @Test
     void setImpact() {
-        iceBrickModel.impact();
-        assertTrue(iceBrickModel.isBroken());
-        iceBrickModel.impact();
         assertFalse(iceBrickModel.isBroken());
+        iceBrickModel.impact();
     }
 
     @Test
@@ -30,7 +28,7 @@ class IceBrickModelTest {
     @Test
     void brickImpact() {
         iceBrickModel.impact();
-        assertTrue(iceBrickModel.isBroken());
+        assertFalse(iceBrickModel.isBroken());
     }
 
     @Test

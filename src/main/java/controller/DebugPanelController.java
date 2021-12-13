@@ -9,8 +9,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /***
- * DebugPanelController Class extends JDialog and implements WindowListener.
- * It is responsible for the controlling the Debug Panel.
+ * DebugPanelController Class extends JDialog and implements WindowListener.It is responsible for the functionality the Debug Panel.
  *
  */
 public class DebugPanelController extends JDialog implements WindowListener {

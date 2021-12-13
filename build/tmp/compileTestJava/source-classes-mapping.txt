@@ -1,28 +1,26 @@
-model/PlayerModelTest.java
- model.PlayerModelTest
 controller/TimerControllerTest.java
  controller.TimerControllerTest
-model/RubberBallModelTest.java
- model.RubberBallModelTest
-model/CementBrickModelTest.java
- model.CementBrickModelTest
-model/SteelBrickModelTest.java
- model.SteelBrickModelTest
-model/ClayBrickModelTest.java
- model.ClayBrickModelTest
 model/GameFrameModelTest.java
  model.GameFrameModelTest
-model/IceBrickModelTest.java
- model.IceBrickModelTest
+model/CementBrickModelTest.java
+ model.CementBrickModelTest
 model/FireBrickModelTest.java
  model.FireBrickModelTest
 controller/WallControllerTest.java
  controller.WallControllerTest
-model/LevelModelTest.java
- model.LevelModelTest
+model/SteelBrickModelTest.java
+ model.SteelBrickModelTest
 controller/PlayerControllerTest.java
  controller.PlayerControllerTest
+model/RubberBallModelTest.java
+ model.RubberBallModelTest
+model/ClayBrickModelTest.java
+ model.ClayBrickModelTest
+model/LevelModelTest.java
+ model.LevelModelTest
+model/PlayerModelTest.java
+ model.PlayerModelTest
 controller/HighScoreControllerTest.java
  controller.HighScoreControllerTest
-controller/GameBoardControllerTest.java
- controller.GameBoardControllerTest
+model/IceBrickModelTest.java
+ model.IceBrickModelTest

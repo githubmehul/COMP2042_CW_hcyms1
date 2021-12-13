@@ -31,11 +31,8 @@ class SteelBrickModelTest {
 
     @Test
     void setImpact() {
-        steelBrickModel.impact();
-        assertTrue(steelBrickModel.isBroken());
-
-        steelBrickModel.impact();
         assertFalse(steelBrickModel.isBroken());
+        steelBrickModel.impact();
     }
 
     @Test

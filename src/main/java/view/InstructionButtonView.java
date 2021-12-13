@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Implements the InstructionButtonView with the Implementation
+ * Updates Audio from the Audio Controller.
  */
 public class InstructionButtonView extends JButton implements ActionListener {
     private final GameFrameModel owner;
@@ -47,7 +48,7 @@ public class InstructionButtonView extends JButton implements ActionListener {
     }
 
     /**
-     * Implements the Functionality of the InstructionButton
+     * Implements the Functionality of the InstructionButton with the implementation of Audio
      *
      * @param e - Action Instance
      */

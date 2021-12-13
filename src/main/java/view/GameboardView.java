@@ -10,7 +10,7 @@ import java.awt.*;
 import static controller.HighScoreController.getHighScoreInstance;
 
 /**
- * GameboardView is responsible to render the GameBoard
+ * GameboardView is responsible to render the GameBoard View and Looks
  */
 public class GameboardView {
     private final WallController wallController;
@@ -33,7 +33,7 @@ public class GameboardView {
     /**
      * Paint method implements Graphics , inherited from JComponent
      * ,it is part of the draw system of the GUI.
-     * It's invoked from Java Swing Framework to ask for a Component to draw itself on the screen
+     * Responsible for compiling the rendering of all the components.
      *
      * @param g - Graphics
      */

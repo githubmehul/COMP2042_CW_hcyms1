@@ -9,13 +9,12 @@ import static controller.HighScoreController.getHighScoreInstance;
 
 
 /***
- * The IceBrickModel class is a child class of BrickController class.
- * IceBrickModel Class extends BrickController Class to create the implementation of
+ * IceBrickModel Class extends BrickController Class creates the implementation of
  * the IceBrickModel.
  * It is responsible for defining its colours, strength properties
  */
 public class IceBrickModel extends BrickController {
-    private static final int FAST_STRENGTH = 1;
+    private static final int FAST_STRENGTH = 2;
     private static final Color BRICK_INNER_COLOR = new Color(2, 28, 118);
     private static final Color BRICK_BORDER_COLOR = new Color(5, 207, 255);
 
@@ -39,8 +38,12 @@ public class IceBrickModel extends BrickController {
         else {
             brickImpact();
         }
-        getHighScoreInstance().setScore(getHighScoreInstance().getScore() + 1);
-        return super.isBroken();
+        if (!super.isBroken()) {
+            //return false
+            return false;
+        }
+        getHighScoreInstance().setScore(getHighScoreInstance().getScore() + 4);
+        return true;
     }
 
     /**

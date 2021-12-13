@@ -10,10 +10,9 @@ import java.util.Random;
 
 
 /***
- * The SteelBrickModel class is a child class of BrickController class.
- * SteelBrickModel Class extends BrickControllerClass to create the implementation of
+ * SteelBrickModel Class extends BrickControllerClass, creates the implementation of
  * the SteelBrickModel.
- * It is responsible for defining its colours, strength and crack properties.
+ * Responsible for defining colours and strength.
  */
 public class SteelBrickModel extends BrickController {
 

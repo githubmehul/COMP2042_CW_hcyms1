@@ -5,12 +5,12 @@ import static controller.HighScoreController.getHighScoreInstance;
 import java.awt.*;
 
 /**
- * Sets the HighScore Model
+ * Responsible for creating the score model, shown during the game play.
  */
 public class HighScoreModel {
 
     /**
-     * Shows the Score in the GameBoard
+     * Shows the Score in the GameBoard while the user is playing the game
      *
      * @param g - Graphics
      */

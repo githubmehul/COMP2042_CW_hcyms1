@@ -100,14 +100,29 @@ public class PauseMenuView {
         g2d.setColor(tmpColor);
     }
 
+    /**
+     * Returns the Continue Button Rectangle View
+     *
+     * @return ContinueButtonRect
+     */
     public Rectangle getContinueButtonRect() {
         return ContinueButtonRect;
     }
 
+    /**
+     * Returns the Exit Button Rectangle View
+     *
+     * @return ExitButtonRect
+     */
     public Rectangle getExitButtonRect() {
         return ExitButtonRect;
     }
 
+    /**
+     * Returns the Restart Button Rectange View
+     *
+     * @return RestartButtonRect
+     */
     public Rectangle getRestartButtonRect() {
         return RestartButtonRect;
     }
