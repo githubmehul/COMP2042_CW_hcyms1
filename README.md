@@ -82,5 +82,54 @@ The score of the user is tracked in every level, considering the score of each b
 # Reflections
 <br>After making the changes, it can be deduced that it is now better to manage the classes as well as the relationships between them while also improving encapsulation. The classes have been made more maintainable and we can easily add more game obstacles or levels. The game has also been made more interesting with the varying audio and different levels. There are also test classes that have been implemented to check the proper functionality of several elements.</br>
 
+# Amended File Structure
+src
+|
+|-- main
+|	|-- java
+|	|	|-- controller
+|	|	|	|-- AudioController
+|	|	|	|-- BallController
+|	|	|	|-- BrickController
+|	|	|	|-- CrackController
+|	|	|	|-- DebugPanelController
+|	|	|	|-- GameBoardController
+|	|	|	|-- HighScoreController
+|	|	|	|__ PauseMenuController
+|	|	| |__ PlayerController
+|	|	| |__ TimerController
+|	|	| |__ WallController
+|	|	| 
+|	|	| 
+|	|	|-- model
+|	|	|	|-- CementBrickModel
+|	|	|	|-- ClayBrickModel
+|	|	|	|-- FireBrickModel
+|	|	|	|-- GameFrameModel
+|	|	|	|-- HighScoreModel
+|	|	|	|-- IceBrickModel
+|	|	|	|-- IntersectingObject
+|	|	|	|-- LevelModel
+|	|	|	|-- PlayerModel
+|	|	|	|-- RubberBallModel
+|	|	|	|-- SteelBrickModel
+|	|	|
+|	|	|-- view
+|	|	|	|-- DebugPanelView
+|	|	|	|-- ExitButtonView
+|	|	|	|-- GameBoardView
+|	|	|	|-- HighScoreButtonView
+|	|	|	|-- HomeMenuView
+|	|	|	|-- InstructionButtonView
+|	|	|	|-- PauseMenuView
+|	|	|	|__ StartButtonView
+|	|	|
+|	|	|__ game
+|	|	
+|	|__ resources	
+|	
+|-- test
+	|-- java
+	|__ resources
 
 
