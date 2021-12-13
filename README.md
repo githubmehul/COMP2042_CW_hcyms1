@@ -97,9 +97,9 @@ src
 |	|	|	|-- GameBoardController
 |	|	|	|-- HighScoreController
 |	|	|	|__ PauseMenuController
-|	|	| |__ PlayerController
-|	|	| |__ TimerController
-|	|	| |__ WallController
+|	|	|       |__ PlayerController
+|	|	|       |__ TimerController
+|	|	|       |__ WallController
 |	|	| 
 |	|	| 
 |	|	|-- model
