@@ -71,7 +71,7 @@ As for the additionally created bricks, the IceBrickModel has a strength of 2 im
 Audio features have been added when the user presses the homescreen buttons, finally wins the game, progresses to the next level and when the ball impacts the wall,bricks, player as well as when the ball is lost.</br>
   
 <b>8. HighScore Implementation</b>
-The score of the user is tracked in every level, considering the score of each brick. After each level is completed, the user sees their accumulated score and timer taken. The HighScore of the player is checked against the highScore.dat file . The highscore is checked when the number of balls are all lost, or when the user completes all the levels and wins the game. If the score attained by the user is greater than the previous user's score, a dialog appears which asks their name and saves the scores. Which is then further sorted in the leaderboard.dat to preview in the HighScoreButton View.
+The score of the user is tracked in every level, considering the score of each brick. After each level is completed, the user sees their accumulated score and timer taken. The HighScore of the player is checked against the highScore.dat file . The highscore is checked when the number of balls are all lost(progresses the user to the homescreen after inputting name), or when the user completes all the levels and wins the game. If the score attained by the user is greater than the previous user's score, a dialog appears which asks their name and saves the scores. Which is then further sorted in the leaderboard.dat to preview in the HighScoreButton View.
 
 <b>9. Level Indicator</b>
 <br> Once a user progresses, a level indicator is shown telling the user what level they are currently in, a feature that was not present in the original version of the game.</br>
@@ -133,3 +133,15 @@ src
 	|-- java
 	|__ resources
 ```
+# Screenshots of Game
+<b>Game Home Screen</b><br>
+<img width="449" alt="GameView" src="https://user-images.githubusercontent.com/53290160/145739037-265c533a-68f0-4634-a5d2-01f68961691a.png"> <br>
+<b>Sample Game Level</b><br>
+<img width="392" alt="GameLevel" src="https://user-images.githubusercontent.com/53290160/145739120-197cafb1-b2bc-4e90-ada9-c331c5023e27.png"><br>
+<b>Help Screen</b><br>
+<img width="521" alt="HelpScreen" src="https://user-images.githubusercontent.com/53290160/145739151-596646f2-9fe4-40f1-a46f-7552341e1077.png"><br>
+<b>Leaderboard Screen</b><br>
+<img width="500" alt="LeaderBoardScreen" src="https://user-images.githubusercontent.com/53290160/145739177-43e19038-28e9-4358-9098-7cf10968d183.png"><br>
+<b>HighScore Dialog Entry</b><br>
+<img width="394" alt="HighScoreDialog" src="https://user-images.githubusercontent.com/53290160/145739207-50023d64-8ea7-4034-a567-52b0977190fa.png"><br>
+
