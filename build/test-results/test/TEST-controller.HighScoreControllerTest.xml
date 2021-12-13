@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.HighScoreControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-12-13T03:29:30" hostname="DESKTOP-82GFS1J" time="7.756">
+  <properties/>
+  <testcase name="sortHighScore()" classname="controller.HighScoreControllerTest" time="4.335"/>
+  <testcase name="getHighScore()" classname="controller.HighScoreControllerTest" time="0.001"/>
+  <testcase name="checkScore()" classname="controller.HighScoreControllerTest" time="3.408"/>
+  <testcase name="setHighScore()" classname="controller.HighScoreControllerTest" time="0.001"/>
+  <testcase name="setScore()" classname="controller.HighScoreControllerTest" time="0.003"/>
+  <testcase name="getScore()" classname="controller.HighScoreControllerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

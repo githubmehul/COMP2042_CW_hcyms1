@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.WallControllerTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-12-13T03:29:38" hostname="DESKTOP-82GFS1J" time="0.009">
+  <properties/>
+  <testcase name="isDone()" classname="controller.WallControllerTest" time="0.0"/>
+  <testcase name="ballEnd()" classname="controller.WallControllerTest" time="0.001"/>
+  <testcase name="getBallCount()" classname="controller.WallControllerTest" time="0.001"/>
+  <testcase name="ballReset()" classname="controller.WallControllerTest" time="0.001"/>
+  <testcase name="resetBallCount()" classname="controller.WallControllerTest" time="0.0"/>
+  <testcase name="getBrickCount()" classname="controller.WallControllerTest" time="0.0"/>
+  <testcase name="isBallLost()" classname="controller.WallControllerTest" time="0.0"/>
+  <testcase name="setBrickCount()" classname="controller.WallControllerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -4,16 +4,16 @@ view/ExitButtonView.java
  view.ExitButtonView
 game/Main.java
  game.Main
-model/IceBrickModel.java
- model.IceBrickModel
-controller/BrickController.java
- controller.BrickController
-model/CementBrickModel.java
- model.CementBrickModel
+controller/GameBoardController.java
+ controller.GameBoardController
+controller/PauseMenuController.java
+ controller.PauseMenuController
+view/GameboardView.java
+ view.GameboardView
 controller/AudioController.java
  controller.AudioController
-controller/CrackController.java
- controller.CrackController
+controller/PlayerController.java
+ controller.PlayerController
 model/GameFrameModel.java
  model.GameFrameModel
 view/StartButtonView.java
@@ -28,34 +28,34 @@ view/InstructionButtonView.java
  view.InstructionButtonView
 model/HighScoreModel.java
  model.HighScoreModel
-view/HomeMenuView.java
- view.HomeMenuView
+model/LevelModel.java
+ model.LevelModel
 model/RubberBallModel.java
  model.RubberBallModel
 view/PauseMenuView.java
  view.PauseMenuView
 controller/HighScoreController.java
  controller.HighScoreController
-model/ClayBrickModel.java
- model.ClayBrickModel
-model/SteelBrickModel.java
- model.SteelBrickModel
-controller/TimerController.java
- controller.TimerController
- controller.TimerController$1
-controller/PlayerController.java
- controller.PlayerController
 controller/WallController.java
  controller.WallController
 controller/DebugPanelController.java
  controller.DebugPanelController
 view/DebugPanelView.java
  view.DebugPanelView
-controller/PauseMenuController.java
- controller.PauseMenuController
-view/GameboardView.java
- view.GameboardView
-controller/GameBoardController.java
- controller.GameBoardController
-model/LevelModel.java
- model.LevelModel
+view/HomeMenuView.java
+ view.HomeMenuView
+model/IceBrickModel.java
+ model.IceBrickModel
+model/CementBrickModel.java
+ model.CementBrickModel
+controller/BrickController.java
+ controller.BrickController
+controller/TimerController.java
+ controller.TimerController
+ controller.TimerController$1
+model/SteelBrickModel.java
+ model.SteelBrickModel
+model/ClayBrickModel.java
+ model.ClayBrickModel
+controller/CrackController.java
+ controller.CrackController

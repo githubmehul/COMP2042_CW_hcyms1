@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="controller.TimerControllerTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2021-12-13T03:29:38" hostname="DESKTOP-82GFS1J" time="0.019">
+  <properties/>
+  <testcase name="getSeconds()" classname="controller.TimerControllerTest" time="0.0"/>
+  <testcase name="setTempSeconds()" classname="controller.TimerControllerTest" time="0.001"/>
+  <testcase name="setGameRunning()" classname="controller.TimerControllerTest" time="0.002"/>
+  <testcase name="getTempMinutes()" classname="controller.TimerControllerTest" time="0.001"/>
+  <testcase name="setMinutes()" classname="controller.TimerControllerTest" time="0.002"/>
+  <testcase name="isGameRunning()" classname="controller.TimerControllerTest" time="0.001"/>
+  <testcase name="setSeconds()" classname="controller.TimerControllerTest" time="0.0"/>
+  <testcase name="resetGame()" classname="controller.TimerControllerTest" time="0.001"/>
+  <testcase name="getMinutes()" classname="controller.TimerControllerTest" time="0.0"/>
+  <testcase name="setTempMinutes()" classname="controller.TimerControllerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

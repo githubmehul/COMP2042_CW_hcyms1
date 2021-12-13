@@ -63,7 +63,7 @@ public class HighScoreController {
         getScore();
         if (score > Integer.parseInt((highScore.split(":")[1]))) {
 
-            String name = JOptionPane.showInputDialog("You Set A New HighScore. What's your name?");
+            String name = JOptionPane.showInputDialog("You Set A New HighScore! What's your name?");
             highScore = name + ":" + score;
 
             File scoreFile = new File("highScore.dat");
