@@ -11,7 +11,7 @@ Pre-requisite : Java 10 or Newer
 A build file is added as it automatically downloads and configures the dependencies and other libraries used. Gradle Wrapper allows us to run the build file without installing Gradle. When we invoke "gradlew", it downloads and builds the Gradle version specified. In order to run the Brick Destroy application from the command line, the following steps can be followed:
 1. Open command prompt and change the directory to where the build.gradle file is found.
 2. Run the application using the command "gradlew run".<br><br>
-`   > cd "C:\Users\<Admin_Name>\<Folder_Name>\"Singh_MehulVarsha_Intellij_10\"`<br><br>
+`   > cd "C:\Users\<Admin_Name>\<Folder_Name>\COMP2042_CW_hcyms1-master\"`<br><br>
 `   > gradlew run ` <br><br>
 
 # Major Refactoring Activities and Corrective Maintainence
